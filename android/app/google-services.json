@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64767201113",
+    "project_id": "petmania-fyp",
+    "storage_bucket": "petmania-fyp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64767201113:android:2a240281bd3fcd7f230648",
+        "android_client_info": {
+          "package_name": "com.example.pet_paradise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64767201113-pcmc5aj4ej5modkla16lrthnvnftge4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK5q-s2CEKCBwoBfTgID0C05ca2ytLci8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64767201113-78gn2of4kvsff96emss10n447nhm89vo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
