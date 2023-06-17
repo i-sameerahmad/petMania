@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Backend/Auth/auth.dart';
 import 'package:pet_paradise/Commons/login_page.dart';
@@ -10,7 +8,7 @@ import '../../utils/responsive_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/size_config.dart';
 
-//Text Editing Controller
+// Text Editing Controller
 TextEditingController nameController = TextEditingController();
 TextEditingController emailController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
@@ -25,30 +23,32 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  //Form key and Auto Validate
+  // Form key and Auto Validate
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool autoValidate = false;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   final AuthNotifier _auth = AuthNotifier();
+
   @override
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: transparentAppBar(context: context),
-        body: Responsive(
-          mobile: mobile(context),
-          tablet: tabletUI(),
-          web: webUI(),
-        ));
+      extendBodyBehindAppBar: true,
+      appBar: transparentAppBar(context: context),
+      body: Responsive(
+        mobile: mobile(context),
+        tablet: tabletUI(),
+        web: webUI(),
+      ),
+    );
   }
 
-//SignUp Form UI
+  // SignUp Form UI
   Widget formUI(BuildContext context) {
     return Form(
       key: _formKey,
@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 20,
           ),
-          //Name Field
+          // Name Field
           SizedBox(
             height: 50,
             child: TextFormField(
@@ -79,22 +79,36 @@ class _SignUpPageState extends State<SignUpPage> {
               },
               controller: nameController,
               keyboardType: TextInputType.text,
-              decoration: textFieldDecorationWithIcon(hint: "Enter Name", icon: Icons.person),
+              decoration: textFieldDecorationWithIcon(
+                hint: "Enter Name",
+                icon: Icons.person,
+                errorText: null,
+              ),
             ),
           ),
           SizedBox(
             height: 10,
           ),
-          //E-mail Field
+          // E-mail Field
           SizedBox(
             height: 50,
             child: TextFormField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: textFieldDecorationWithIcon(hint: "Enter Email", icon: Icons.voicemail),
+              decoration: textFieldDecorationWithIcon(
+                hint: "Enter Email",
+                icon: Icons.voicemail,
+                errorText: _auth.loginEmailError, // Use the loginEmailError property from AuthNotifier
+              ),
               validator: (arg) {
                 if (arg != null) {
-                  MyFormValidator.validateEmail(email: arg);
+                  final emailError = MyFormValidator.validateEmail(email: arg);
+                  if (emailError != null) {
+                    setState(() {
+                      _auth.loginEmailError = emailError; // Update the loginEmailError property in AuthNotifier
+                    });
+                    return emailError;
+                  }
                 }
                 return null;
               },
@@ -103,9 +117,7 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 15,
           ),
-          //Password Field
-
-          //Password Field
+          // Password Field
           SizedBox(
             height: 50,
             child: TextFormField(
@@ -121,20 +133,28 @@ class _SignUpPageState extends State<SignUpPage> {
               controller: passwordController,
               obscureText: true,
               keyboardType: TextInputType.text,
-              decoration: textFieldDecorationWithIcon(hint: "Enter Password", icon: Icons.lock_open),
+              decoration: textFieldDecorationWithIcon(
+                hint: "Enter Password",
+                icon: Icons.lock_open,
+                errorText: null,
+              ),
             ),
           ),
           SizedBox(
             height: 15,
           ),
-          //Re-Enter Password Field
+          // Re-Enter Password Field
           SizedBox(
             height: 50,
             child: TextFormField(
               controller: rePasswordController,
               obscureText: true,
               keyboardType: TextInputType.text,
-              decoration: textFieldDecorationWithIcon(hint: "Re-enter Password", icon: Icons.lock_open),
+              decoration: textFieldDecorationWithIcon(
+                hint: "Re-enter Password",
+                icon: Icons.lock_open,
+                errorText: null,
+              ),
               validator: (arg) {
                 if (arg != null) {
                   MyFormValidator.validatePassword(password: arg);
@@ -143,11 +163,10 @@ class _SignUpPageState extends State<SignUpPage> {
               },
             ),
           ),
-
           SizedBox(
             height: 15,
           ),
-          //SignUp Button
+          // SignUp Button
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -192,7 +211,6 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 15,
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -207,11 +225,15 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
                 child: Text(
                   " Login",
-                  style: TextStyle(color: MyColors.MATERIAL_LIGHT_GREEN, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+                  style: TextStyle(
+                    color: MyColors.MATERIAL_LIGHT_GREEN,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -228,18 +250,18 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                //Logo Image
+                // Logo Image
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: SizedBox(
-                      height: 180,
-                      width: 180,
-                      child: Image(
-                          image: AssetImage(
-                        "assets/images/logo.png",
-                      ))),
+                    height: 180,
+                    width: 180,
+                    child: Image(
+                      image: AssetImage("assets/images/logo.png"),
+                    ),
+                  ),
                 ),
-                //Text Descriptions
+                // Text Descriptions
                 Text(
                   "Welcome\nTo Pet Paradise~",
                   style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 27, fontWeight: FontWeight.bold),
@@ -254,7 +276,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(
                   height: 20,
                 ),
-                //Login Card
+                // Login Card
                 Card(
                   elevation: 5,
                   shadowColor: MyColors.MATERIAL_LIGHT_GREEN,
@@ -262,14 +284,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
-                      padding: EdgeInsets.only(
-                        left: MyAppSize.width! * 0.025,
-                        right: MyAppSize.width! * 0.025,
-                        top: 20,
-                        bottom: 30,
-                      ),
-                      child: formUI(context)),
-                )
+                    padding: EdgeInsets.only(
+                      left: MyAppSize.width! * 0.025,
+                      right: MyAppSize.width! * 0.025,
+                      top: 20,
+                      bottom: 30,
+                    ),
+                    child: formUI(context),
+                  ),
+                ),
               ],
             ),
           ),

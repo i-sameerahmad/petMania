@@ -44,7 +44,7 @@ Widget MyButton(
 
 /// InputDecoration for Login and Sign up TextFields
 InputDecoration textFieldDecorationWithIcon(
-    {required String hint, IconData? icon, double? borderRadius}) {
+    {required String hint, IconData? icon, double? borderRadius, required errorText}) {
   return InputDecoration(
     hintText: hint,
     prefixIcon: Icon(icon),

@@ -92,7 +92,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 controller: resetPasswordEmailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: textFieldDecorationWithIcon(
-                    hint: "Enter Your Email", icon: Icons.voicemail),
+                    hint: "Enter Your Email", icon: Icons.voicemail, errorText: null),
               ),
               const SizedBox(
                 height: 50,

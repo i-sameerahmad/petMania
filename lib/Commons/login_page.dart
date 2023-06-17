@@ -32,6 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   final AuthNotifier _auth = AuthNotifier();
+  
+  bool emailValidator(String email) {
+    // Regular expression for email validation
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$');
+    return emailRegex.hasMatch(email);
+  }
+  
   @override
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
@@ -64,8 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 180,
                       child: Image(
                           image: AssetImage(
-                        "assets/images/logo.png",
-                      ))),
+                            "assets/images/logo.png",
+                          ))),
                 ),
                 //Text Descriptions
                 Text(
@@ -113,13 +120,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: TextFormField(
                             controller: loginEmailController,
                             keyboardType: TextInputType.emailAddress,
-                            decoration: textFieldDecorationWithIcon(hint: "Enter Email", icon: Icons.voicemail),
+                            decoration: textFieldDecorationWithIcon(
+                                hint: "Enter Email",
+                                icon: Icons.voicemail,
+                                errorText: _auth.loginEmailError), // Pass the error text from AuthNotifier
                           ),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        //TODO:Password Field
+                        //TODO: Password Field
                         SizedBox(
                           height: 50,
                           child: TextField(
@@ -128,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             keyboardType: TextInputType.text,
                             decoration: textFieldDecorationWithIcon(
                               hint: "Enter Password",
-                              icon: Icons.lock_open_rounded,
+                              icon: Icons.lock_open_rounded, errorText: null,
                             ),
                           ),
                         ),
@@ -137,14 +147,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         //TODO: Forgot Password
                         clickAbleText(
-                            enable: true,
-                            text: "Forgot Password?",
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ResetPasswordPage()));
-                            },
-                            textColor: MyColors.RED,
-                            fontWeight: FontWeight.bold,
-                            textAlign: TextAlign.end),
+                          enable: true,
+                          text: "Forgot Password?",
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ResetPasswordPage()));
+                          },
+                          textColor: MyColors.RED,
+                          fontWeight: FontWeight.bold,
+                          textAlign: TextAlign.end,
+                        ),
                         SizedBox(
                           height: 15,
                         ),
@@ -156,7 +168,29 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 39,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               onPressed: () async {
-                                _auth.login(loginEmailController.text, loginPasswordController.text, context);
+                                if (emailValidator(loginEmailController.text)) {
+                                  _auth.login(
+                                    loginEmailController.text,
+                                    loginPasswordController.text,
+                                    context,
+                                  );
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text('Invalid Email'),
+                                      content: Text('Please enter a valid email.'),
+                                      actions: [
+                                        TextButton(
+                                          child: Text('OK'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
                               },
                               textColor: Colors.black,
                               color: MyColors.MATERIAL_LIGHT_GREEN,
@@ -176,14 +210,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Text("Don't have an account?"),
                             clickAbleText(
-                                enable: true,
-                                text: " SignUp",
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
-                                },
-                                underLine: true,
-                                textColor: MyColors.MATERIAL_LIGHT_GREEN,
-                                fontWeight: FontWeight.bold),
+                              enable: true,
+                              text: " SignUp",
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignUpPage(),
+                                  ),
+                                );
+                              },
+                              underLine: true,
+                              textColor: MyColors.MATERIAL_LIGHT_GREEN,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ],
                         )
                       ],

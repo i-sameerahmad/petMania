@@ -7,6 +7,7 @@ import 'package:pet_paradise/Commons/commonHomeScreen.dart';
 import 'package:pet_paradise/models/user.dart';
 
 class AuthNotifier {
+  String? loginEmailError;
   Future register(String email, password, name, context) async {
     User user;
     final Map<String, String> body = {
