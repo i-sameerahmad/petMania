@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 
-  final AuthNotifer _auth = AuthNotifer();
+  final AuthNotifier _auth = AuthNotifier();
   @override
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
@@ -52,8 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundWidget(),
         SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
-                left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
+            padding: EdgeInsets.only(left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -71,10 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //Text Descriptions
                 Text(
                   "Welcome\nTo Pet Paradise~",
-                  style: TextStyle(
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 27,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 27, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 5,
@@ -106,10 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text(
                           "Login",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: ' Itim-Regular',
-                              fontSize: 27),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 27),
                         ),
                         SizedBox(
                           height: 20,
@@ -120,8 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: TextFormField(
                             controller: loginEmailController,
                             keyboardType: TextInputType.emailAddress,
-                            decoration: textFieldDecorationWithIcon(
-                                hint: "Enter Email", icon: Icons.voicemail),
+                            decoration: textFieldDecorationWithIcon(hint: "Enter Email", icon: Icons.voicemail),
                           ),
                         ),
                         SizedBox(
@@ -148,8 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             enable: true,
                             text: "Forgot Password?",
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ResetPasswordPage()));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ResetPasswordPage()));
                             },
                             textColor: MyColors.RED,
                             fontWeight: FontWeight.bold,
@@ -163,11 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             MaterialButton(
                               minWidth: 139,
                               height: 39,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               onPressed: () async {
-                                _auth.login(loginEmailController.text,
-                                    loginPasswordController.text, context);
+                                _auth.login(loginEmailController.text, loginPasswordController.text, context);
                               },
                               textColor: Colors.black,
                               color: MyColors.MATERIAL_LIGHT_GREEN,
@@ -190,10 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 enable: true,
                                 text: " SignUp",
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SignUpPage()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
                                 },
                                 underLine: true,
                                 textColor: MyColors.MATERIAL_LIGHT_GREEN,

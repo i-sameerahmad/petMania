@@ -34,7 +34,7 @@ class _SignUpPageState extends State<SignUpPage> {
     super.initState();
   }
 
-  final AuthNotifer _auth = AuthNotifer();
+  final AuthNotifier _auth = AuthNotifier();
   @override
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
@@ -79,8 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
               },
               controller: nameController,
               keyboardType: TextInputType.text,
-              decoration: textFieldDecorationWithIcon(
-                  hint: "Enter Name", icon: Icons.person),
+              decoration: textFieldDecorationWithIcon(hint: "Enter Name", icon: Icons.person),
             ),
           ),
           SizedBox(
@@ -92,8 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: TextFormField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: textFieldDecorationWithIcon(
-                  hint: "Enter Email", icon: Icons.voicemail),
+              decoration: textFieldDecorationWithIcon(hint: "Enter Email", icon: Icons.voicemail),
               validator: (arg) {
                 if (arg != null) {
                   MyFormValidator.validateEmail(email: arg);
@@ -113,8 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: TextFormField(
               validator: (arg) {
                 if (arg != null) {
-                  final passwordError =
-                      MyFormValidator.validatePassword(password: arg);
+                  final passwordError = MyFormValidator.validatePassword(password: arg);
                   if (passwordError != null) {
                     return passwordError;
                   }
@@ -124,8 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
               controller: passwordController,
               obscureText: true,
               keyboardType: TextInputType.text,
-              decoration: textFieldDecorationWithIcon(
-                  hint: "Enter Password", icon: Icons.lock_open),
+              decoration: textFieldDecorationWithIcon(hint: "Enter Password", icon: Icons.lock_open),
             ),
           ),
           SizedBox(
@@ -138,8 +134,7 @@ class _SignUpPageState extends State<SignUpPage> {
               controller: rePasswordController,
               obscureText: true,
               keyboardType: TextInputType.text,
-              decoration: textFieldDecorationWithIcon(
-                  hint: "Re-enter Password", icon: Icons.lock_open),
+              decoration: textFieldDecorationWithIcon(hint: "Re-enter Password", icon: Icons.lock_open),
               validator: (arg) {
                 if (arg != null) {
                   MyFormValidator.validatePassword(password: arg);
@@ -159,8 +154,7 @@ class _SignUpPageState extends State<SignUpPage> {
               MaterialButton(
                 minWidth: 139,
                 height: 39,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 onPressed: () async {
                   if (passwordController.text == rePasswordController.text) {
                     _auth.register(
@@ -175,8 +169,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text("Password Error"),
-                          content:
-                              Text("The passwords you entered do not match."),
+                          content: Text("The passwords you entered do not match."),
                           actions: [
                             TextButton(
                               onPressed: () {
@@ -214,10 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
                 child: Text(
                   " Login",
-                  style: TextStyle(
-                      color: MyColors.MATERIAL_LIGHT_GREEN,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline),
+                  style: TextStyle(color: MyColors.MATERIAL_LIGHT_GREEN, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
                 ),
               )
             ],
@@ -234,8 +224,7 @@ class _SignUpPageState extends State<SignUpPage> {
         backgroundWidget(),
         SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
-                left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
+            padding: EdgeInsets.only(left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -253,10 +242,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 //Text Descriptions
                 Text(
                   "Welcome\nTo Pet Paradise~",
-                  style: TextStyle(
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 27,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 27, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 5,
