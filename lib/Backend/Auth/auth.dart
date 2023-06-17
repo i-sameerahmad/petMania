@@ -59,21 +59,18 @@ class AuthNotifer {
       'email': email,
       'password': password,
     };
-    final response = await http.post(
-        Uri.parse("http://10.0.2.2:8000/api/auth/register"),
-        body: body,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        });
+    final response = await http.post(Uri.parse("http://10.0.2.2:8000/api/auth/register"), body: body, headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    });
     String responseBody = utf8.decoder.convert(response.bodyBytes);
-    final jsonResponse =
-        convert.jsonDecode(responseBody) as Map<String, dynamic>;
+    final jsonResponse = convert.jsonDecode(responseBody) as Map<String, dynamic>;
     print(jsonResponse);
     if (jsonResponse['status']) {
       user = User.fromJson(json.decode(responseBody));
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool("status", jsonResponse['status']);
       prefs.setInt("userID", jsonResponse['user']['id']);
+      prefs.setInt("user_type", jsonResponse['user']['user_type']);
       prefs.setString("userName", jsonResponse['user']['name']);
       // await _prefs.setString('user', json.encode(_user));
       Navigator.push(
@@ -109,22 +106,19 @@ class AuthNotifer {
       'email': email,
       'password': password,
     };
-    final response = await http.post(
-        Uri.parse("http://10.0.2.2:8000/api/auth/login"),
-        body: body,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        });
+    final response = await http.post(Uri.parse("http://10.0.2.2:8000/api/auth/login"), body: body, headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    });
     String responseBody = utf8.decoder.convert(response.bodyBytes);
 
-    final jsonResponse =
-        convert.jsonDecode(responseBody) as Map<String, dynamic>;
+    final jsonResponse = convert.jsonDecode(responseBody) as Map<String, dynamic>;
 
     // String userData = _prefs.getString('user');
     if (jsonResponse['status']) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool("status", jsonResponse['status']);
       prefs.setInt("userID", jsonResponse['user']['id']);
+      prefs.setInt("user_type", jsonResponse['user']['user_type']);
       prefs.setString("userName", jsonResponse['user']['name']);
       final snackBar = SnackBar(
         content: Text(jsonResponse['message']),

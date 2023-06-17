@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart'; // Import the intl package
+import 'package:intl/intl.dart';
 import 'package:pet_paradise/Commons/chat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,16 +13,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool open = false;
-  late Stream<QuerySnapshot<Map<String, dynamic>>> chatRoomsStream;
+  Stream<QuerySnapshot<Map<String, dynamic>>>? chatRoomsStream;
+
   late int userId;
+  List<String> chatRooms = [];
 
   myPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       userId = prefs.getInt('userID') ?? 0;
-      print(userId);
     });
-    initializeChatRoomsStream();
+
+    final chatRooms = await fetchChatRooms();
+    setState(() {
+      this.chatRooms = chatRooms;
+      chatRoomsStream = FirebaseFirestore.instance.collection('chatRooms').where('participantIds', arrayContains: userId.toString()).snapshots();
+    });
   }
 
   @override
@@ -31,13 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  Stream<List<DocumentSnapshot>> initializeChatRoomsStream() {
-    final chatRoomsRef = FirebaseFirestore.instance.collection('chatRooms');
-
-    return chatRoomsRef
-        .where('participantIds', arrayContains: userId)
-        .snapshots()
-        .map((snapshot) => snapshot.docs);
+  Future<List<String>> fetchChatRooms() async {
+    final querySnapshot = await FirebaseFirestore.instance.collection('chatRooms').get();
+    final chatRooms = querySnapshot.docs.map((doc) => doc.id).toList();
+    print(chatRooms);
+    return chatRooms;
   }
 
   @override
@@ -84,8 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         const Spacer(),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
                           child: Text(
                             'Recent Users',
                             style: Styles.h1(),
@@ -113,19 +116,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                           child: Text(
                             'Contacts',
-                            style: Styles.h1().copyWith(color: Colors.indigo),
+                            style: Styles.h1(),
                           ),
                         ),
                         Expanded(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 12.0),
-                            child: StreamBuilder<
-                                QuerySnapshot<Map<String, dynamic>>>(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                               stream: chatRoomsStream,
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
@@ -133,48 +133,30 @@ class _MyHomePageState extends State<MyHomePage> {
                                   return ListView.builder(
                                     itemCount: chatRoomDocs.length,
                                     itemBuilder: (context, index) {
-                                      final chatRoom =
-                                          chatRoomDocs[index].data();
+                                      final chatRoom = chatRoomDocs[index].data();
                                       final chatRoomId = chatRoomDocs[index].id;
-                                      final participantIds =
-                                          chatRoom['participantIds'] as List?;
-                                      final otherParticipantId =
-                                          participantIds?.firstWhere(
-                                              (id) => id != userId.toString(),
-                                              orElse: () => '');
+                                      final participantIds = chatRoom['participantIds'] as List?;
+                                      final otherParticipantId = participantIds?.firstWhere((id) => id != userId.toString(), orElse: () => '');
 
-                                      return StreamBuilder<
-                                          QuerySnapshot<Map<String, dynamic>>>(
-                                        stream: FirebaseFirestore.instance
-                                            .collection('chatRooms')
-                                            .doc(chatRoomId)
-                                            .collection(chatRoomId)
-                                            .orderBy('timestamp',
-                                                descending: true)
-                                            .limit(1)
-                                            .snapshots(),
+                                      return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                                        stream: FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId).collection('messages').orderBy('timestamp', descending: true).limit(1).snapshots(),
                                         builder: (context, snapshot) {
                                           if (snapshot.hasData) {
-                                            final messageDocs =
-                                                snapshot.data!.docs;
+                                            final messageDocs = snapshot.data!.docs;
                                             if (messageDocs.isNotEmpty) {
-                                              final lastMessage =
-                                                  messageDocs[0].data();
+                                              final lastMessage = messageDocs[0].data();
+                                              final timestamp = lastMessage['timestamp'] as Timestamp;
+                                              final messageTime = timestamp.toDate();
                                               return ChatWidgets.card(
                                                 title: otherParticipantId,
-                                                subtitle:
-                                                    lastMessage['message'] ??
-                                                        'No messages',
-                                                time: lastMessage['timestamp'],
+                                                subtitle: lastMessage['message'] ?? 'No messages',
+                                                time: messageTime,
                                                 onTap: () {
                                                   Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                       builder: (context) {
                                                         return ChatPage(
-                                                          participantIds:
-                                                              participantIds
-                                                                  as List<
-                                                                      String>,
+                                                          participantIds: participantIds as List<String>,
                                                         );
                                                       },
                                                     ),
@@ -188,8 +170,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                       );
                                     },
                                   );
+                                } else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else {
+                                  return const CircularProgressIndicator();
                                 }
-                                return const CircularProgressIndicator();
                               },
                             ),
                           ),
@@ -215,8 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: open
                     ? Padding(
-                        padding:
-                            const EdgeInsets.only(top: 20, right: 10, left: 10),
+                        padding: const EdgeInsets.only(top: 20, right: 10, left: 10),
                         child: Column(
                           children: [
                             Row(
@@ -246,19 +230,22 @@ class _MyHomePageState extends State<MyHomePage> {
                             const SizedBox(height: 20),
                             Expanded(
                               child: ListView.builder(
-                                itemCount: 10,
-                                itemBuilder: (context, i) {
+                                itemCount: chatRooms.length,
+                                itemBuilder: (context, index) {
+                                  final chatRoomId = chatRooms[index];
                                   return ListTile(
-                                    leading: CircleAvatar(
-                                      radius: 20,
-                                      backgroundColor: Colors.indigo.shade400,
-                                      child: const Icon(
-                                        Icons.person,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    title: Text('User $i'),
-                                    onTap: () {},
+                                    title: Text(chatRoomId),
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return ChatPage(
+                                              chatRoomId: chatRoomId,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
                               ),
@@ -266,10 +253,15 @@ class _MyHomePageState extends State<MyHomePage> {
                           ],
                         ),
                       )
-                    : const Center(
-                        child: Icon(
+                    : IconButton(
+                        onPressed: () {
+                          setState(() {
+                            open = !open;
+                          });
+                        },
+                        icon: Icon(
                           Icons.search_rounded,
-                          color: Colors.white,
+                          size: 30,
                         ),
                       ),
               ),
@@ -281,26 +273,34 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class ChatPage extends StatelessWidget {
+  final String? chatRoomId;
+  final List<String>? participantIds;
+
+  const ChatPage({Key? key, this.chatRoomId, this.participantIds}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Chat Room'),
+      ),
+      body: Center(
+        child: Text('Chat Room: $chatRoomId'),
+      ),
+    );
+  }
+}
+
 class ChatWidgets {
   static Widget circleProfile() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.indigo.shade400,
-            child: const Icon(
-              Icons.person,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            'User',
-            style: Styles.subtitle(),
-          ),
-        ],
+      width: 60,
+      height: 60,
+      margin: const EdgeInsets.only(right: 8),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.white,
       ),
     );
   }
@@ -308,39 +308,15 @@ class ChatWidgets {
   static Widget card({
     required String title,
     required String subtitle,
-    required Timestamp time,
+    required DateTime time,
     required VoidCallback onTap,
   }) {
-    return GestureDetector(
+    final formattedTime = DateFormat('HH:mm').format(time);
+    return ListTile(
+      title: Text(title),
+      subtitle: Text(subtitle),
+      trailing: Text(formattedTime),
       onTap: onTap,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        child: ListTile(
-          leading: CircleAvatar(
-            radius: 20,
-            backgroundColor: Colors.indigo.shade400,
-            child: const Icon(
-              Icons.person,
-              color: Colors.white,
-            ),
-          ),
-          title: Text(
-            title,
-            style: Styles.h1(),
-          ),
-          subtitle: Text(
-            subtitle,
-            style: Styles.subtitle(),
-          ),
-          trailing: Text(
-            DateFormat('HH:mm').format(time.toDate()),
-            style: Styles.subtitle(),
-          ),
-        ),
-      ),
     );
   }
 }
@@ -348,15 +324,8 @@ class ChatWidgets {
 class Styles {
   static TextStyle h1() {
     return const TextStyle(
-      fontSize: 20,
+      fontSize: 24,
       fontWeight: FontWeight.bold,
-    );
-  }
-
-  static TextStyle subtitle() {
-    return const TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.normal,
     );
   }
 
@@ -364,8 +333,8 @@ class Styles {
     return BoxDecoration(
       color: Colors.white,
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(30),
-        topRight: Radius.circular(30),
+        topLeft: Radius.circular(25),
+        topRight: Radius.circular(25),
       ),
     );
   }

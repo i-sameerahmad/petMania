@@ -79,9 +79,11 @@ class _PDPPageState extends State<PDPPage> {
   void addToCart() {
     if (cartCalue > 0 && product.isNotEmpty) {
       for (var item in product) {
+        final int productId = item['id'];
         final String productName = item['product_name'];
         final double productPrice = item['product_price'];
         final cartProduct = CartProduct(
+          productId: productId,
           name: productName,
           price: productPrice,
           quantity: cartCalue,
@@ -397,16 +399,19 @@ class _PDPPageState extends State<PDPPage> {
                                 Provider.of<CartProvider>(context,
                                     listen: false);
                             for (var item in product) {
+                              final int productId = item['id'];
                               final String productName = item['product_name'];
                               final double productPrice =
                                   item['product_price'].toDouble();
                               final int productQuantity = cartCalue;
                               // Provide default value
                               final cartProduct = CartProduct(
+                                productId: productId,
                                 name: productName,
                                 price: productPrice,
                                 quantity: productQuantity,
                               );
+
                               cartProvider.addToCart(cartProduct);
                             }
                             Navigator.push(

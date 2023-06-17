@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:pet_paradise/Commons/splash_page.dart';
+import 'package:pet_paradise/vet_module/vatConfirmation.dart';
 
 List<String> pets = [
   "Cat",
@@ -98,10 +100,9 @@ class PetNotifier {
     int age,
     double price,
     File? image,
-    String certificatePath,
+    String? certificatePath,
     BuildContext context,
   ) async {
-    
     List<String> labels = await detectLabels(image);
     print(labels);
     List<String> commonPets = pets
@@ -133,11 +134,13 @@ class PetNotifier {
     // request.fields['labels'] = labels.join(','); // Add labels to the request
 
     // Add the PDF file to the request as a file attachment
-    request.files.add(await http.MultipartFile.fromPath(
-      'certificate',
-      certificatePath,
-      contentType: MediaType('application', 'pdf'),
-    ));
+    if (certificatePath != null) {
+      request.files.add(await http.MultipartFile.fromPath(
+        'certificate',
+        certificatePath,
+        contentType: MediaType('application', 'pdf'),
+      ));
+    }
     request.files.add(
       http.MultipartFile.fromBytes(
         'image',
@@ -148,7 +151,78 @@ class PetNotifier {
 
     var response = await request.send();
     if (response.statusCode == 200) {
-      print('Pet added!');
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              VatConfirmation(), // Replace CartPage with your actual cart page
+        ),
+      );
+    } else {
+      print('Failed to add pet.');
+    }
+  }
+
+  Future<void> addAdoptPet(
+    int userID,
+    String title,
+    String description,
+    String gender,
+    String category,
+    int age,
+    File? image,
+    BuildContext context,
+  ) async {
+    List<String> labels = await detectLabels(image);
+    print(labels);
+    List<String> commonPets = pets
+        .where((pet) => labels.any(
+            (label) => label.trim().toLowerCase() == pet.trim().toLowerCase()))
+        .toList();
+
+    print('Common Pets: $commonPets');
+    if (commonPets.isEmpty) {
+      final snackBar =
+          SnackBar(content: Text('Please select an appropriate image.'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return;
+    }
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('http://10.0.2.2:8000/api/adoptpet'),
+    );
+
+    // Add text fields to the request
+    request.fields['title'] = title;
+    request.fields['description'] = description;
+    request.fields['gender'] = gender;
+    request.fields['category'] = category;
+    request.fields['age'] = age.toString();
+    request.fields['user_id'] = userID.toString();
+    request.fields['image'] = image!.path.split('/').last;
+    // request.fields['labels'] = labels.join(','); // Add labels to the request
+
+    // Add the PDF file to the request as a file attachment
+
+    request.files.add(
+      http.MultipartFile.fromBytes(
+        'image',
+        await File.fromUri(image.uri).readAsBytes(),
+        filename: image.path.split('/').last,
+      ),
+    );
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              VatConfirmation(), // Replace CartPage with your actual cart page
+        ),
+      );
     } else {
       print('Failed to add pet.');
     }
@@ -174,9 +248,49 @@ class PetNotifier {
     }
   }
 
+  Future<List<dynamic>> fetchAdoptPets() async {
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/getadoptpets'));
+
+    if (response.statusCode == 200) {
+      // If the request is successful, parse the response body
+      final data = jsonDecode(response.body);
+      if (data is List) {
+        // Return the list of pets
+        return data;
+      } else {
+        // Handle the case where the response body is not a list
+        throw Exception('Invalid response format');
+      }
+    } else {
+      // If the request fails, throw an exception or handle the error accordingly
+      throw Exception('Failed to fetch pets');
+    }
+  }
+
   Future<dynamic> fetchPet(int id) async {
     final response =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/getpet/$id'));
+
+    if (response.statusCode == 200) {
+      // If the request is successful, parse the response body
+      final data = jsonDecode(response.body);
+      if (data is List) {
+        // Return the list of pets
+        return data;
+      } else {
+        // Handle the case where the response body is not a list
+        throw Exception('Invalid response format');
+      }
+    } else {
+      // If the request fails, throw an exception or handle the error accordingly
+      throw Exception('Failed to fetch pets');
+    }
+  }
+
+  Future<dynamic> fetchAdoptPet(int id) async {
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/getadoptpet/$id'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body

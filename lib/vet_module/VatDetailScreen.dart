@@ -90,8 +90,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
         ],
         title: Text(
           'Vat Details',
-          style: TextStyle(
-              fontFamily: 'Itim-Regular', fontWeight: FontWeight.bold),
+          style: TextStyle(fontFamily: 'Itim-Regular', fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -100,8 +99,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                  top: 10.0, right: 10, left: 10, bottom: 15),
+              padding: const EdgeInsets.only(top: 10.0, right: 10, left: 10, bottom: 15),
               child: Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -109,8 +107,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
                     children: [
                       CachedNetworkImage(
                         imageUrl: DB_URL_IMAGES + doctor[0]['doc_image'],
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
+                        placeholder: (context, url) => CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                         height: 120,
                         width: 120,
@@ -132,8 +129,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 1.0, horizontal: 35),
+                        padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 35),
                         child: Text(
                           doctor.isNotEmpty ? doctor[0]['doc_slot'] : '',
                           style: TextStyle(
@@ -168,8 +164,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 3.0, horizontal: 25),
+              padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -200,8 +195,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 3.0, horizontal: 25),
+              padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 25),
               child: Row(
                 children: [
                   Icon(Icons.location_city),
@@ -233,8 +227,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 3.0, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 20),
               child: Row(
                 children: [
                   Expanded(
@@ -253,8 +246,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 3.0, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 20),
               child: Row(
                 children: [
                   Expanded(
@@ -273,8 +265,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
               child: InkWell(
                 onTap: (() {
                   Navigator.push(
@@ -283,31 +274,27 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
                   );
                 }),
                 child: Container(
-                  decoration: BoxDecoration(
-                      color: MyColors.MATERIAL_LIGHT_GREEN,
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  decoration: BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN, borderRadius: BorderRadius.all(Radius.circular(20))),
                   height: 50,
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Proceed",
-                            style: TextStyle(
-                              fontFamily: ' Itim-Regular',
-                              fontSize: 17,
-                            ),
-                          ),
-                          Icon(Icons.arrow_forward_ios)
-                        ]),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                      Text(
+                        "Proceed",
+                        style: TextStyle(
+                          fontFamily: ' Itim-Regular',
+                          fontSize: 17,
+                        ),
+                      ),
+                      Icon(Icons.arrow_forward_ios)
+                    ]),
                   ),
                 ),
               ),
             ),
             SizedBox(height: 20.0),
             Text(
-              'Rate this product',
+              'Rate this Doctor',
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
@@ -344,8 +331,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
             ElevatedButton(
               onPressed: () {
                 String review = reviewController.text;
-                _notifier.addReview(
-                    userID, userName, review, rating, doctor[0]['id'], context);
+                _notifier.addReview(userID, userName, review, rating, doctor[0]['id'], context);
                 reviewController.clear(); // Clear the review text field
                 setState(() {
                   rating = 0.0; // Reset the rating
@@ -383,8 +369,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
               ),
               itemBuilder: (context, index) {
                 final review = reviewList[index];
-                final double reviewRating =
-                    double.parse(review['rating'].toString());
+                final double reviewRating = double.parse(review['rating'].toString());
                 final String reviewText = review['review'];
                 final String username = review['userName'];
                 return ListTile(

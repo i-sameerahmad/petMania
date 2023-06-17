@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/AdoptAPet/adoptPetShop.dart';
+import 'package:pet_paradise/Backend/Pet/pet.dart';
 import 'package:pet_paradise/Backend/doctor.dart';
 import 'package:pet_paradise/Backend/product.dart';
 import 'package:pet_paradise/Commons/chat.dart';
 import 'package:pet_paradise/Commons/inbox.dart';
 import 'package:pet_paradise/pages/add_pet_detail.dart';
+import 'package:pet_paradise/pages/adopt_pet_detail.dart';
 import 'package:pet_paradise/petPanda_Module/petPandaLandingPage.dart';
 import 'package:pet_paradise/pet_owner_module/module/get_started_page_data.dart';
 import 'package:pet_paradise/Commons/get_started_page.dart';
@@ -93,6 +96,7 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
 
   final DoctorNotifier _doctorNotifier = DoctorNotifier();
   final ProductNotifier _productNotifier = ProductNotifier();
+  final PetNotifier _petNotifier = PetNotifier();
 
   @override
   Widget build(BuildContext context) {
@@ -173,19 +177,40 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: MyButton(
-                  onPressed: () {
-                    Navigator.push(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MyButton(
+                    onPressed: () {
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const AddPetDetail()));
-                    // AddPost
-                  },
-                  title: 'Sale Pet',
-                  color: Colors.yellow,
-                  textColor: Colors.black,
-                  height: 45),
-            )
+                          builder: (context) => const AddPetDetail(),
+                        ),
+                      );
+                    },
+                    title: 'Sale Pet',
+                    color: Colors.yellow,
+                    textColor: Colors.black,
+                    height: 45,
+                  ),
+                  MyButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddAdoptPetDetail(),
+                        ),
+                      );
+                    },
+                    title: 'Adopt Pet',
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    height: 45,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
         collapseMode: CollapseMode.parallax,
@@ -258,13 +283,18 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
                               appUser: appUser,
                             )));
               } else if (gridCardData[index].title == ADOPTAPET) {
-                Navigator.push(
+                _petNotifier.fetchAdoptPets().then((pets) {
+                  // Handle the list of doctors here
+                  // You can pass the doctors to the next screen or perform any other logic
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => GetStartedPage(
-                              pageData: CommonDashBoard.getStartedWithAdoptAPet,
-                              appUser: appUser,
-                            )));
+                        builder: (context) => ADOPTPETSHOP(pets: pets)),
+                  );
+                }).catchError((error) {
+                  // Handle the error if the request fails
+                  print(error);
+                });
               } else if (gridCardData[index].title == BLOGSANDARTICLES) {
                 Navigator.push(
                     context,

@@ -9,16 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import '../components/styles.dart';
 
-class AddPetDetail extends StatefulWidget {
+class AddAdoptPetDetail extends StatefulWidget {
   static const String id = 'AddPetDetail';
 
-  const AddPetDetail({Key? key}) : super(key: key);
+  const AddAdoptPetDetail({Key? key}) : super(key: key);
 
   @override
-  _AddPetDetailState createState() => _AddPetDetailState();
+  _AddAdoptPetDetailState createState() => _AddAdoptPetDetailState();
 }
 
-class _AddPetDetailState extends State<AddPetDetail> {
+class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
   int selectID = 1;
   late String _selectGender;
   String dropdownValueSpecies = 'Dog';
@@ -82,29 +82,27 @@ class _AddPetDetailState extends State<AddPetDetail> {
     }
   }
 
-  late String _fileName;
-  late String _filePath;
+  // late String _fileName;
+  // late String _filePath;
 
-  void _openFileExplorer() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
-    );
+  // void _openFileExplorer() async {
+  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //     type: FileType.custom,
+  //     allowedExtensions: ['pdf'],
+  //   );
 
-    if (result != null) {
-      setState(() {
-        _fileName = result.files.single.name;
-        _filePath = result.files.single.path!;
-      });
-    }
-  }
+  //   if (result != null) {
+  //     setState(() {
+  //       _fileName = result.files.single.name;
+  //       _filePath = result.files.single.path!;
+  //     });
+  //   }
+  // }
 
   @override
   void initState() {
     myPrefs();
     super.initState();
-    _fileName = '';
-    _filePath = '';
   }
 
   final PetNotifier _petNotifier = PetNotifier();
@@ -181,21 +179,6 @@ class _AddPetDetailState extends State<AddPetDetail> {
                       _buildSelect('Female', 2),
                     ],
                   ),
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: _openFileExplorer,
-                          child: const Text('Select PDF'),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                            'Selected PDF: ${_fileName.isNotEmpty ? _fileName : 'None'}'),
-                        if (_filePath.isNotEmpty) Text('File path: $_filePath'),
-                      ],
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(height: 8),
@@ -214,16 +197,14 @@ class _AddPetDetailState extends State<AddPetDetail> {
                     print(image);
                     print(userID);
 
-                    _petNotifier.addPet(
+                    _petNotifier.addAdoptPet(
                         userID,
                         _petNameController.text,
                         _petDescriptionController.text,
                         _selectGender,
                         dropdownValueSpecies,
                         int.parse(_petAgeController.text),
-                        double.parse(_petPriceController.text),
                         image,
-                        _filePath.isNotEmpty ? _filePath : null,
                         context);
                     // Navigator.push(
                     //     context,
