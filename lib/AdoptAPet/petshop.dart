@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:pet_paradise/AdoptAPet/petDetail.dart';
 import 'package:pet_paradise/Backend/Pet/pet.dart';
-import 'package:pet_paradise/Commons/chat.dart';
 import 'package:pet_paradise/utils/appConstants.dart';
 
 class PETSHOP extends StatefulWidget {
@@ -46,7 +45,7 @@ class _PETSHOPState extends State<PETSHOP> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Adopt a Pet",
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -56,7 +55,7 @@ class _PETSHOPState extends State<PETSHOP> {
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.chat,
             ),
             onPressed: () {
@@ -73,7 +72,7 @@ class _PETSHOPState extends State<PETSHOP> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListTile(
+            const ListTile(
               leading: CircleAvatar(
                 backgroundImage: AssetImage(
                   'assets/images/meena.png',
@@ -97,13 +96,13 @@ class _PETSHOPState extends State<PETSHOP> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -131,7 +130,7 @@ class _PETSHOPState extends State<PETSHOP> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
@@ -145,7 +144,7 @@ class _PETSHOPState extends State<PETSHOP> {
                         ),
                       ),
                       onChanged: (value) {
-                        SchedulerBinding.instance!.addPostFrameCallback((_) {
+                        SchedulerBinding.instance.addPostFrameCallback((_) {
                           setState(() {
                             filteredPets = pets.where((pet) {
                               final String title =
@@ -167,7 +166,7 @@ class _PETSHOPState extends State<PETSHOP> {
                       },
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
                       // Perform your filter logic here
@@ -181,14 +180,14 @@ class _PETSHOPState extends State<PETSHOP> {
                         }).toList();
                       });
                     },
-                    child: Text('Filter'),
+                    child: const Text('Filter'),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 // color: Color(0xFFFA3BA61),
                 borderRadius: BorderRadius.circular(20),
@@ -198,17 +197,17 @@ class _PETSHOPState extends State<PETSHOP> {
                 children: [
                   Text(
                     '${pets.length} Pets Found',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Itim-Regular',
                       fontSize: 18,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   GridView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
@@ -275,10 +274,10 @@ class CategoryIcon extends StatelessWidget {
           width: 80,
           height: 80,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontFamily: 'Itim-Regular',
             fontSize: 18,
@@ -311,7 +310,7 @@ class PetCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 217, 221, 225),
+        color: const Color.fromARGB(255, 217, 221, 225),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -320,8 +319,8 @@ class PetCard extends StatelessWidget {
             padding: const EdgeInsets.all(0),
             child: CachedNetworkImage(
               imageUrl: DB_URL_IMAGES + imageUrl,
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
               height: 140,
               width: 140,
             ),
@@ -333,7 +332,7 @@ class PetCard extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Itim-Regular',
                     fontSize: 16,
@@ -341,7 +340,7 @@ class PetCard extends StatelessWidget {
                 ),
                 Text(
                   price,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Itim-Regular',
                     fontSize: 16,
@@ -350,7 +349,7 @@ class PetCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
@@ -358,7 +357,7 @@ class PetCard extends StatelessWidget {
               children: [
                 Text(
                   category,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Itim-Regular',
                     fontSize: 14,
@@ -366,7 +365,7 @@ class PetCard extends StatelessWidget {
                 ),
                 Text(
                   gender,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Itim-Regular',
                     fontSize: 14,
@@ -375,10 +374,10 @@ class PetCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             age,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontFamily: 'Itim-Regular',
               fontSize: 14,

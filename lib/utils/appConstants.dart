@@ -2,6 +2,7 @@
 
 const ALLUSERS = 'Users';
 const PETS = 'Pets';
+const VERIFIED = 'Verified Pets';
 const BREEDER = 'Breeder';
 const VATERINARIAN = 'Veterinarian';
 const PETOWNERS = 'Pet Owners';

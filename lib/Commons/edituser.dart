@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class EditUserPage extends StatefulWidget {
+  const EditUserPage({super.key});
+
   @override
   _EditUserPageState createState() => _EditUserPageState();
 }
 
 class _EditUserPageState extends State<EditUserPage> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   // Simulated user data
   String _currentName = 'John Doe';
@@ -25,7 +27,7 @@ class _EditUserPageState extends State<EditUserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit User'),
+        title: const Text('Edit User'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -33,18 +35,18 @@ class _EditUserPageState extends State<EditUserPage> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Name',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 // Update the user's information
@@ -57,11 +59,11 @@ class _EditUserPageState extends State<EditUserPage> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('User Updated'),
-                      content: Text('User information updated successfully.'),
+                      title: const Text('User Updated'),
+                      content: const Text('User information updated successfully.'),
                       actions: [
                         TextButton(
-                          child: Text('OK'),
+                          child: const Text('OK'),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -71,7 +73,7 @@ class _EditUserPageState extends State<EditUserPage> {
                   },
                 );
               },
-              child: Text('Update'),
+              child: const Text('Update'),
             ),
           ],
         ),

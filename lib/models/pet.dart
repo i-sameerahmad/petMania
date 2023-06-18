@@ -15,6 +15,10 @@ class Pet {
   String status;
   String image;
   String certificate;
+  String user_name;
+  String user_address;
+  String user_phone;
+  String user_email;
   DateTime updatedAt;
   DateTime createdAt;
   int id;
@@ -30,6 +34,10 @@ class Pet {
     required this.status,
     required this.image,
     required this.certificate,
+    required this.user_name,
+    required this.user_address,
+    required this.user_phone,
+    required this.user_email,
     required this.updatedAt,
     required this.createdAt,
     required this.id,
@@ -46,6 +54,10 @@ class Pet {
         status: json["status"],
         image: json["image"],
         certificate: json["certificate"],
+        user_name: json["user_name"],
+        user_address: json["user_address"],
+        user_phone: json["user_phone"],
+        user_email: json["user_email"],
         updatedAt: DateTime.parse(json["updated_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         id: json["id"],
@@ -62,6 +74,10 @@ class Pet {
         "status": status,
         "image": image,
         "certificate": certificate,
+        "user_name": user_name,
+        "user_address": user_address,
+        "user_phone": user_phone,
+        "user_email": user_email,
         "updated_at": updatedAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
         "id": id,

@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:pet_paradise/Backend/Review/productReview.dart';
 import 'package:pet_paradise/Providers/cart_provider.dart';
 import 'package:pet_paradise/models/cart.dart';
 import 'package:pet_paradise/petPanda_Module/cart.dart';
+import 'package:pet_paradise/utils/appConstants.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +23,7 @@ class PDPPage extends StatefulWidget {
 }
 
 class _PDPPageState extends State<PDPPage> {
-  ProductReviewNotifier _notifier = ProductReviewNotifier();
+  final ProductReviewNotifier _notifier = ProductReviewNotifier();
   final TextEditingController reviewController = TextEditingController();
   List<dynamic> product = []; // Added variable
   List<dynamic> cartList = [];
@@ -88,8 +90,7 @@ class _PDPPageState extends State<PDPPage> {
           price: productPrice,
           quantity: cartCalue,
         );
-        Provider.of<CartProvider>(context, listen: false)
-            .addToCart(cartProduct);
+        Provider.of<CartProvider>(context, listen: false).addToCart(cartProduct);
       }
       cartCalue = 0;
     }
@@ -129,15 +130,14 @@ class _PDPPageState extends State<PDPPage> {
           flexibleSpace: FlexibleSpaceBar(
             background: Stack(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xfffd9e3be),
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/waggles 2 (1).png'),
-                          fit: BoxFit.contain),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20))),
+                Expanded(
+                  child: Center(
+                    child: CachedNetworkImage(
+                      imageUrl: DB_URL_IMAGES + product[0]['product_image'],
+                      placeholder: (context, url) => CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                  ),
                 ),
                 Positioned(
                   bottom: 0,
@@ -173,8 +173,7 @@ class _PDPPageState extends State<PDPPage> {
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4.0, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                         child: Text(
                           product.isNotEmpty ? product[0]['product_name'] : '',
                           style: TextStyle(
@@ -190,12 +189,9 @@ class _PDPPageState extends State<PDPPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4.0, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                         child: Text(
-                          product.isNotEmpty
-                              ? product[0]['product_price'].toString()
-                              : '',
+                          product.isNotEmpty ? product[0]['product_price'].toString() : '',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 24,
@@ -264,8 +260,7 @@ class _PDPPageState extends State<PDPPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4.0, horizontal: 5),
+                              padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                               child: Text(
                                 'Description',
                                 style: TextStyle(
@@ -278,15 +273,12 @@ class _PDPPageState extends State<PDPPage> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 3.0, horizontal: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 20),
                           child: Row(
                             children: [
                               Expanded(
                                 child: Text(
-                                  product.isNotEmpty
-                                      ? product[0]['product_description']
-                                      : '',
+                                  product.isNotEmpty ? product[0]['product_description'] : '',
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 15,
                                   softWrap: false,
@@ -300,57 +292,44 @@ class _PDPPageState extends State<PDPPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8.0, horizontal: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
                           child: Row(
                             children: [
                               InkWell(
                                 onTap: (() {}),
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                      color: MyColors.MATERIAL_LIGHT_GREEN,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
+                                  decoration: BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN, borderRadius: BorderRadius.all(Radius.circular(20))),
                                   height: 50,
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Product Feature",
-                                            style: TextStyle(
-                                              fontFamily: 'Itim-Regular',
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        ]),
+                                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                      Text(
+                                        "Product Feature",
+                                        style: TextStyle(
+                                          fontFamily: 'Itim-Regular',
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    ]),
                                   ),
                                 ),
                               ),
                               InkWell(
                                 onTap: (() {}),
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                      color: MyColors.MATERIAL_LIGHT_GREEN,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
+                                  decoration: BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN, borderRadius: BorderRadius.all(Radius.circular(20))),
                                   height: 50,
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Reviews",
-                                            style: TextStyle(
-                                              fontFamily: 'Itim-Regular',
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        ]),
+                                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                      Text(
+                                        "Reviews",
+                                        style: TextStyle(
+                                          fontFamily: 'Itim-Regular',
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    ]),
                                   ),
                                 ),
                               ),
@@ -364,8 +343,7 @@ class _PDPPageState extends State<PDPPage> {
                               itemCount: messages.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 40.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
                                   child: ListTile(
                                       leading: Icon(
                                         Icons.circle,
@@ -391,18 +369,14 @@ class _PDPPageState extends State<PDPPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4.0, horizontal: 5),
+                        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                         child: InkWell(
                           onTap: () {
-                            CartProvider cartProvider =
-                                Provider.of<CartProvider>(context,
-                                    listen: false);
+                            CartProvider cartProvider = Provider.of<CartProvider>(context, listen: false);
                             for (var item in product) {
                               final int productId = item['id'];
                               final String productName = item['product_name'];
-                              final double productPrice =
-                                  item['product_price'].toDouble();
+                              final double productPrice = item['product_price'].toDouble();
                               final int productQuantity = cartCalue;
                               // Provide default value
                               final cartProduct = CartProduct(
@@ -417,23 +391,20 @@ class _PDPPageState extends State<PDPPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    Cart(), // Replace CartPage with your actual cart page
+                                builder: (context) => Cart(), // Replace CartPage with your actual cart page
                               ),
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                               color: MyColors.MATERIAL_LIGHT_GREEN,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                              borderRadius: BorderRadius.all(Radius.circular(20)),
                             ),
                             height: 50,
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "Add to Cart",
@@ -489,15 +460,14 @@ class _PDPPageState extends State<PDPPage> {
                   ElevatedButton(
                     onPressed: () {
                       String review = reviewController.text;
-                      _notifier.addReview(userID, userName, review, rating,
-                          product[0]['id'], context);
+                      _notifier.addReview(userID, userName, review, rating, product[0]['id'], context);
                       reviewController.clear(); // Clear the review text field
                       setState(() {
                         rating = 0.0; // Reset the rating
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
+                      backgroundColor: Colors.green,
                       padding: EdgeInsets.symmetric(horizontal: 30.0),
                     ),
                     child: Text(
@@ -528,8 +498,7 @@ class _PDPPageState extends State<PDPPage> {
                     ),
                     itemBuilder: (context, index) {
                       final review = reviewList[index];
-                      final double reviewRating =
-                          double.parse(review['rating'].toString());
+                      final double reviewRating = double.parse(review['rating'].toString());
                       final String reviewText = review['review'];
                       final String username = review['userName'];
                       return ListTile(

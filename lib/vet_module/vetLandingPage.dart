@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/AdoptAPet/landingAdoptpet.dart';
 import 'package:pet_paradise/Backend/doctor.dart';
-import 'package:pet_paradise/Commons/chat.dart';
 import 'package:pet_paradise/trainer_landing/trainerLangingPage.dart';
 import 'package:pet_paradise/utils/appConstants.dart';
 import 'package:pet_paradise/vet_module/VatDetailScreen.dart';
@@ -91,8 +90,7 @@ class _VatLandingState extends State<VatLanding> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => TrainerLanding()),
+                          MaterialPageRoute(builder: (context) => TrainerLanding()),
                         );
                       },
                       child: Column(
@@ -104,8 +102,7 @@ class _VatLandingState extends State<VatLanding> {
                           ),
                           Text(
                             "Training",
-                            style: TextStyle(
-                                fontFamily: 'Itim-Regular', fontSize: 20),
+                            style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 20),
                           ),
                         ],
                       ),
@@ -130,8 +127,7 @@ class _VatLandingState extends State<VatLanding> {
                           ),
                           Text(
                             "Veterinary",
-                            style: TextStyle(
-                                fontFamily: 'Itim-Regular', fontSize: 20),
+                            style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 20),
                           ),
                         ],
                       ),
@@ -154,8 +150,7 @@ class _VatLandingState extends State<VatLanding> {
                           ),
                           Text(
                             "Adopt",
-                            style: TextStyle(
-                                fontFamily: 'Itim-Regular', fontSize: 20),
+                            style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 20),
                           ),
                         ],
                       ),
@@ -177,13 +172,11 @@ class _VatLandingState extends State<VatLanding> {
                     child: InkWell(
                       onTap: () async {
                         try {
-                          var response =
-                              _doctorNotifier.fetchDoctor(doctor['id']);
+                          var response = _doctorNotifier.fetchDoctor(doctor['id']);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  VatDetailScreen(doctorData: response),
+                              builder: (context) => VatDetailScreen(doctorData: response),
                             ),
                           );
                         } catch (error) {
@@ -202,10 +195,8 @@ class _VatLandingState extends State<VatLanding> {
                             children: [
                               CachedNetworkImage(
                                 imageUrl: DB_URL_IMAGES + doctor['doc_image'],
-                                placeholder: (context, url) =>
-                                    CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
+                                placeholder: (context, url) => CircularProgressIndicator(),
+                                errorWidget: (context, url, error) => Icon(Icons.error),
                                 height: 120,
                                 width: 120,
                               ),
@@ -233,8 +224,7 @@ class _VatLandingState extends State<VatLanding> {
                                     ),
                                     SizedBox(height: 5),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           'Fee: ${doctor['doc_fee']}',
@@ -245,8 +235,7 @@ class _VatLandingState extends State<VatLanding> {
                                         ),
                                         Row(
                                           children: [
-                                            Icon(Icons.star,
-                                                color: Colors.yellow),
+                                            Icon(Icons.star, color: Colors.yellow),
                                             SizedBox(width: 5),
                                             Text(
                                               '4',

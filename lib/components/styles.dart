@@ -138,10 +138,7 @@ numField(hint, icn, TextEditingController controller) {
     child: TextField(
       controller: controller,
       keyboardType: TextInputType.number,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-        FilteringTextInputFormatter.digitsOnly
-      ],
+      inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.allow(RegExp(r'[0-9]')), FilteringTextInputFormatter.digitsOnly],
       decoration: InputDecoration(
         labelText: hint,
         suffixIcon: Icon(
@@ -162,9 +159,7 @@ SearchBox() {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 20),
     padding: const EdgeInsets.symmetric(horizontal: 16),
-    decoration: const BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.all(Radius.circular(30))),
+    decoration: const BoxDecoration(color: backgroundColor, borderRadius: BorderRadius.all(Radius.circular(30))),
     child: TextField(
       onChanged: (String txt) {},
       style: const TextStyle(

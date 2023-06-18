@@ -36,7 +36,7 @@ class _AdoptPetDetailsState extends State<AdoptPetDetails> {
 
   Future<void> _fetchPet() async {
     try {
-      final List<dynamic> data = await widget.petData;
+      final List<dynamic> data = widget.petData;
       setState(() {
         pet = data;
         print(pet);
@@ -59,10 +59,7 @@ class _AdoptPetDetailsState extends State<AdoptPetDetails> {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChatPage(
-                        participantIds: [
-                          userID.toString(),
-                          pet[0]['user_id'].toString()
-                        ],
+                        participantIds: [userID.toString(), pet[0]['user_id'].toString()],
                       )));
 
               // do something
@@ -142,51 +139,33 @@ class _AdoptPetDetailsState extends State<AdoptPetDetails> {
                     width: 120,
                     child: Column(
                       children: [
-                        Text(pet[0]['gender'],
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: ' Itim-Regular',
-                                fontSize: 24)),
+                        Text(pet[0]['gender'], style: TextStyle(color: Colors.black, fontFamily: ' Itim-Regular', fontSize: 24)),
                       ],
                       mainAxisAlignment: MainAxisAlignment.center,
                     ),
-                    decoration: BoxDecoration(
-                        color: Color(0xfff89aa28),
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    decoration: BoxDecoration(color: Color(0xfff89aa28), borderRadius: BorderRadius.all(Radius.circular(25))),
                   ),
                   Container(
                     height: 50,
                     width: 120,
                     child: Column(
                       children: [
-                        Text(pet[0]['category'],
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: ' Itim-Regular',
-                                fontSize: 24)),
+                        Text(pet[0]['category'], style: TextStyle(color: Colors.black, fontFamily: ' Itim-Regular', fontSize: 24)),
                       ],
                       mainAxisAlignment: MainAxisAlignment.center,
                     ),
-                    decoration: BoxDecoration(
-                        color: Color(0xfff89aa28),
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    decoration: BoxDecoration(color: Color(0xfff89aa28), borderRadius: BorderRadius.all(Radius.circular(25))),
                   ),
                   Container(
                     height: 50,
                     width: 120,
                     child: Column(
                       children: [
-                        Text(pet[0]['age'].toString(),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: ' Itim-Regular',
-                                fontSize: 24)),
+                        Text(pet[0]['age'].toString(), style: TextStyle(color: Colors.black, fontFamily: ' Itim-Regular', fontSize: 24)),
                       ],
                       mainAxisAlignment: MainAxisAlignment.center,
                     ),
-                    decoration: BoxDecoration(
-                        color: Color(0xfff89aa28),
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    decoration: BoxDecoration(color: Color(0xfff89aa28), borderRadius: BorderRadius.all(Radius.circular(25))),
                   ),
                 ],
               ),
@@ -224,37 +203,46 @@ class _AdoptPetDetailsState extends State<AdoptPetDetails> {
                 ],
               ),
             ),
-            Positioned(
-              bottom: 0,
+            Card(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
-                child: InkWell(
-                  onTap: (() {}),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xfff89aa28),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    height: 50,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Book Me",
-                              style: TextStyle(
-                                fontFamily: ' Itim-Regular',
-                                fontSize: 17,
-                              ),
-                            ),
-                            Icon(Icons.arrow_forward_ios)
-                          ]),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'User details',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: ' Itim-Regular',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 12),
+                    ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text('Name'),
+                      subtitle: Text(pet[0]['user_name']),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.email),
+                      title: Text('Email'),
+                      subtitle: Text(pet[0]['user_email']),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.phone),
+                      title: Text('Phone'),
+                      subtitle: Text(pet[0]['user_phone']),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.location_on),
+                      title: Text('Address'),
+                      subtitle: Text(pet[0]['user_address']),
+                    ),
+                  ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       )),

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Backend/Pet/pet.dart';
-import 'package:pet_paradise/pages/tabs.dart';
 import 'package:pet_paradise/widget/elevated_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,8 +24,12 @@ class _AddPetDetailState extends State<AddPetDetail> {
   String dropdownValueBreed = 'American Bulldog';
   String dropdownValueSize = 'Select';
   final TextEditingController _petNameController = TextEditingController();
-  final TextEditingController _petDescriptionController =
-      TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+
+  final TextEditingController _petDescriptionController = TextEditingController();
   final TextEditingController _petAgeController = TextEditingController();
 
   final TextEditingController _petPriceController = TextEditingController();
@@ -46,11 +49,7 @@ class _AddPetDetailState extends State<AddPetDetail> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: currentDate,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2050));
+    final DateTime? pickedDate = await showDatePicker(context: context, initialDate: currentDate, firstDate: DateTime(2015), lastDate: DateTime(2050));
     if (pickedDate != null && pickedDate != currentDate) {
       setState(() {
         currentDate = pickedDate;
@@ -190,18 +189,104 @@ class _AddPetDetailState extends State<AddPetDetail> {
                           child: const Text('Select PDF'),
                         ),
                         const SizedBox(height: 16),
-                        Text(
-                            'Selected PDF: ${_fileName.isNotEmpty ? _fileName : 'None'}'),
+                        Text('Selected PDF: ${_fileName.isNotEmpty ? _fileName : 'None'}'),
                         if (_filePath.isNotEmpty) Text('File path: $_filePath'),
                       ],
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 25),
               // greyTextSmall('Date of birth'),
               // _buildSelectDate(),
               // SizedBox(height: 30),
+              // const SizedBox(height: 8),
+              blackBoldText(
+                'User details',
+              ),
+              // Added heading "User details"
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
+                child: Form(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Name",
+                        style: TextStyle(
+                          fontFamily: 'Itim-Regular',
+                          fontSize: 16,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(),
+                        controller: _nameController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        "Address",
+                        style: TextStyle(
+                          fontFamily: 'Itim-Regular',
+                          fontSize: 16,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(),
+                        controller: _addressController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your address';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        "Phone",
+                        style: TextStyle(
+                          fontFamily: 'Itim-Regular',
+                          fontSize: 16,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(),
+                        controller: _phoneController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your phone number';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        "Email",
+                        style: TextStyle(
+                          fontFamily: 'Itim-Regular',
+                          fontSize: 16,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(),
+                        controller: _emailController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
               MyElevatedButton(
                   onPressed: () {
                     print(_petNameController.text);
@@ -224,6 +309,10 @@ class _AddPetDetailState extends State<AddPetDetail> {
                         double.parse(_petPriceController.text),
                         image,
                         _filePath.isNotEmpty ? _filePath : null,
+                        _nameController.text,
+                        _addressController.text,
+                        _phoneController.text,
+                        _emailController.text,
                         context);
                     // Navigator.push(
                     //     context,
@@ -256,11 +345,7 @@ class _AddPetDetailState extends State<AddPetDetail> {
           color: selectID == id ? appColor : Colors.transparent,
           borderRadius: const BorderRadius.all(Radius.circular(50.0)),
         ),
-        child: Text(title,
-            style: TextStyle(
-                fontFamily: 'medium',
-                fontSize: 14,
-                color: selectID == id ? Colors.white : Colors.black54)),
+        child: Text(title, style: TextStyle(fontFamily: 'medium', fontSize: 14, color: selectID == id ? Colors.white : Colors.black54)),
       ),
     );
   }
@@ -282,8 +367,7 @@ class _AddPetDetailState extends State<AddPetDetail> {
             dropdownValueSpecies = newValue!;
           });
         },
-        items: ['Dog', 'Cat', 'Turtle', 'Monkey']
-            .map<DropdownMenuItem<String>>((String value) {
+        items: ['Dog', 'Cat', 'Turtle', 'Monkey'].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(
@@ -295,95 +379,4 @@ class _AddPetDetailState extends State<AddPetDetail> {
       ),
     );
   }
-
-  // Widget buildDropDownBreed() {
-  //   return Container(
-  //     width: double.infinity,
-  //     decoration: BoxDecoration(
-  //       border: Border(bottom: BorderSide(color: Colors.black26)),
-  //       color: Colors.white,
-  //     ),
-  //     child: DropdownButton<String>(
-  //       underline: SizedBox(),
-  //       iconSize: 18,
-  //       iconEnabledColor: Colors.black,
-  //       value: dropdownValueBreed,
-  //       onChanged: (newValue) {
-  //         setState(() {
-  //           dropdownValueBreed = newValue!;
-  //         });
-  //       },
-  //       items: [
-  //         'American Bulldog',
-  //         'Muffin',
-  //         'Labrador',
-  //         'German Shephard',
-  //         'Golden Retriver'
-  //       ].map<DropdownMenuItem<String>>((String value) {
-  //         return DropdownMenuItem<String>(
-  //           value: value,
-  //           child: Text(
-  //             value,
-  //             style: TextStyle(color: Colors.black, fontSize: 14),
-  //           ),
-  //         );
-  //       }).toList(),
-  //     ),
-  //   );
-  // }
-
-  // Widget buildDropDownSize() {
-  //   return Container(
-  //     width: double.infinity,
-  //     decoration: BoxDecoration(
-  //       border: Border(bottom: BorderSide(color: Colors.black26)),
-  //       color: Colors.white,
-  //     ),
-  //     child: DropdownButton<String>(
-  //       underline: SizedBox(),
-  //       iconSize: 18,
-  //       iconEnabledColor: Colors.black,
-  //       value: dropdownValueSize,
-  //       onChanged: (newValue) {
-  //         setState(() {
-  //           dropdownValueSize = newValue!;
-  //         });
-  //       },
-  //       items: ['Select', '5', '6', '7']
-  //           .map<DropdownMenuItem<String>>((String value) {
-  //         return DropdownMenuItem<String>(
-  //           value: value,
-  //           child: Text(
-  //             value,
-  //             style: TextStyle(color: Colors.black, fontSize: 14),
-  //           ),
-  //         );
-  //       }).toList(),
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildSelectDate() {
-  //   return GestureDetector(
-  //     onTap: () => _selectDate(context),
-  //     child: Container(
-  //       padding: const EdgeInsets.symmetric(vertical: 12),
-  //       margin: EdgeInsets.symmetric(vertical: 10),
-  //       decoration: BoxDecoration(
-  //         border: Border(bottom: BorderSide(color: Colors.black26)),
-  //         color: Colors.white,
-  //       ),
-  //       child: Row(
-  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //         children: [
-  //           //  Text(currentDate.toString()),
-  //           Text('4 Jan \'21',
-  //               style: TextStyle(
-  //                   fontFamily: 'medium', fontSize: 14, color: Colors.black54)),
-  //           Icon(Icons.calendar_month, color: appColor)
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

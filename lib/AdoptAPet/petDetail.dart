@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Commons/chat.dart';
+import 'package:pet_paradise/components/styles.dart';
 import 'package:pet_paradise/utils/appConstants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,7 +37,7 @@ class _PetDetailsState extends State<PetDetails> {
 
   Future<void> _fetchPet() async {
     try {
-      final List<dynamic> data = await widget.petData;
+      final List<dynamic> data = widget.petData;
       setState(() {
         pet = data;
         print(pet);
@@ -58,14 +59,10 @@ class _PetDetailsState extends State<PetDetails> {
             ),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChatPage(
-                        participantIds: [
-                          userID.toString(),
-                          pet[0]['user_id'].toString()
-                        ],
-                      )));
-
-              // do something
+                builder: (context) => ChatPage(
+                  participantIds: [userID.toString(), pet[0]['user_id'].toString()],
+                ),
+              ));
             },
           )
         ],
@@ -73,191 +70,211 @@ class _PetDetailsState extends State<PetDetails> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            // SizedBox(
-            //   height: 10,
-            // ),
-            Row(
-              children: [
-                Text(
-                  'Pet Details',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: ' Itim-Regular',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  pet[0]['title'],
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: ' Itim-Regular',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CachedNetworkImage(
-                  imageUrl: DB_URL_IMAGES + pet[0]['image'],
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                  height: 250,
-                  width: 250,
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  'PKR, ${pet[0]['price']}',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: ' Itim-Regular',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  Container(
-                    height: 50,
-                    width: 120,
-                    child: Column(
-                      children: [
-                        Text(pet[0]['gender'],
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: ' Itim-Regular',
-                                fontSize: 24)),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  Text(
+                    'Pet Details',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: ' Itim-Regular',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
-                    decoration: BoxDecoration(
-                        color: Color(0xfff89aa28),
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
-                  ),
-                  Container(
-                    height: 50,
-                    width: 120,
-                    child: Column(
-                      children: [
-                        Text(pet[0]['category'],
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: ' Itim-Regular',
-                                fontSize: 24)),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ),
-                    decoration: BoxDecoration(
-                        color: Color(0xfff89aa28),
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
-                  ),
-                  Container(
-                    height: 50,
-                    width: 120,
-                    child: Column(
-                      children: [
-                        Text(pet[0]['age'].toString(),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: ' Itim-Regular',
-                                fontSize: 24)),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ),
-                    decoration: BoxDecoration(
-                        color: Color(0xfff89aa28),
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
                   ),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                Text(
-                  'Details',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: ' Itim-Regular',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Text(
-                      pet[0]['description'],
-                      maxLines: 10,
-                      softWrap: false,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: ' Itim-Regular',
-                        fontSize: 18,
+                  Text(
+                    pet[0]['title'],
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: ' Itim-Regular',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CachedNetworkImage(
+                    imageUrl: DB_URL_IMAGES + pet[0]['image'],
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    height: 250,
+                    width: 250,
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    'PKR, ${pet[0]['price']}',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: ' Itim-Regular',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 120,
+                      child: Column(
+                        children: [
+                          Text(
+                            pet[0]['gender'],
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: ' Itim-Regular',
+                              fontSize: 24,
+                            ),
+                          ),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(0xfff89aa28),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
                       ),
                     ),
+                    Container(
+                      height: 50,
+                      width: 120,
+                      child: Column(
+                        children: [
+                          Text(
+                            pet[0]['category'],
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: ' Itim-Regular',
+                              fontSize: 24,
+                            ),
+                          ),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(0xfff89aa28),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      width: 120,
+                      child: Column(
+                        children: [
+                          Text(
+                            pet[0]['age'].toString(),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: ' Itim-Regular',
+                              fontSize: 24,
+                            ),
+                          ),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(0xfff89aa28),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Details',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: ' Itim-Regular',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
-                child: InkWell(
-                  onTap: (() {}),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xfff89aa28),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    height: 50,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Book Me",
-                              style: TextStyle(
-                                fontFamily: ' Itim-Regular',
-                                fontSize: 17,
-                              ),
-                            ),
-                            Icon(Icons.arrow_forward_ios)
-                          ]),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        pet[0]['description'],
+                        maxLines: 10,
+                        softWrap: false,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: ' Itim-Regular',
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'User details',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: ' Itim-Regular',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text('Name'),
+                        subtitle: Text(pet[0]['user_name']),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.email),
+                        title: Text('Email'),
+                        subtitle: Text(pet[0]['user_email']),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.phone),
+                        title: Text('Phone'),
+                        subtitle: Text(pet[0]['user_phone']),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.location_on),
+                        title: Text('Address'),
+                        subtitle: Text(pet[0]['user_address']),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

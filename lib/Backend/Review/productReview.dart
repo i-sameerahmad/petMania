@@ -2,9 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:http_parser/http_parser.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 class ProductReviewNotifier {
   Future<void> addReview(
@@ -32,12 +29,12 @@ class ProductReviewNotifier {
 
     var response = await request.send();
     if (response.statusCode == 200) {
-      final snackBar = SnackBar(
+      const snackBar = SnackBar(
         content: Text('Review added Successfully'),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
-      final snackBar = SnackBar(
+      const snackBar = SnackBar(
         content: Text("Failed to add Review"),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);

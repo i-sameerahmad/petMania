@@ -23,7 +23,7 @@ class AuthNotifier {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-      ).timeout(Duration(seconds: 10)); // Set a timeout of 10 seconds
+      ).timeout(const Duration(seconds: 10)); // Set a timeout of 10 seconds
 
       String responseBody = utf8.decoder.convert(response.bodyBytes);
       final jsonResponse = convert.jsonDecode(responseBody) as Map<String, dynamic>;
@@ -83,7 +83,7 @@ class AuthNotifier {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-      ).timeout(Duration(seconds: 10)); // Set a timeout of 10 seconds
+      ).timeout(const Duration(seconds: 10)); // Set a timeout of 10 seconds
 
       String responseBody = utf8.decoder.convert(response.bodyBytes);
       final jsonResponse = convert.jsonDecode(responseBody) as Map<String, dynamic>;
@@ -118,5 +118,16 @@ class AuthNotifier {
     }
   }
 
-  // ...
+  Future<String> fetchNames(String otherParticipantId) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getNames/$otherParticipantId'));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final username = data[0];
+      // print(username);
+      return username;
+    } else {
+      throw Exception('Failed to fetch username');
+    }
+  }
 }

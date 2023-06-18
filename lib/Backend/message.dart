@@ -1,4 +1,3 @@
-import 'package:mysql1/mysql1.dart';
 import 'package:pet_paradise/models/message.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;

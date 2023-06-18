@@ -4,12 +4,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pet_paradise/Backend/Review/doctorReview.dart';
+import 'package:pet_paradise/Backend/doctor.dart';
 import 'package:pet_paradise/Commons/chat.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/vet_module/vatConfirmation.dart';
 
 class VatConsultScreen extends StatefulWidget {
-  const VatConsultScreen({Key? key}) : super(key: key);
+  final int userId;
+  final int doctorId;
+
+  const VatConsultScreen({Key? key, required this.userId, required this.doctorId}) : super(key: key);
 
   @override
   State<VatConsultScreen> createState() => _VatConsultScreenState();
@@ -18,7 +23,8 @@ class VatConsultScreen extends StatefulWidget {
 class _VatConsultScreenState extends State<VatConsultScreen> {
   ImagePicker imagePicker = ImagePicker();
   late final String imgUrl;
-  late File? imgFile;
+  late File? imgFile = null;
+  late DateTime selectedDate = DateTime.now(); // Added for date picker
 
   Future<void> getImgFromGallery() async {
     try {
@@ -31,6 +37,22 @@ class _VatConsultScreenState extends State<VatConsultScreen> {
       print("Image Picker Error: ${e.toString()}");
     }
   }
+
+  void _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2030),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  final DoctorNotifier _notifier = DoctorNotifier();
 
   TextEditingController helpController = TextEditingController();
 
@@ -125,15 +147,53 @@ class _VatConsultScreenState extends State<VatConsultScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: GestureDetector(
-                    onTap: () {
-                      getImgFromGallery();
-                    },
+                    onTap: getImgFromGallery,
                     child: Container(
                       color: MyColors.GREEN40,
                       height: 100,
                       child: Center(
                         child: imgFile?.path == null ? Icon(Icons.add_a_photo) : Image(image: FileImage(imgFile!), fit: BoxFit.cover),
                       ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'Select Date',
+                      style: TextStyle(
+                        fontFamily: 'Itim-Regular',
+                        fontSize: 30,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: () => _selectDate(context),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: MyColors.MATERIAL_LIGHT_GREEN,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  height: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${selectedDate.toLocal()}'.split(' ')[0],
+                          style: TextStyle(
+                            fontFamily: 'Itim-Regular',
+                            fontSize: 17,
+                          ),
+                        ),
+                        Icon(Icons.calendar_today),
+                      ],
                     ),
                   ),
                 ),
@@ -146,10 +206,10 @@ class _VatConsultScreenState extends State<VatConsultScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
         child: InkWell(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => VatConfirmation()),
-            );
+            String description = helpController.text;
+            String formattedDate = selectedDate.toLocal().toString().split(' ')[0];
+
+            _notifier.addAppointment(description, imgFile, formattedDate, widget.userId, widget.doctorId);
           },
           child: Container(
             decoration: BoxDecoration(

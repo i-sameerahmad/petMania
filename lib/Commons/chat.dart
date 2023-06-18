@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatPage extends StatefulWidget {
-  final List<String> participantIds;
+  final List<dynamic> participantIds;
 
   const ChatPage({Key? key, required this.participantIds}) : super(key: key);
 
@@ -33,55 +33,45 @@ class _ChatPageState extends State<ChatPage> {
 
   Future<void> createChatRoom() async {
     final participantIds = widget.participantIds;
-    final sortedParticipantIds = participantIds
-      ..sort(); // Sort participant IDs to ensure consistency
+    final sortedParticipantIds = participantIds..sort(); // Sort participant IDs to ensure consistency
     chatRoomId = sortedParticipantIds.join('_');
 
     // Create the chat room if it doesn't exist
-    final chatRoomRef =
-        FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId);
+    final chatRoomRef = FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId);
     final chatRoomSnapshot = await chatRoomRef.get();
 
     if (!chatRoomSnapshot.exists) {
       await chatRoomRef.set({
-        'participantIds':
-            sortedParticipantIds.map((id) => id.toString()).toList(),
+        'participantIds': sortedParticipantIds.map((id) => id.toString()).toList(),
       });
     }
   }
 
   void sendMessage(String message) {
-    final chatRoomRef =
-        FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId);
+    final chatRoomRef = FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId);
     chatRoomRef.collection('messages').add({
       'message': message,
       'timestamp': DateTime.now(),
       'senderId': userID,
     });
 
-    _messageController
-        .clear(); // Clear the text field after sending the message
+    _messageController.clear(); // Clear the text field after sending the message
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat Room'),
+        title: const Text('Chat Room'),
       ),
       body: Column(
         children: [
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('chatRooms')
-                  .doc(chatRoomId)
-                  .collection('messages')
-                  .orderBy('timestamp', descending: true)
-                  .snapshots(),
+              stream: FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId).collection('messages').orderBy('timestamp', descending: true).snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -98,30 +88,22 @@ class _ChatPageState extends State<ChatPage> {
                   reverse: true,
                   itemCount: messages?.length ?? 0,
                   itemBuilder: (context, index) {
-                    final message = messages?[index].data()
-                        as Map<String, dynamic>?; // Cast to the expected type
+                    final message = messages?[index].data() as Map<String, dynamic>?; // Cast to the expected type
 
                     final bool isSent = message?['senderId'] == userID;
 
                     // Extract the time part from the timestamp
-                    final timestamp = (message?['timestamp'] as Timestamp?)
-                        ?.toDate()
-                        ?.toLocal();
-                    final time = timestamp != null
-                        ? '${timestamp.hour}:${timestamp.minute}'
-                        : '';
+                    final timestamp = (message?['timestamp'] as Timestamp?)?.toDate().toLocal();
+                    final time = timestamp != null ? '${timestamp.hour}:${timestamp.minute}' : '';
 
                     // Bubble color based on sender
-                    final bubbleColor =
-                        isSent ? Colors.blue : Colors.grey.shade300;
+                    final bubbleColor = isSent ? Colors.blue : Colors.grey.shade300;
 
                     // Text color based on sender
                     final textColor = isSent ? Colors.white : Colors.black;
 
                     // Align the messages based on sender
-                    final alignment = isSent
-                        ? CrossAxisAlignment.end
-                        : CrossAxisAlignment.start;
+                    final alignment = isSent ? CrossAxisAlignment.end : CrossAxisAlignment.start;
 
                     // Message container decoration
                     final decoration = BoxDecoration(
@@ -130,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
                     );
 
                     return Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 8.0,
                         vertical: 4.0,
                       ),
@@ -138,7 +120,7 @@ class _ChatPageState extends State<ChatPage> {
                         crossAxisAlignment: alignment,
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 12.0,
                               vertical: 8.0,
                             ),
@@ -150,10 +132,10 @@ class _ChatPageState extends State<ChatPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 4.0),
+                          const SizedBox(height: 4.0),
                           Text(
                             time,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12.0,
                               color: Colors.grey,
                             ),
@@ -167,18 +149,18 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Enter a message...',
                     ),
                   ),
                 ),
-                SizedBox(width: 8.0),
+                const SizedBox(width: 8.0),
                 ElevatedButton(
                   onPressed: () {
                     final message = _messageController.text.trim();
@@ -186,7 +168,7 @@ class _ChatPageState extends State<ChatPage> {
                       sendMessage(message);
                     }
                   },
-                  child: Text('Send'),
+                  child: const Text('Send'),
                 ),
               ],
             ),

@@ -46,11 +46,11 @@ class Styles {
   static searchField({Function(String)? onChange}) {
     return Container(
       margin: const EdgeInsets.all(10),
+      decoration: Styles.messageFieldCardStyle(),
       child: TextField(
        onChanged: onChange,
         decoration: Styles.searchTextFieldStyle(),
       ),
-      decoration: Styles.messageFieldCardStyle(),
     );
   }
 }

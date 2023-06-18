@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:pet_paradise/Backend/Review/doctorReview.dart';
+import 'package:pet_paradise/Backend/doctor.dart';
 import 'package:pet_paradise/Commons/chat.dart';
 import 'package:pet_paradise/Commons/map.dart';
 import 'package:pet_paradise/utils/appConstants.dart';
@@ -21,8 +22,10 @@ class VatDetailScreen extends StatefulWidget {
 
 class _VatDetailScreenState extends State<VatDetailScreen> {
   List<dynamic> doctor = [];
+  late int id;
   // Added variable
-  DoctorReviewNotifier _notifier = DoctorReviewNotifier();
+  final DoctorReviewNotifier _notifier = DoctorReviewNotifier();
+  final DoctorNotifier _doctorNotifier = DoctorNotifier();
   final TextEditingController reviewController = TextEditingController();
   List<dynamic> reviewList = [];
   double rating = 0.0;
@@ -52,6 +55,8 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
         print(doctor);
       });
       _fetchDoctorReviews(doctor.isNotEmpty ? doctor[0]['id'] : null);
+      id = await _doctorNotifier.fetchDocId(doctor[0]['doc_email']);
+      print(id);
     } catch (error) {
       // Handle error
       print('Failed to fetch doctor data: $error');
@@ -81,10 +86,10 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
               Icons.chat,
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Chat()),
-              // );
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChatPage(
+                        participantIds: [userID.toString(), id.toString()],
+                      )));
             },
           )
         ],
@@ -270,7 +275,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
                 onTap: (() {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VatConsultScreen()),
+                    MaterialPageRoute(builder: (context) => VatConsultScreen(userId: userID, doctorId: doctor[0]['id'])),
                   );
                 }),
                 child: Container(
@@ -338,7 +343,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
                 });
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.green,
+                backgroundColor: Colors.green,
                 padding: EdgeInsets.symmetric(horizontal: 30.0),
               ),
               child: Text(

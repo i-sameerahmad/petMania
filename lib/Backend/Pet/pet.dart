@@ -3,8 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:pet_paradise/Commons/splash_page.dart';
 import 'package:pet_paradise/vet_module/vatConfirmation.dart';
 
 List<String> pets = [
@@ -101,19 +99,19 @@ class PetNotifier {
     double price,
     File? image,
     String? certificatePath,
+    String userName,
+    String userAddress,
+    String userPhone,
+    String userEmail,
     BuildContext context,
   ) async {
     List<String> labels = await detectLabels(image);
     print(labels);
-    List<String> commonPets = pets
-        .where((pet) => labels.any(
-            (label) => label.trim().toLowerCase() == pet.trim().toLowerCase()))
-        .toList();
+    List<String> commonPets = pets.where((pet) => labels.any((label) => label.trim().toLowerCase() == pet.trim().toLowerCase())).toList();
 
     print('Common Pets: $commonPets');
     if (commonPets.isEmpty) {
-      final snackBar =
-          SnackBar(content: Text('Please select an appropriate image.'));
+      const snackBar = SnackBar(content: Text('Please select an appropriate image.'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       return;
     }
@@ -131,6 +129,11 @@ class PetNotifier {
     request.fields['price'] = price.toString();
     request.fields['user_id'] = userID.toString();
     request.fields['image'] = image!.path.split('/').last;
+    request.fields['user_name'] = userName.toString();
+    request.fields['user_address'] = userAddress.toString();
+    request.fields['user_phone'] = userPhone.toString();
+    request.fields['user_email'] = userEmail.toString();
+
     // request.fields['labels'] = labels.join(','); // Add labels to the request
 
     // Add the PDF file to the request as a file attachment
@@ -155,8 +158,7 @@ class PetNotifier {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              VatConfirmation(), // Replace CartPage with your actual cart page
+          builder: (context) => const VatConfirmation(), // Replace CartPage with your actual cart page
         ),
       );
     } else {
@@ -172,19 +174,19 @@ class PetNotifier {
     String category,
     int age,
     File? image,
+    String userName,
+    String userAddress,
+    String userPhone,
+    String userEmail,
     BuildContext context,
   ) async {
     List<String> labels = await detectLabels(image);
     print(labels);
-    List<String> commonPets = pets
-        .where((pet) => labels.any(
-            (label) => label.trim().toLowerCase() == pet.trim().toLowerCase()))
-        .toList();
+    List<String> commonPets = pets.where((pet) => labels.any((label) => label.trim().toLowerCase() == pet.trim().toLowerCase())).toList();
 
     print('Common Pets: $commonPets');
     if (commonPets.isEmpty) {
-      final snackBar =
-          SnackBar(content: Text('Please select an appropriate image.'));
+      const snackBar = SnackBar(content: Text('Please select an appropriate image.'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       return;
     }
@@ -201,6 +203,10 @@ class PetNotifier {
     request.fields['age'] = age.toString();
     request.fields['user_id'] = userID.toString();
     request.fields['image'] = image!.path.split('/').last;
+    request.fields['user_name'] = userName.toString();
+    request.fields['user_address'] = userAddress.toString();
+    request.fields['user_phone'] = userPhone.toString();
+    request.fields['user_email'] = userEmail.toString();
     // request.fields['labels'] = labels.join(','); // Add labels to the request
 
     // Add the PDF file to the request as a file attachment
@@ -219,8 +225,7 @@ class PetNotifier {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              VatConfirmation(), // Replace CartPage with your actual cart page
+          builder: (context) => const VatConfirmation(), // Replace CartPage with your actual cart page
         ),
       );
     } else {
@@ -229,8 +234,7 @@ class PetNotifier {
   }
 
   Future<List<dynamic>> fetchPets() async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/getpets'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getpets'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -249,8 +253,7 @@ class PetNotifier {
   }
 
   Future<List<dynamic>> fetchAdoptPets() async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/getadoptpets'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getadoptpets'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -269,8 +272,7 @@ class PetNotifier {
   }
 
   Future<dynamic> fetchPet(int id) async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/getpet/$id'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getpet/$id'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -289,8 +291,7 @@ class PetNotifier {
   }
 
   Future<dynamic> fetchAdoptPet(int id) async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/getadoptpet/$id'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getadoptpet/$id'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -318,8 +319,7 @@ class PetNotifier {
     );
 
     // Set authorization header
-    request.headers['Authorization'] =
-        'Basic ${base64Encode(utf8.encode("$imaggaApiKey:$imaggaApiSecret"))}';
+    request.headers['Authorization'] = 'Basic ${base64Encode(utf8.encode("$imaggaApiKey:$imaggaApiSecret"))}';
 
     // Add image file to the request
     request.files.add(await http.MultipartFile.fromPath(
@@ -336,8 +336,7 @@ class PetNotifier {
       if (result != null && result.containsKey('tags')) {
         var tags = result['tags'];
         if (tags is List) {
-          var labels =
-              tags.map<String>((tag) => tag['tag']['en'].toString()).toList();
+          var labels = tags.map<String>((tag) => tag['tag']['en'].toString()).toList();
           return labels;
         }
       }

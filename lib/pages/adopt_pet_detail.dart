@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Backend/Pet/pet.dart';
-import 'package:pet_paradise/pages/tabs.dart';
 import 'package:pet_paradise/widget/elevated_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,10 +23,12 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
   String dropdownValueBreed = 'American Bulldog';
   String dropdownValueSize = 'Select';
   final TextEditingController _petNameController = TextEditingController();
-  final TextEditingController _petDescriptionController =
-      TextEditingController();
+  final TextEditingController _petDescriptionController = TextEditingController();
   final TextEditingController _petAgeController = TextEditingController();
-
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
   final TextEditingController _petPriceController = TextEditingController();
 
   late File _image;
@@ -46,11 +46,7 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: currentDate,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2050));
+    final DateTime? pickedDate = await showDatePicker(context: context, initialDate: currentDate, firstDate: DateTime(2015), lastDate: DateTime(2050));
     if (pickedDate != null && pickedDate != currentDate) {
       setState(() {
         currentDate = pickedDate;
@@ -185,6 +181,92 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
               // greyTextSmall('Date of birth'),
               // _buildSelectDate(),
               // SizedBox(height: 30),
+              blackBoldText(
+                'User details',
+              ),
+              // Added heading "User details"
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
+                child: Form(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Name",
+                        style: TextStyle(
+                          fontFamily: 'Itim-Regular',
+                          fontSize: 16,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(),
+                        controller: _nameController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        "Address",
+                        style: TextStyle(
+                          fontFamily: 'Itim-Regular',
+                          fontSize: 16,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(),
+                        controller: _addressController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your address';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        "Phone",
+                        style: TextStyle(
+                          fontFamily: 'Itim-Regular',
+                          fontSize: 16,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(),
+                        controller: _phoneController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your phone number';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        "Email",
+                        style: TextStyle(
+                          fontFamily: 'Itim-Regular',
+                          fontSize: 16,
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(),
+                        controller: _emailController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
               MyElevatedButton(
                   onPressed: () {
                     print(_petNameController.text);
@@ -197,15 +279,8 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
                     print(image);
                     print(userID);
 
-                    _petNotifier.addAdoptPet(
-                        userID,
-                        _petNameController.text,
-                        _petDescriptionController.text,
-                        _selectGender,
-                        dropdownValueSpecies,
-                        int.parse(_petAgeController.text),
-                        image,
-                        context);
+                    _petNotifier.addAdoptPet(userID, _petNameController.text, _petDescriptionController.text, _selectGender, dropdownValueSpecies, int.parse(_petAgeController.text), image,
+                        _nameController.text, _addressController.text, _phoneController.text, _emailController.text, context);
                     // Navigator.push(
                     //     context,
                     //     MaterialPageRoute(
@@ -237,11 +312,7 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
           color: selectID == id ? appColor : Colors.transparent,
           borderRadius: const BorderRadius.all(Radius.circular(50.0)),
         ),
-        child: Text(title,
-            style: TextStyle(
-                fontFamily: 'medium',
-                fontSize: 14,
-                color: selectID == id ? Colors.white : Colors.black54)),
+        child: Text(title, style: TextStyle(fontFamily: 'medium', fontSize: 14, color: selectID == id ? Colors.white : Colors.black54)),
       ),
     );
   }
@@ -263,8 +334,7 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
             dropdownValueSpecies = newValue!;
           });
         },
-        items: ['Dog', 'Cat', 'Turtle', 'Monkey']
-            .map<DropdownMenuItem<String>>((String value) {
+        items: ['Dog', 'Cat', 'Turtle', 'Monkey'].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(

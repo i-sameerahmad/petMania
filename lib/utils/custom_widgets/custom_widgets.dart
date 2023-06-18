@@ -70,15 +70,15 @@ Widget drawer(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                  //borderRadius: radius(100),
+                ),
                 child: Image.asset(
                   'assets/images/use1.jpg',
                   height: 58,
                   width: 58,
                   fit: BoxFit.cover,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                  //borderRadius: radius(100),
                 ),
               ),
               const SizedBox(
@@ -98,11 +98,11 @@ Widget drawer(
                     ],
                   ),
                   IconButton(
-                    icon: Icon(Icons.arrow_forward_ios,
+                    icon: const Icon(Icons.arrow_forward_ios,
                         color: Colors.white, size: 16),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => EditUserPage()));
+                          builder: (context) => const EditUserPage()));
                     },
                   )
                 ],
@@ -118,14 +118,14 @@ Widget drawer(
         ),
         ListTile(
           minLeadingWidth: 0,
-          title: Text("My favourites", style: TextStyle()),
-          leading: Icon(Icons.star_border, color: Colors.brown),
+          title: const Text("My favourites", style: TextStyle()),
+          leading: const Icon(Icons.star_border, color: Colors.brown),
           onTap: () {},
         ),
         ListTile(
           minLeadingWidth: 0,
-          title: Text("My favourites", style: TextStyle()),
-          leading: Icon(Icons.star_border, color: Colors.brown),
+          title: const Text("My favourites", style: TextStyle()),
+          leading: const Icon(Icons.star_border, color: Colors.brown),
           onTap: () {},
         ),
         ListTile(
@@ -143,8 +143,8 @@ Widget drawer(
         ),
         ListTile(
           minLeadingWidth: 0,
-          title: Text("My favourites", style: TextStyle()),
-          leading: Icon(Icons.star_border, color: Colors.brown),
+          title: const Text("My favourites", style: TextStyle()),
+          leading: const Icon(Icons.star_border, color: Colors.brown),
           onTap: () {},
         ),
         ListTile(

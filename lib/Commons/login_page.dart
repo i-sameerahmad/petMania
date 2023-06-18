@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 //Text Descriptions
                 Text(
-                  "Welcome\nTo Pet Paradise~",
+                  "Welcome\nTo Pet Mania~",
                   style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 27, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
