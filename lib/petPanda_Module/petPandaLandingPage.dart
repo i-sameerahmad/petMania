@@ -46,12 +46,12 @@ class _PetPandaLandingState extends State<PetPandaLanding> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: (() {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AddPost()));
-          }),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   child: Icon(Icons.add),
+        //   onPressed: (() {
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => AddPost()));
+        //   }),
+        // ),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,

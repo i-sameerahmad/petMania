@@ -1,7 +1,32 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class PetConfirmation extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:pet_paradise/Commons/commonHomeScreen.dart';
+
+class PetConfirmation extends StatefulWidget {
   const PetConfirmation({super.key});
+
+  // const VatConfirmation({required Key key}) : super(key: key);
+
+  @override
+  _PetConfirmationState createState() => _PetConfirmationState();
+}
+
+class _PetConfirmationState extends State<PetConfirmation> {
+  @override
+  void initState() {
+    super.initState();
+    // Start the timer when the widget is created
+    Timer(const Duration(seconds: 2), () {
+      // Navigate to the home screen after 2 seconds
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const CommonDashBoard(), // Replace CartPage with your actual cart page
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

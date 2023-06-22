@@ -13,6 +13,12 @@ import '../../utils/size_config.dart';
 //Text Editing Controller
 TextEditingController loginEmailController = TextEditingController();
 TextEditingController loginPasswordController = TextEditingController();
+@override
+void dispose() {
+  loginEmailController.dispose();
+  loginPasswordController.dispose();
+  // super.dispose();
+}
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

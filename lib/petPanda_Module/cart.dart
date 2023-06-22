@@ -301,6 +301,11 @@ class _CartState extends State<Cart> {
                           if (value!.isEmpty) {
                             return 'Please enter your phone number';
                           }
+                          final phoneRegex = r'^\d{11}$';
+                          final isValidPhone = RegExp(phoneRegex).hasMatch(value);
+                          if (!isValidPhone) {
+                            return 'Invalid phone number';
+                          }
                           return null;
                         },
                       ),
@@ -318,6 +323,9 @@ class _CartState extends State<Cart> {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your email';
+                          }
+                          if (!value.contains('@')) {
+                            return 'Invalid email format';
                           }
                           return null;
                         },

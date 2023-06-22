@@ -21,6 +21,7 @@ class VatLanding extends StatefulWidget {
 class _VatLandingState extends State<VatLanding> {
   List<dynamic> doctors = [];
   String userName = "";
+  String searchQuery = '';
 
   myPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -49,21 +50,17 @@ class _VatLandingState extends State<VatLanding> {
     }
   }
 
+  List<dynamic> filterDoctors(String query) {
+    return doctors.where((doctor) => doctor['doc_name'].toLowerCase().contains(query.toLowerCase())).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final filteredDoctors = filterDoctors(searchQuery);
+
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          // IconButton(
-          //   icon: Icon(
-          //     Icons.chat,
-          //   ),
-          //   onPressed: () {
-          //     // Navigator.of(context)
-          //     //     .push(MaterialPageRoute(builder: (context) => MyHomePage()));
-          //   },
-          // )
-        ],
+        actions: [],
         centerTitle: true,
         title: Text(
           'Veterinarian',
@@ -92,89 +89,30 @@ class _VatLandingState extends State<VatLanding> {
                 ),
               ),
               SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => TrainerLanding()),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/images/training.png",
-                            height: 100,
-                            width: 100,
-                          ),
-                          Text(
-                            "Training",
-                            style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 20),
-                          ),
-                        ],
-                      ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      searchQuery = value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Search',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => VatLanding(doctors: doctors),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/images/veterinary.png",
-                            height: 100,
-                            width: 100,
-                          ),
-                          Text(
-                            "Veterinary",
-                            style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 20),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ADOPTPET()),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/images/grooming.png",
-                            height: 100,
-                            width: 100,
-                          ),
-                          Text(
-                            "Adopt",
-                            style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 20),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
               SizedBox(height: 20),
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: doctors.length,
+                itemCount: filteredDoctors.length,
                 itemBuilder: (BuildContext context, int index) {
-                  dynamic doctor = doctors[index];
+                  dynamic doctor = filteredDoctors[index];
                   final image = DB_URL_IMAGES + doctor['doc_image'];
 
                   return Padding(

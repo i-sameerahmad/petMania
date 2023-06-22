@@ -143,23 +143,27 @@ class _PDPPageState extends State<PDPPage> {
                           ),
                         ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Icon(
-                      Icons.favorite,
-                      size: 30,
-                    ),
-                  ),
-                ),
+                // Positioned(
+                //   bottom: 0,
+                //   right: 0,
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(20.0),
+                //     child: Icon(
+                //       Icons.favorite,
+                //       size: 30,
+                //     ),
+                //   ),
+                // ),
                 Positioned(
                   top: 0,
                   right: 0,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Image.asset('assets/images/Vector.png'),
+                    // child: Icon(
+                    //   size: 29,
+                    //   Icons.trolley,
+                    //   color: Colors.black,
+                    // ),
                   ),
                 ),
               ],
@@ -322,25 +326,25 @@ class _PDPPageState extends State<PDPPage> {
                                         ),
                                       ),
                                     ),
-                                    InkWell(
-                                      onTap: (() {}),
-                                      child: Container(
-                                        decoration: BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN, borderRadius: BorderRadius.all(Radius.circular(20))),
-                                        height: 50,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                                            Text(
-                                              "Reviews",
-                                              style: TextStyle(
-                                                fontFamily: 'Itim-Regular',
-                                                fontSize: 17,
-                                              ),
-                                            ),
-                                          ]),
-                                        ),
-                                      ),
-                                    ),
+                                    // InkWell(
+                                    //   onTap: (() {}),
+                                    //   child: Container(
+                                    //     decoration: BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN, borderRadius: BorderRadius.all(Radius.circular(20))),
+                                    //     height: 50,
+                                    //     child: Padding(
+                                    //       padding: const EdgeInsets.all(15.0),
+                                    //       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                    //         Text(
+                                    //           "Reviews",
+                                    //           style: TextStyle(
+                                    //             fontFamily: 'Itim-Regular',
+                                    //             fontSize: 17,
+                                    //           ),
+                                    //         ),
+                                    //       ]),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ],
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 ),
@@ -396,12 +400,20 @@ class _PDPPageState extends State<PDPPage> {
 
                                     cartProvider.addToCart(cartProduct);
                                   }
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Cart(), // Replace CartPage with your actual cart page
-                                    ),
-                                  );
+                                  if (cartCalue != 0) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Cart(), // Replace CartPage with your actual cart page
+                                      ),
+                                    );
+                                  }
+                                  if (cartCalue == 0) {
+                                    final snackBar = SnackBar(
+                                      content: Text("Select quantity"),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

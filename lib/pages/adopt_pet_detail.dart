@@ -150,7 +150,7 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
               const SizedBox(height: 8),
               textField('Description', Icons.check, _petDescriptionController),
               const SizedBox(height: 8),
-              numField('Age', Icons.check, _petAgeController),
+              numField('Age in months', Icons.check, _petAgeController),
               const SizedBox(height: 8),
               numField('Price', Icons.check, _petPriceController),
               const SizedBox(height: 8),
@@ -241,6 +241,11 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
                           if (value!.isEmpty) {
                             return 'Please enter your phone number';
                           }
+                          final phoneRegex = r'^\d{11}$';
+                          final isValidPhone = RegExp(phoneRegex).hasMatch(value);
+                          if (!isValidPhone) {
+                            return 'Invalid phone number';
+                          }
                           return null;
                         },
                       ),
@@ -258,6 +263,9 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your email';
+                          }
+                          if (!value.contains('@')) {
+                            return 'Invalid email format';
                           }
                           return null;
                         },
@@ -334,7 +342,7 @@ class _AddAdoptPetDetailState extends State<AddAdoptPetDetail> {
             dropdownValueSpecies = newValue!;
           });
         },
-        items: ['Dog', 'Cat', 'Turtle', 'Monkey'].map<DropdownMenuItem<String>>((String value) {
+        items: ['Dog', 'Cat', 'Parrot', 'Peacock', 'Pigeon', 'Rabbit', 'Others'].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(

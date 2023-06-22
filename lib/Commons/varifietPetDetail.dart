@@ -168,7 +168,7 @@ class _VarifiedPetDetailsState extends State<VarifiedPetDetails> {
                       child: Column(
                         children: [
                           Text(
-                            pet[0]['vpet_age'].toString(),
+                            pet[0]['vpet_age'].toString() + " M",
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: ' Itim-Regular',

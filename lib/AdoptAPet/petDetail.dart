@@ -59,11 +59,13 @@ class _PetDetailsState extends State<PetDetails> {
               Icons.chat,
             ),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ChatPage(
-                  participantIds: [userID.toString(), pet[0]['user_id'].toString()],
-                ),
-              ));
+              if (userID != pet[0]['user_id']) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChatPage(
+                    participantIds: [userID.toString(), pet[0]['user_id'].toString()],
+                  ),
+                ));
+              }
             },
           )
         ],
@@ -114,6 +116,9 @@ class _PetDetailsState extends State<PetDetails> {
                   )
                 ],
               ),
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 children: [
                   Text(
@@ -125,7 +130,7 @@ class _PetDetailsState extends State<PetDetails> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Padding(padding: EdgeInsets.symmetric(horizontal: 110)),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 80)),
                   InkWell(
                       onTap: () {
                         Navigator.push(
@@ -192,7 +197,7 @@ class _PetDetailsState extends State<PetDetails> {
                       child: Column(
                         children: [
                           Text(
-                            pet[0]['age'].toString(),
+                            pet[0]['age'].toString() + " M",
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: ' Itim-Regular',

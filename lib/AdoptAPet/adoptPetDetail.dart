@@ -162,7 +162,7 @@ class _AdoptPetDetailsState extends State<AdoptPetDetails> {
                     width: 120,
                     child: Column(
                       children: [
-                        Text(pet[0]['age'].toString(), style: TextStyle(color: Colors.black, fontFamily: ' Itim-Regular', fontSize: 24)),
+                        Text(pet[0]['age'].toString() + " M", style: TextStyle(color: Colors.black, fontFamily: ' Itim-Regular', fontSize: 24)),
                       ],
                       mainAxisAlignment: MainAxisAlignment.center,
                     ),

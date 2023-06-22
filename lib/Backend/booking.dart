@@ -1,4 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:pet_paradise/Commons/commonHomeScreen.dart';
+import 'package:pet_paradise/vet_module/bookingconf.dart';
 
 class BookingNotifier {
   Future<void> booking(int petId, int userId, int total, String name, String address, String phone, String email, String paymentMethod) async {
@@ -21,7 +25,11 @@ class BookingNotifier {
 
     // Handle the response
     if (response.statusCode == 200) {
-      print("hello");
+      Navigator.of(context as BuildContext).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const CommonDashBoard(),
+        ),
+      );
     } else {
       print(response);
     }

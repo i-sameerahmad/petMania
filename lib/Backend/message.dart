@@ -11,15 +11,11 @@ class MessageNotifier {
       'recipientId': recipientId,
       'content': content,
     };
-    final response = await http.post(
-        Uri.parse("http://10.0.2.2:8000/api/message"),
-        body: body,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        });
+    final response = await http.post(Uri.parse("http://10.0.2.2:8000/api/message"), body: body, headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    });
     String responseBody = utf8.decoder.convert(response.bodyBytes);
-    final jsonResponse =
-        convert.jsonDecode(responseBody) as Map<String, dynamic>;
+    final jsonResponse = convert.jsonDecode(responseBody) as Map<String, dynamic>;
     print(jsonResponse);
   }
 
@@ -54,10 +50,8 @@ class MessageNotifier {
   //     throw Exception('Failed to fetch doctors');
   //   }
   // }
-  Future<List<dynamic>> getMessages(
-      {required int uid, required int rid}) async {
-    final response = await http
-        .get(Uri.parse('http://10.0.2.2:8000/api/getmessages/$uid/$rid'));
+  Future<List<dynamic>> getMessages({required int uid, required int rid}) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getmessages/$uid/$rid'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body

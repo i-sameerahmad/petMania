@@ -3,8 +3,7 @@ import 'package:http/http.dart' as http;
 
 class ProductNotifier {
   Future<List<dynamic>> fetchProducts() async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/getproducts'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getproducts'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -23,8 +22,7 @@ class ProductNotifier {
   }
 
   Future<List<dynamic>> fetchProduct(int id) async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/getproduct/$id'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getproduct/$id'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body

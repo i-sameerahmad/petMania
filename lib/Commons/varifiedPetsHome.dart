@@ -47,7 +47,7 @@ class _VARIFIEDPETSHOPState extends State<VARIFIEDPETSHOP> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          "Adopt a Pet",
+          "Pets by Pet-Mania",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontFamily: 'Itim-Regular',
@@ -107,7 +107,7 @@ class _VARIFIEDPETSHOPState extends State<VARIFIEDPETSHOP> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '40% off on all',
+                        'Medically fit &',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Itim-Regular',
@@ -115,7 +115,7 @@ class _VARIFIEDPETSHOPState extends State<VARIFIEDPETSHOP> {
                         ),
                       ),
                       Text(
-                        'Pets Adoption',
+                        'Cruelty free Pets',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Itim-Regular',
@@ -161,20 +161,20 @@ class _VARIFIEDPETSHOPState extends State<VARIFIEDPETSHOP> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Perform your filter logic here
-                      setState(() {
-                        // Update filteredPets based on your filter criteria
-                        // For example, filtering by category "Cats":
-                        filteredPets = pets.where((pet) {
-                          final String category = pet['vpet_category'].toString().toLowerCase();
-                          return category == 'cat';
-                        }).toList();
-                      });
-                    },
-                    child: const Text('Filter'),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     // Perform your filter logic here
+                  //     setState(() {
+                  //       // Update filteredPets based on your filter criteria
+                  //       // For example, filtering by category "Cats":
+                  //       filteredPets = pets.where((pet) {
+                  //         final String category = pet['vpet_category'].toString().toLowerCase();
+                  //         return category == 'cat';
+                  //       }).toList();
+                  //     });
+                  //   },
+                  //   child: const Text('Filter'),
+                  // ),
                 ],
               ),
             ),
@@ -230,7 +230,7 @@ class _VARIFIEDPETSHOPState extends State<VARIFIEDPETSHOP> {
                           price: pet['vpet_price'].toString(),
                           category: pet['vpet_category'],
                           gender: pet['vpet_gender'],
-                          age: pet['vpet_age'].toString(),
+                          age: pet['vpet_age'].toString() + " M",
                         ),
                       );
                     },

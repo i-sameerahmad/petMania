@@ -5,8 +5,10 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Commons/edituser.dart';
 import 'package:pet_paradise/Commons/login_page.dart';
+import 'package:pet_paradise/Commons/mybookings.dart';
 import 'package:pet_paradise/Commons/myorders.dart';
 import 'package:pet_paradise/Commons/mypets.dart';
+import 'package:pet_paradise/petPanda_Module/cart.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 
@@ -87,8 +89,8 @@ Widget drawer(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Shane Mendoza', style: TextStyle(color: Colors.white, fontSize: 18)),
-                      Text('470-499-4935', style: TextStyle(color: Colors.black)),
+                      Text('Ahmar', style: TextStyle(color: Colors.white, fontSize: 18)),
+                      Text('03104747899', style: TextStyle(color: Colors.black)),
                     ],
                   ),
                   IconButton(
@@ -112,15 +114,25 @@ Widget drawer(
         ),
         ListTile(
           minLeadingWidth: 0,
-          title: const Text("My favourites", style: TextStyle()),
+          title: const Text("My Bookings", style: TextStyle()),
           leading: const Icon(Icons.star_border, color: Colors.brown),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyBookings()));
+          },
         ),
+
         ListTile(
           minLeadingWidth: 0,
-          title: const Text("My favourites", style: TextStyle()),
-          leading: const Icon(Icons.star_border, color: Colors.brown),
-          onTap: () {},
+          title: const Text("Cart", style: TextStyle()),
+          leading: const Icon(Icons.trolley, color: Colors.brown),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Cart(), // Replace CartPage with your actual cart page
+              ),
+            );
+          },
         ),
         ListTile(
           minLeadingWidth: 0,
@@ -130,18 +142,18 @@ Widget drawer(
             Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrders()));
           },
         ),
-        ListTile(
-          minLeadingWidth: 0,
-          title: const Text("Notification", style: TextStyle()),
-          leading: const Icon(Icons.notifications_none_outlined, color: Colors.amber),
-          onTap: () {},
-        ),
-        ListTile(
-          minLeadingWidth: 0,
-          title: const Text("My favourites", style: TextStyle()),
-          leading: const Icon(Icons.star_border, color: Colors.brown),
-          onTap: () {},
-        ),
+        // ListTile(
+        //   minLeadingWidth: 0,
+        //   title: const Text("Notification", style: TextStyle()),
+        //   leading: const Icon(Icons.notifications_none_outlined, color: Colors.amber),
+        //   onTap: () {},
+        // ),
+        // ListTile(
+        //   minLeadingWidth: 0,
+        //   title: const Text("My favourites", style: TextStyle()),
+        //   leading: const Icon(Icons.star_border, color: Colors.brown),
+        //   onTap: () {},
+        // ),
         ListTile(
           title: const Text('LogOut'),
           leading: const Icon(Icons.exit_to_app),
@@ -229,10 +241,10 @@ AppBar transparentAppBar({required BuildContext context, String? centerTitle}) {
       onTap: () {
         Navigator.of(context).pop();
       },
-      child: const Icon(
-        Icons.arrow_back,
-        color: MyColors.MATERIAL_LIGHT_GREEN,
-      ),
+      // child: const Icon(
+      //   Icons.arrow_back,
+      //   color: MyColors.MATERIAL_LIGHT_GREEN,
+      // ),
     ),
   );
 }

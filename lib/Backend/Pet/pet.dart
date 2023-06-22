@@ -13,12 +13,12 @@ List<String> pets = [
   "Kitten",
   "Fish",
   "Duke",
-  "Oliver",
-  "Goldie",
+  "Peacock",
+  "Pigeon",
   "Molly",
   "Squeak",
-  "Fluffy",
-  "Piggy",
+  "Parrot",
+  "Rabbit",
   "Porky",
   "Daisy",
   "Canary",
@@ -99,7 +99,7 @@ class PetNotifier {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const PetConfirmation(), // Replace CartPage with your actual cart page
+          builder: (context) => PetConfirmation(), // Replace CartPage with your actual cart page
         ),
       );
     } else {

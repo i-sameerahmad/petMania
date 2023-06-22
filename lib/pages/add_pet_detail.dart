@@ -121,7 +121,7 @@ class _AddPetDetailState extends State<AddPetDetail> {
             'Add pet detail',
             style: TextStyle(color: Colors.black, fontFamily: 'bold'),
           ),
-          actions: [TextButton(onPressed: () {}, child: appcolorText('Skip'))],
+          // actions: [TextButton(onPressed: () {}, child: appcolorText('Skip'))],
         ),
         body: _buildBody());
   }
@@ -155,7 +155,7 @@ class _AddPetDetailState extends State<AddPetDetail> {
               const SizedBox(height: 8),
               textField('Description', Icons.check, _petDescriptionController),
               const SizedBox(height: 8),
-              numField('Age', Icons.check, _petAgeController),
+              numField('Age in months', Icons.check, _petAgeController),
               const SizedBox(height: 8),
               numField('Price', Icons.check, _petPriceController),
               const SizedBox(height: 8),
@@ -261,6 +261,11 @@ class _AddPetDetailState extends State<AddPetDetail> {
                           if (value!.isEmpty) {
                             return 'Please enter your phone number';
                           }
+                          final phoneRegex = r'^\d{11}$';
+                          final isValidPhone = RegExp(phoneRegex).hasMatch(value);
+                          if (!isValidPhone) {
+                            return 'Invalid phone number';
+                          }
                           return null;
                         },
                       ),
@@ -278,6 +283,9 @@ class _AddPetDetailState extends State<AddPetDetail> {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your email';
+                          }
+                          if (!value.contains('@')) {
+                            return 'Invalid email format';
                           }
                           return null;
                         },
@@ -367,7 +375,7 @@ class _AddPetDetailState extends State<AddPetDetail> {
             dropdownValueSpecies = newValue!;
           });
         },
-        items: ['Dog', 'Cat', 'Turtle', 'Monkey'].map<DropdownMenuItem<String>>((String value) {
+        items: ['Dog', 'Cat', 'Parrot', 'Peacock', 'Pigeon', 'Rabbit', 'Others'].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(

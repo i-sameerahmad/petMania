@@ -189,20 +189,6 @@ class _PETSHOPState extends State<PETSHOP> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Perform your filter logic here
-                      setState(() {
-                        // Update filteredPets based on your filter criteria
-                        // For example, filtering by category "Cats":
-                        filteredPets = pets.where((pet) {
-                          final String category = pet['category'].toString().toLowerCase();
-                          return category == 'cat';
-                        }).toList();
-                      });
-                    },
-                    child: const Text('Filter'),
-                  ),
                 ],
               ),
             ),
@@ -258,7 +244,7 @@ class _PETSHOPState extends State<PETSHOP> {
                           price: pet['price'].toString(),
                           category: pet['category'],
                           gender: pet['gender'],
-                          age: pet['age'].toString(),
+                          age: pet['age'].toString() + " M",
                         ),
                       );
                     },

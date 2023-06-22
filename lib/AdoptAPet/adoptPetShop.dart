@@ -188,20 +188,20 @@ class _ADOPTPETSHOPState extends State<ADOPTPETSHOP> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Perform your filter logic here
-                      setState(() {
-                        // Update filteredPets based on your filter criteria
-                        // For example, filtering by category "Cats":
-                        filteredPets = pets.where((pet) {
-                          final String category = pet['category'].toString().toLowerCase();
-                          return category == 'cat';
-                        }).toList();
-                      });
-                    },
-                    child: const Text('Filter'),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     // Perform your filter logic here
+                  //     setState(() {
+                  //       // Update filteredPets based on your filter criteria
+                  //       // For example, filtering by category "Cats":
+                  //       filteredPets = pets.where((pet) {
+                  //         final String category = pet['category'].toString().toLowerCase();
+                  //         return category == 'cat';
+                  //       }).toList();
+                  //     });
+                  //   },
+                  //   child: const Text('Filter'),
+                  // ),
                 ],
               ),
             ),
@@ -256,7 +256,7 @@ class _ADOPTPETSHOPState extends State<ADOPTPETSHOP> {
                           name: pet['title'],
                           category: pet['category'],
                           gender: pet['gender'],
-                          age: pet['age'].toString(),
+                          age: pet['age'].toString() + " M",
                         ),
                       );
                     },
@@ -340,7 +340,7 @@ class PetCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -349,7 +349,15 @@ class PetCard extends StatelessWidget {
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Itim-Regular',
-                    fontSize: 16,
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  age,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Itim-Regular',
+                    fontSize: 18,
                   ),
                 ),
                 // Text(
@@ -363,9 +371,9 @@ class PetCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          // const SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.fromLTRB(25, 0, 25, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -374,7 +382,7 @@ class PetCard extends StatelessWidget {
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Itim-Regular',
-                    fontSize: 14,
+                    fontSize: 16,
                   ),
                 ),
                 Text(
@@ -382,21 +390,21 @@ class PetCard extends StatelessWidget {
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Itim-Regular',
-                    fontSize: 14,
+                    fontSize: 16,
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 10),
-          Text(
-            age,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Itim-Regular',
-              fontSize: 14,
-            ),
-          ),
+          // const SizedBox(height: 10),
+          // Text(
+          //   age,
+          //   style: const TextStyle(
+          //     fontWeight: FontWeight.bold,
+          //     fontFamily: 'Itim-Regular',
+          //     fontSize: 14,
+          //   ),
+          // ),
         ],
       ),
     );

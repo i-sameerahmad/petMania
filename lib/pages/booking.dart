@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Backend/booking.dart';
+import 'package:pet_paradise/vet_module/bookingconf.dart';
 
 class BookingPage extends StatefulWidget {
   final Map<String, dynamic> petData;
@@ -137,6 +138,9 @@ class _BookingPageState extends State<BookingPage> {
                     if (value!.isEmpty) {
                       return 'Please enter your email';
                     }
+                    if (!value.contains('@')) {
+                      return 'Invalid email format';
+                    }
                     // You can add more specific email validation if needed
                     return null;
                   },
@@ -148,6 +152,11 @@ class _BookingPageState extends State<BookingPage> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter your phone number';
+                    }
+                    final phoneRegex = r'^\d{11}$';
+                    final isValidPhone = RegExp(phoneRegex).hasMatch(value);
+                    if (!isValidPhone) {
+                      return 'Invalid phone number';
                     }
                     return null;
                   },

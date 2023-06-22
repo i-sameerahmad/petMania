@@ -1,14 +1,15 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Commons/commonHomeScreen.dart';
 
-class CartConfirmation extends StatefulWidget {
+class BookingConfirmation extends StatefulWidget {
+  // const BookingConfirmation({required Key key}) : super(key: key);
+
   @override
-  _CartConfirmationState createState() => _CartConfirmationState();
+  _BookingConfirmationState createState() => _BookingConfirmationState();
 }
 
-class _CartConfirmationState extends State<CartConfirmation> {
+class _BookingConfirmationState extends State<BookingConfirmation> {
   @override
   void initState() {
     super.initState();
@@ -28,7 +29,7 @@ class _CartConfirmationState extends State<CartConfirmation> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Image.asset(
-        "assets/images/OrderConfirmation.png",
+        "assets/images/booking.png",
         fit: BoxFit.cover,
         height: double.infinity,
         width: double.infinity,
