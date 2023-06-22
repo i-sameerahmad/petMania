@@ -56,7 +56,7 @@ class DoctorNotifier {
     }
   }
 
-  Future<void> addAppointment(String description, File? image, String date, int userId, int doctorId) async {
+  Future<void> addAppointment(String description, String user_name, File? image, String date, int userId, int doctorId) async {
     try {
       // Prepare the request body
       var request = http.MultipartRequest(
@@ -66,6 +66,7 @@ class DoctorNotifier {
       request.fields['description'] = description;
       request.fields['date'] = date;
       request.fields['userId'] = userId.toString();
+      request.fields['user_name'] = user_name.toString();
       request.fields['doctorId'] = doctorId.toString();
 
       if (image != null) {
@@ -81,7 +82,7 @@ class DoctorNotifier {
         print("appointment done");
         Navigator.push(
           context as BuildContext,
-          MaterialPageRoute(builder: (context) => const VatConfirmation()),
+          MaterialPageRoute(builder: (context) => VatConfirmation()),
         );
       } else {
         // Request failed

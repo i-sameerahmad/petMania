@@ -6,6 +6,7 @@ import 'package:pet_paradise/AdoptAPet/petshop.dart';
 import 'package:pet_paradise/Backend/Pet/pet.dart';
 import 'package:pet_paradise/Backend/doctor.dart';
 import 'package:pet_paradise/Backend/product.dart';
+import 'package:pet_paradise/Commons/varifiedPetsHome.dart';
 import 'package:pet_paradise/blogs_module/module/blog_module.dart';
 import 'package:pet_paradise/blogs_module/pages/blogs_selection_page.dart';
 import 'package:pet_paradise/petPanda_Module/petPandaLandingPage.dart';
@@ -23,8 +24,7 @@ class GetStartedPage extends StatelessWidget {
   final ProductNotifier _productNotifier = ProductNotifier();
   final PetNotifier _petNotifier = PetNotifier();
 
-  GetStartedPage({Key? key, required this.pageData, required this.appUser})
-      : super(key: key);
+  GetStartedPage({Key? key, required this.pageData, required this.appUser}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +53,7 @@ class GetStartedPage extends StatelessWidget {
   }
 
   /// Mobile
-  Widget mobile(BuildContext context,
-      {required GetStartedPageData pageData, required appUser}) {
+  Widget mobile(BuildContext context, {required GetStartedPageData pageData, required appUser}) {
     List<Blog> list = List.empty(growable: true);
     return Stack(
       children: [
@@ -72,16 +71,10 @@ class GetStartedPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                    left: MyAppSize.width! * 0.1,
-                    right: MyAppSize.width! * 0.1),
+                padding: EdgeInsets.only(left: MyAppSize.width! * 0.1, right: MyAppSize.width! * 0.1),
                 child: Text(
                   pageData.pageName,
-                  style: TextStyle(
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: MyColors.DARK_BROWN),
+                  style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 20, fontWeight: FontWeight.bold, color: MyColors.DARK_BROWN),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -100,16 +93,10 @@ class GetStartedPage extends StatelessWidget {
                 height: 20,
               ),
               Padding(
-                padding: EdgeInsets.only(
-                    left: MyAppSize.width! * 0.1,
-                    right: MyAppSize.width! * 0.1),
+                padding: EdgeInsets.only(left: MyAppSize.width! * 0.1, right: MyAppSize.width! * 0.1),
                 child: Text(
                   pageData.pageSubTitle,
-                  style: TextStyle(
-                      color: MyColors.LIGHT_PINK,
-                      fontStyle: FontStyle.italic,
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 14),
+                  style: TextStyle(color: MyColors.LIGHT_PINK, fontStyle: FontStyle.italic, fontFamily: ' Itim-Regular', fontSize: 14),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -124,8 +111,7 @@ class GetStartedPage extends StatelessWidget {
               onPressed: () async {
                 if (pageData.pageName == BLOGSANDARTICLES) {
                   print(appUser);
-                  navigateToiNextScreen(
-                      context, BlogSelectionPage(appUser: appUser));
+                  navigateToiNextScreen(context, BlogSelectionPage(appUser: appUser));
                 } else if (pageData.pageName == ADOPTAPET) {
                   print('adopt a pet');
                   navigateToiNextScreen(context, ADOPTPET());
@@ -133,9 +119,7 @@ class GetStartedPage extends StatelessWidget {
                   _productNotifier.fetchProducts().then((products) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              PetPandaLanding(products: products)),
+                      MaterialPageRoute(builder: (context) => PetPandaLanding(products: products)),
                     );
                   }).catchError((error) {
                     print(error);
@@ -144,8 +128,17 @@ class GetStartedPage extends StatelessWidget {
                   _petNotifier.fetchPets().then((pets) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => PETSHOP(pets: pets)),
+                      MaterialPageRoute(builder: (context) => PETSHOP(pets: pets)),
+                    );
+                  }).catchError((error) {
+                    print(error);
+                  });
+                  print(PETS);
+                } else if (pageData.pageName == VERIFIED) {
+                  _petNotifier.fetchVerifiedPets().then((pets) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => VARIFIEDPETSHOP(pets: pets)),
                     );
                   }).catchError((error) {
                     print(error);
@@ -155,8 +148,7 @@ class GetStartedPage extends StatelessWidget {
                   _doctorNotifier.fetchDoctors().then((doctors) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => VatLanding(doctors: doctors)),
+                      MaterialPageRoute(builder: (context) => VatLanding(doctors: doctors)),
                     );
                   }).catchError((error) {
                     print(error);
@@ -185,7 +177,6 @@ class GetStartedPage extends StatelessWidget {
 
   /// Navigate To NextScreen
   navigateToiNextScreen(BuildContext context, var screen) {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => screen));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => screen));
   }
 }

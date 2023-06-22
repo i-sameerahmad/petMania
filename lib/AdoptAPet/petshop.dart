@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:pet_paradise/AdoptAPet/petDetail.dart';
 import 'package:pet_paradise/Backend/Pet/pet.dart';
+import 'package:pet_paradise/pages/add_pet_detail.dart';
 import 'package:pet_paradise/utils/appConstants.dart';
+import 'package:pet_paradise/utils/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PETSHOP extends StatefulWidget {
   final List<dynamic> pets;
@@ -19,8 +22,20 @@ class _PETSHOPState extends State<PETSHOP> {
   final PetNotifier _petNotifier = PetNotifier();
   List<dynamic> filteredPets = [];
   List<dynamic> pets = [];
+
+  String userName = "";
+
+  myPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('userName')!;
+    });
+  }
+
   @override
   void initState() {
+    myPrefs();
+
     super.initState();
     fetchPets(); // Call the method to fetch pets when the widget initializes
   }
@@ -46,7 +61,7 @@ class _PETSHOPState extends State<PETSHOP> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          "Adopt a Pet",
+          "",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontFamily: 'Itim-Regular',
@@ -54,34 +69,48 @@ class _PETSHOPState extends State<PETSHOP> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.chat,
-            ),
-            onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(builder: (context) => Chat()),
-              // );
-            },
-          )
+          // IconButton(
+          //   icon: const Icon(
+          //     Icons.chat,
+          //   ),
+          //   onPressed: () {
+          //     // Navigator.of(context).push(
+          //     //   MaterialPageRoute(builder: (context) => Chat()),
+          //     // );
+          //   },
+          // )
         ],
         elevation: 0,
         backgroundColor: Colors.white,
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddPetDetail()));
+          },
+          backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
+          tooltip: "Add new Blog.",
+          child: Icon(
+            Icons.add,
+            color: const Color.fromARGB(255, 0, 0, 0),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ListTile(
-              leading: CircleAvatar(
+            ListTile(
+              leading: const CircleAvatar(
                 backgroundImage: AssetImage(
                   'assets/images/meena.png',
                 ),
                 radius: 50,
               ),
               title: Text(
-                'Ahmad',
-                style: TextStyle(
+                userName,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Itim-Regular',
                   fontSize: 22,
@@ -147,19 +176,12 @@ class _PETSHOPState extends State<PETSHOP> {
                         SchedulerBinding.instance.addPostFrameCallback((_) {
                           setState(() {
                             filteredPets = pets.where((pet) {
-                              final String title =
-                                  pet['title'].toString().toLowerCase();
-                              final String category =
-                                  pet['category'].toString().toLowerCase();
-                              final String gender =
-                                  pet['gender'].toString().toLowerCase();
-                              final String age =
-                                  pet['age'].toString().toLowerCase();
+                              final String title = pet['title'].toString().toLowerCase();
+                              final String category = pet['category'].toString().toLowerCase();
+                              final String gender = pet['gender'].toString().toLowerCase();
+                              final String age = pet['age'].toString().toLowerCase();
 
-                              return title.contains(value.toLowerCase()) ||
-                                  category.contains(value.toLowerCase()) ||
-                                  gender.contains(value.toLowerCase()) ||
-                                  age.contains(value.toLowerCase());
+                              return title.contains(value.toLowerCase()) || category.contains(value.toLowerCase()) || gender.contains(value.toLowerCase()) || age.contains(value.toLowerCase());
                             }).toList();
                           });
                         });
@@ -174,8 +196,7 @@ class _PETSHOPState extends State<PETSHOP> {
                         // Update filteredPets based on your filter criteria
                         // For example, filtering by category "Cats":
                         filteredPets = pets.where((pet) {
-                          final String category =
-                              pet['category'].toString().toLowerCase();
+                          final String category = pet['category'].toString().toLowerCase();
                           return category == 'cat';
                         }).toList();
                       });
@@ -219,15 +240,12 @@ class _PETSHOPState extends State<PETSHOP> {
                       return GestureDetector(
                         onTap: () async {
                           try {
-                            var response =
-                                await _petNotifier.fetchPet(pet['id']);
-                            var navigatorContext =
-                                context; // Store the BuildContext in a local variable
+                            var response = await _petNotifier.fetchPet(pet['id']);
+                            var navigatorContext = context; // Store the BuildContext in a local variable
                             Navigator.push(
                               navigatorContext,
                               MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    PetDetails(petData: response),
+                                builder: (BuildContext context) => PetDetails(petData: response),
                               ),
                             );
                           } catch (error) {

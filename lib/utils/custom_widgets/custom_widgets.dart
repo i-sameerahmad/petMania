@@ -5,6 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Commons/edituser.dart';
 import 'package:pet_paradise/Commons/login_page.dart';
+import 'package:pet_paradise/Commons/myorders.dart';
+import 'package:pet_paradise/Commons/mypets.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 
@@ -26,25 +28,19 @@ Widget MyButton(
     width: width,
     child: MaterialButton(
       onPressed: onPressed,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 10)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius ?? 10)),
       color: color,
       splashColor: splashColor ?? MyColors.PARRIT_GREEN,
       child: Text(
         title,
-        style: TextStyle(
-            color: textColor,
-            fontFamily: fontFamily,
-            fontSize: fontSize ?? 18,
-            fontWeight: FontWeight.w700),
+        style: TextStyle(color: textColor, fontFamily: fontFamily, fontSize: fontSize ?? 18, fontWeight: FontWeight.w700),
       ),
     ),
   );
 }
 
 /// InputDecoration for Login and Sign up TextFields
-InputDecoration textFieldDecorationWithIcon(
-    {required String hint, IconData? icon, double? borderRadius}) {
+InputDecoration textFieldDecorationWithIcon({required String hint, IconData? icon, double? borderRadius}) {
   return InputDecoration(
     hintText: hint,
     prefixIcon: Icon(icon),
@@ -91,18 +87,14 @@ Widget drawer(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Shane Mendoza',
-                          style: TextStyle(color: Colors.white, fontSize: 18)),
-                      Text('470-499-4935',
-                          style: TextStyle(color: Colors.black)),
+                      Text('Shane Mendoza', style: TextStyle(color: Colors.white, fontSize: 18)),
+                      Text('470-499-4935', style: TextStyle(color: Colors.black)),
                     ],
                   ),
                   IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios,
-                        color: Colors.white, size: 16),
+                    icon: const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const EditUserPage()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EditUserPage()));
                     },
                   )
                 ],
@@ -112,9 +104,11 @@ Widget drawer(
         ),
         ListTile(
           minLeadingWidth: 0,
-          title: const Text("My rides", style: TextStyle()),
+          title: const Text("My pets", style: TextStyle()),
           leading: const Icon(Icons.access_time_rounded, color: Colors.blue),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyPets()));
+          },
         ),
         ListTile(
           minLeadingWidth: 0,
@@ -130,15 +124,16 @@ Widget drawer(
         ),
         ListTile(
           minLeadingWidth: 0,
-          title: const Text("My payment", style: TextStyle()),
+          title: const Text("My Orders", style: TextStyle()),
           leading: const Icon(Icons.payment, color: Colors.amber),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrders()));
+          },
         ),
         ListTile(
           minLeadingWidth: 0,
           title: const Text("Notification", style: TextStyle()),
-          leading: const Icon(Icons.notifications_none_outlined,
-              color: Colors.amber),
+          leading: const Icon(Icons.notifications_none_outlined, color: Colors.amber),
           onTap: () {},
         ),
         ListTile(
@@ -165,8 +160,7 @@ Widget drawer(
 }
 
 /// InputDecoration for Login and Sign up TextFields
-InputDecoration textFieldDecorationWithOutIcon(
-    {required String hint, double? borderRadius}) {
+InputDecoration textFieldDecorationWithOutIcon({required String hint, double? borderRadius}) {
   return InputDecoration(
     hintText: hint,
     hintStyle: const TextStyle(
@@ -180,8 +174,7 @@ InputDecoration textFieldDecorationWithOutIcon(
 }
 
 ///Login and SignUp Button
-Widget loginAndSignUpButton(
-    {required Function onPressed, required String title}) {
+Widget loginAndSignUpButton({required Function onPressed, required String title}) {
   return MaterialButton(
     onPressed: onPressed(),
     textColor: Colors.black,
@@ -194,10 +187,7 @@ Widget loginAndSignUpButton(
 
 /// Main Dashboard Card
 
-Widget dashboardCard(
-    {required Function onTap,
-    required String logoImgPath,
-    required String title}) {
+Widget dashboardCard({required Function onTap, required String logoImgPath, required String title}) {
   return GestureDetector(
     onTap: onTap(),
     child: SizedBox(
@@ -250,18 +240,13 @@ AppBar transparentAppBar({required BuildContext context, String? centerTitle}) {
 /// Right and Left Padding for All Pages
 Padding leftAndRightPadding({required Widget child}) {
   return Padding(
-    padding: EdgeInsets.only(
-        right: MyAppSize.width! * 0.05, left: MyAppSize.width! * 0.05),
+    padding: EdgeInsets.only(right: MyAppSize.width! * 0.05, left: MyAppSize.width! * 0.05),
     child: child,
   );
 }
 
 ///Code Verification TextField
-Widget codeVerificationTextField(
-    {required BuildContext context,
-    required TextEditingController controller,
-    double? width,
-    required int digitNumber}) {
+Widget codeVerificationTextField({required BuildContext context, required TextEditingController controller, double? width, required int digitNumber}) {
   return SizedBox(
       width: width ?? MyAppSize.width! * 0.14,
       height: 55,
@@ -298,23 +283,14 @@ Widget codeVerificationTextField(
 
 ///Clickable Text
 Widget clickAbleText(
-    {required String text,
-    required void Function() onTap,
-    bool? enable,
-    bool? underLine,
-    double? textSize,
-    Color? textColor,
-    TextAlign? textAlign,
-    FontWeight? fontWeight,
-    String? fontFamily}) {
+    {required String text, required void Function() onTap, bool? enable, bool? underLine, double? textSize, Color? textColor, TextAlign? textAlign, FontWeight? fontWeight, String? fontFamily}) {
   return GestureDetector(
     onTap: enable == true ? onTap : null,
     child: Text(
       text,
       style: TextStyle(
         color: textColor ?? Colors.black,
-        decoration:
-            underLine == null ? TextDecoration.none : TextDecoration.underline,
+        decoration: underLine == null ? TextDecoration.none : TextDecoration.underline,
         fontWeight: fontWeight ?? FontWeight.normal,
         fontSize: textSize ?? 13,
         fontFamily: fontFamily,
@@ -350,8 +326,7 @@ Widget sellerCenterCard({required BuildContext buildContext}) {
 }
 
 ///Important Text
-Widget importantText(
-    {required String text, double? fontSize, Color? textColor}) {
+Widget importantText({required String text, double? fontSize, Color? textColor}) {
   return Row(
     children: [
       const Text(
@@ -360,21 +335,14 @@ Widget importantText(
       ),
       Text(
         text,
-        style: TextStyle(
-            color: textColor ?? Colors.grey,
-            fontSize: fontSize ?? 13,
-            fontFamily: 'Itim-Regular'),
+        style: TextStyle(color: textColor ?? Colors.grey, fontSize: fontSize ?? 13, fontFamily: 'Itim-Regular'),
       )
     ],
   );
 }
 
 ///ReadOnly Text Field
-Widget myCustomTextFiled(
-    {required BuildContext context,
-    required TextEditingController controller,
-    required String hint,
-    bool important = false}) {
+Widget myCustomTextFiled({required BuildContext context, required TextEditingController controller, required String hint, bool important = false}) {
   return SizedBox(
       height: 30,
       child: TextField(
@@ -383,8 +351,7 @@ Widget myCustomTextFiled(
         decoration: InputDecoration(
           label: important ? importantText(text: hint) : Text(hint),
           border: InputBorder.none,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         ),
       ));
 }
@@ -405,11 +372,7 @@ Widget customBodyWithCenterTextAppBar({
 }
 
 ///Seller Profile Container
-Widget sellerProfileContainer(
-    {required String tittle,
-    required Function onTap,
-    bool? topBorder,
-    bool? bootomBorder}) {
+Widget sellerProfileContainer({required String tittle, required Function onTap, bool? topBorder, bool? bootomBorder}) {
   return GestureDetector(
       onTap: onTap(),
       child: Column(
@@ -428,8 +391,7 @@ Widget sellerProfileContainer(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     tittle,
-                    style: const TextStyle(
-                        fontSize: 15, fontFamily: 'Itim-Regular'),
+                    style: const TextStyle(fontSize: 15, fontFamily: 'Itim-Regular'),
                   ),
                 ),
                 const Icon(
@@ -448,10 +410,7 @@ Widget sellerProfileContainer(
 }
 
 /// Seller Tools Button
-Widget sellerToolButton(
-    {required Function() onTape,
-    required String title,
-    required String imgPath}) {
+Widget sellerToolButton({required Function() onTape, required String title, required String imgPath}) {
   return GestureDetector(
     onTap: onTape,
     child: SizedBox(
@@ -476,8 +435,7 @@ Widget sellerToolButton(
 }
 
 ///Seller Notification custom Container
-Widget customContainerForSellerNotification(
-    {required String imgName, required String title}) {
+Widget customContainerForSellerNotification({required String imgName, required String title}) {
   return Container(
     height: 80,
     color: Colors.white,
@@ -508,9 +466,7 @@ void showSnackBarMsg(BuildContext context, String msg, {bool error = false}) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Text(
       msg,
-      style: TextStyle(
-          fontFamily: 'Itim-Regular',
-          color: error == false ? Colors.white : Colors.red),
+      style: TextStyle(fontFamily: 'Itim-Regular', color: error == false ? Colors.white : Colors.red),
     ),
     backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
   ));

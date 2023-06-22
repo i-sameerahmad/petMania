@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Commons/chat.dart';
+import 'package:pet_paradise/Commons/map.dart';
 import 'package:pet_paradise/utils/appConstants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -170,6 +171,9 @@ class _AdoptPetDetailsState extends State<AdoptPetDetails> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 Text(
@@ -181,10 +185,19 @@ class _AdoptPetDetailsState extends State<AdoptPetDetails> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 130)),
+                InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MapScreen()),
+                      );
+                    },
+                    child: Icon(Icons.location_history)),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
               child: Row(
                 children: [
                   Expanded(

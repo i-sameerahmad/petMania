@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
+import 'package:pet_paradise/vet_module/petconf.dart';
 import 'package:pet_paradise/vet_module/vatConfirmation.dart';
 
 List<String> pets = [
@@ -11,81 +12,21 @@ List<String> pets = [
   "Horse",
   "Kitten",
   "Fish",
-  "Buddy",
-  "Rocky",
   "Duke",
-  "Jack",
-  "Maggie",
   "Oliver",
-  "Milo",
-  "Jasper",
-  "Luna",
-  "Lola",
-  "Smokey",
-  "Whiskers",
-  "Mittens",
-  "Boots",
-  "Shadow",
-  "Nemo",
   "Goldie",
-  "Bubbles",
-  "Rainbow",
-  "Oscar",
-  "Guppy",
-  "Betta",
   "Molly",
-  "Tetra",
-  "Pleco",
   "Squeak",
-  "Snowball",
   "Fluffy",
-  "Hammy",
-  "Rocky",
-  "Bandit",
-  "Oreo",
-  "Peanut",
-  "Pumpkin",
-  "Slinky",
   "Piggy",
-  "Wilbur",
   "Porky",
-  "Penelope",
-  "George",
-  "Henry",
-  "Lily",
   "Daisy",
-  "Violet",
-  "Hazel",
-  "Thumper",
-  "Peter",
-  "Cottontail",
-  "Clover",
-  "Coco",
-  "Buster",
-  "Murphy",
-  "Milo",
-  "Oscar",
-  "Oliver",
-  "Tweety",
-  "Bluebird",
-  "Robin",
-  "Budgie",
-  "Parakeet",
-  "Finch",
   "Canary",
   "Parrot",
   "Macaw",
-  "Cockatoo",
-  "Slinky",
   "Snakey",
-  "Rex",
   "Turtle",
   "Leo",
-  "Oscar",
-  "Bella",
-  "Daisy",
-  "Jasper",
-  "Lucy"
 ];
 
 class PetNotifier {
@@ -158,7 +99,7 @@ class PetNotifier {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const VatConfirmation(), // Replace CartPage with your actual cart page
+          builder: (context) => const PetConfirmation(), // Replace CartPage with your actual cart page
         ),
       );
     } else {
@@ -225,7 +166,7 @@ class PetNotifier {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const VatConfirmation(), // Replace CartPage with your actual cart page
+          builder: (context) => VatConfirmation(), // Replace CartPage with your actual cart page
         ),
       );
     } else {
@@ -235,6 +176,25 @@ class PetNotifier {
 
   Future<List<dynamic>> fetchPets() async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getpets'));
+
+    if (response.statusCode == 200) {
+      // If the request is successful, parse the response body
+      final data = jsonDecode(response.body);
+      if (data is List) {
+        // Return the list of pets
+        return data;
+      } else {
+        // Handle the case where the response body is not a list
+        throw Exception('Invalid response format');
+      }
+    } else {
+      // If the request fails, throw an exception or handle the error accordingly
+      throw Exception('Failed to fetch pets');
+    }
+  }
+
+  Future<List<dynamic>> fetchVerifiedPets() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getverifiedpets'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -273,6 +233,25 @@ class PetNotifier {
 
   Future<dynamic> fetchPet(int id) async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getpet/$id'));
+
+    if (response.statusCode == 200) {
+      // If the request is successful, parse the response body
+      final data = jsonDecode(response.body);
+      if (data is List) {
+        // Return the list of pets
+        return data;
+      } else {
+        // Handle the case where the response body is not a list
+        throw Exception('Invalid response format');
+      }
+    } else {
+      // If the request fails, throw an exception or handle the error accordingly
+      throw Exception('Failed to fetch pets');
+    }
+  }
+
+  Future<dynamic> fetchVarifiedPet(int id) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getvarifiedpet/$id'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body

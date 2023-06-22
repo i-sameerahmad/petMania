@@ -3,21 +3,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/Commons/chat.dart';
-import 'package:pet_paradise/Commons/map.dart';
 import 'package:pet_paradise/components/styles.dart';
+import 'package:pet_paradise/pages/booking.dart';
 import 'package:pet_paradise/utils/appConstants.dart';
+import 'package:pet_paradise/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PetDetails extends StatefulWidget {
+class VarifiedPetDetails extends StatefulWidget {
   final List<dynamic> petData; // Updated type
 
-  const PetDetails({Key? key, required this.petData}) : super(key: key);
+  const VarifiedPetDetails({Key? key, required this.petData}) : super(key: key);
 
   @override
-  State<PetDetails> createState() => _PetDetailsState();
+  State<VarifiedPetDetails> createState() => _VarifiedPetDetailsState();
 }
 
-class _PetDetailsState extends State<PetDetails> {
+class _VarifiedPetDetailsState extends State<VarifiedPetDetails> {
   List<dynamic> pet = [];
   late int userID;
   myPrefs() async {
@@ -53,20 +54,7 @@ class _PetDetailsState extends State<PetDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.chat,
-            ),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ChatPage(
-                  participantIds: [userID.toString(), pet[0]['user_id'].toString()],
-                ),
-              ));
-            },
-          )
-        ],
+        actions: [],
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -92,7 +80,7 @@ class _PetDetailsState extends State<PetDetails> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    pet[0]['title'],
+                    pet[0]['vpet_name'],
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: ' Itim-Regular',
@@ -106,7 +94,7 @@ class _PetDetailsState extends State<PetDetails> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CachedNetworkImage(
-                    imageUrl: DB_URL_IMAGES + pet[0]['image'],
+                    imageUrl: DB_URL_IMAGES + pet[0]['vpet_image'],
                     placeholder: (context, url) => CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                     height: 250,
@@ -117,7 +105,7 @@ class _PetDetailsState extends State<PetDetails> {
               Row(
                 children: [
                   Text(
-                    'PKR, ${pet[0]['price']}',
+                    'PKR, ${pet[0]['vpet_price']}',
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: ' Itim-Regular',
@@ -125,22 +113,10 @@ class _PetDetailsState extends State<PetDetails> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Padding(padding: EdgeInsets.symmetric(horizontal: 110)),
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MapScreen()),
-                        );
-                      },
-                      child: Icon(Icons.location_history)),
                 ],
               ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -150,7 +126,7 @@ class _PetDetailsState extends State<PetDetails> {
                       child: Column(
                         children: [
                           Text(
-                            pet[0]['gender'],
+                            pet[0]['vpet_gender'],
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: ' Itim-Regular',
@@ -171,7 +147,7 @@ class _PetDetailsState extends State<PetDetails> {
                       child: Column(
                         children: [
                           Text(
-                            pet[0]['category'],
+                            pet[0]['vpet_category'],
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: ' Itim-Regular',
@@ -192,7 +168,7 @@ class _PetDetailsState extends State<PetDetails> {
                       child: Column(
                         children: [
                           Text(
-                            pet[0]['age'].toString(),
+                            pet[0]['vpet_age'].toString(),
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: ' Itim-Regular',
@@ -224,12 +200,12 @@ class _PetDetailsState extends State<PetDetails> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(
-                        pet[0]['description'],
+                        pet[0]['vpet_description'],
                         maxLines: 10,
                         softWrap: false,
                         overflow: TextOverflow.ellipsis,
@@ -244,43 +220,31 @@ class _PetDetailsState extends State<PetDetails> {
                 ),
               ),
               const SizedBox(height: 12),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'User details',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: ' Itim-Regular',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+                child: InkWell(
+                  onTap: (() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BookingPage(userId: userID, petData: pet[0])),
+                    );
+                  }),
+                  child: Container(
+                    decoration: BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN, borderRadius: BorderRadius.all(Radius.circular(20))),
+                    height: 50,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                        Text(
+                          "Book me",
+                          style: TextStyle(
+                            fontFamily: ' Itim-Regular',
+                            fontSize: 17,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      ListTile(
-                        leading: Icon(Icons.person),
-                        title: Text('Name'),
-                        subtitle: Text(pet[0]['user_name']),
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.email),
-                        title: Text('Email'),
-                        subtitle: Text(pet[0]['user_email']),
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.phone),
-                        title: Text('Phone'),
-                        subtitle: Text(pet[0]['user_phone']),
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.location_on),
-                        title: Text('Address'),
-                        subtitle: Text(pet[0]['user_address']),
-                      ),
-                    ],
+                        Icon(Icons.arrow_forward_ios)
+                      ]),
+                    ),
                   ),
                 ),
               ),

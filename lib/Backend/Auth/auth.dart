@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pet_paradise/Commons/DoctorHome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class AuthNotifier {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool("status", jsonResponse['status']);
         prefs.setInt("userID", jsonResponse['user']['id']);
+        prefs.setInt("userType", jsonResponse['user']['user_type']);
         prefs.setString("userName", jsonResponse['user']['name']);
 
         Navigator.push(
@@ -93,17 +95,39 @@ class AuthNotifier {
         prefs.setBool("status", jsonResponse['status']);
         prefs.setInt("userID", jsonResponse['user']['id']);
         prefs.setString("userName", jsonResponse['user']['name']);
+        prefs.setInt("userType", jsonResponse['user']['user_type']);
 
         final snackBar = SnackBar(
           content: Text(jsonResponse['message']),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        if (jsonResponse['user']['user_type'] == 2) {
+          print("user");
+          print(jsonResponse['user']['id']);
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const CommonDashBoard(),
+            ),
+          );
+        } else if (jsonResponse['user']['user_type'] == 3) {
+          print("doctor");
 
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const CommonDashBoard(),
-          ),
-        );
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const DoctorHomeScreen(),
+            ),
+          );
+        } else {
+          final snackBar = SnackBar(
+            content: Text("Invalid user"),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+        // Navigator.of(context).pushReplacement(
+        //   MaterialPageRoute(
+        //     builder: (context) => const CommonDashBoard(),
+        //   ),
+        // );
       } else {
         final snackBar = SnackBar(
           content: Text(jsonResponse['message']),

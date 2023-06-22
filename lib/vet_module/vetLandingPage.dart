@@ -7,6 +7,7 @@ import 'package:pet_paradise/Backend/doctor.dart';
 import 'package:pet_paradise/trainer_landing/trainerLangingPage.dart';
 import 'package:pet_paradise/utils/appConstants.dart';
 import 'package:pet_paradise/vet_module/VatDetailScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class VatLanding extends StatefulWidget {
   final List<dynamic> doctors;
@@ -19,9 +20,18 @@ class VatLanding extends StatefulWidget {
 
 class _VatLandingState extends State<VatLanding> {
   List<dynamic> doctors = [];
+  String userName = "";
+
+  myPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('userName')!;
+    });
+  }
 
   @override
   void initState() {
+    myPrefs();
     super.initState();
     fetchDoctors();
   }
@@ -44,15 +54,15 @@ class _VatLandingState extends State<VatLanding> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.chat,
-            ),
-            onPressed: () {
-              // Navigator.of(context)
-              //     .push(MaterialPageRoute(builder: (context) => MyHomePage()));
-            },
-          )
+          // IconButton(
+          //   icon: Icon(
+          //     Icons.chat,
+          //   ),
+          //   onPressed: () {
+          //     // Navigator.of(context)
+          //     //     .push(MaterialPageRoute(builder: (context) => MyHomePage()));
+          //   },
+          // )
         ],
         centerTitle: true,
         title: Text(
@@ -70,7 +80,7 @@ class _VatLandingState extends State<VatLanding> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
-                  "Hey, Ahmad...",
+                  "Hey, $userName...",
                   style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 25),
                 ),
               ),

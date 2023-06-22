@@ -1,9 +1,28 @@
-
+import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/Commons/commonHomeScreen.dart';
 
-class CartConfirmation extends StatelessWidget {
-  const CartConfirmation({super.key});
+class CartConfirmation extends StatefulWidget {
+  @override
+  _CartConfirmationState createState() => _CartConfirmationState();
+}
+
+class _CartConfirmationState extends State<CartConfirmation> {
+  @override
+  void initState() {
+    super.initState();
+    // Start the timer when the widget is created
+    Timer(Duration(seconds: 2), () {
+      // Navigate to the home screen after 2 seconds
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CommonDashBoard(), // Replace CartPage with your actual cart page
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

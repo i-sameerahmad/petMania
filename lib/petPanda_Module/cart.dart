@@ -87,7 +87,7 @@ class _CartState extends State<Cart> {
         // Navigate to confirmation page
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const CartConfirmation(),
+            builder: (context) => CartConfirmation(),
           ),
         );
       }

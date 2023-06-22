@@ -3,45 +3,32 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:pet_paradise/AdoptAPet/adoptPetDetail.dart';
+import 'package:pet_paradise/AdoptAPet/petDetail.dart';
 import 'package:pet_paradise/Backend/Pet/pet.dart';
+import 'package:pet_paradise/Commons/varifietPetDetail.dart';
 import 'package:pet_paradise/utils/appConstants.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/pages/adopt_pet_detail.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class ADOPTPETSHOP extends StatefulWidget {
+class VARIFIEDPETSHOP extends StatefulWidget {
   final List<dynamic> pets;
-  const ADOPTPETSHOP({Key? key, required this.pets}) : super(key: key);
+  const VARIFIEDPETSHOP({Key? key, required this.pets}) : super(key: key);
 
   @override
-  State<ADOPTPETSHOP> createState() => _ADOPTPETSHOPState();
+  State<VARIFIEDPETSHOP> createState() => _VARIFIEDPETSHOPState();
 }
 
-class _ADOPTPETSHOPState extends State<ADOPTPETSHOP> {
+class _VARIFIEDPETSHOPState extends State<VARIFIEDPETSHOP> {
   final PetNotifier _petNotifier = PetNotifier();
   List<dynamic> filteredPets = [];
   List<dynamic> pets = [];
-
-  String userName = "";
-
-  myPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      userName = prefs.getString('userName')!;
-    });
-  }
-
   @override
   void initState() {
-    myPrefs();
     super.initState();
-    fetchAdoptPets(); // Call the method to fetch pets when the widget initializes
+    fetchPets(); // Call the method to fetch pets when the widget initializes
   }
 
-  Future<void> fetchAdoptPets() async {
+  Future<void> fetchPets() async {
     try {
-      List<dynamic> fetchedPets = await PetNotifier().fetchAdoptPets();
+      List<dynamic> fetchedPets = await PetNotifier().fetchVerifiedPets();
       setState(() {
         pets = fetchedPets;
         filteredPets = fetchedPets;
@@ -68,54 +55,40 @@ class _ADOPTPETSHOPState extends State<ADOPTPETSHOP> {
           ),
         ),
         actions: [
-          // IconButton(
-          //   icon: const Icon(
-          //     Icons.chat,
-          //   ),
-          //   onPressed: () {
-          //     // Navigator.of(context).push(
-          //     //   MaterialPageRoute(builder: (context) => Chat()),
-          //     // );
-          //   },
-          // )
+          IconButton(
+            icon: const Icon(
+              Icons.chat,
+            ),
+            onPressed: () {
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (context) => Chat()),
+              // );
+            },
+          )
         ],
         elevation: 0,
         backgroundColor: Colors.white,
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 16.0),
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AddAdoptPetDetail()));
-          },
-          backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
-          tooltip: "Add new Blog.",
-          child: Icon(
-            Icons.add,
-            color: const Color.fromARGB(255, 0, 0, 0),
-          ),
-        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListTile(
-              leading: const CircleAvatar(
+            const ListTile(
+              leading: CircleAvatar(
                 backgroundImage: AssetImage(
                   'assets/images/meena.png',
                 ),
                 radius: 50,
               ),
               title: Text(
-                userName,
-                style: const TextStyle(
+                'Ahmad',
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Itim-Regular',
                   fontSize: 22,
                 ),
               ),
-              subtitle: const Text(
+              subtitle: Text(
                 'Lahore, Pakistan',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -175,10 +148,10 @@ class _ADOPTPETSHOPState extends State<ADOPTPETSHOP> {
                         SchedulerBinding.instance.addPostFrameCallback((_) {
                           setState(() {
                             filteredPets = pets.where((pet) {
-                              final String title = pet['title'].toString().toLowerCase();
-                              final String category = pet['category'].toString().toLowerCase();
-                              final String gender = pet['gender'].toString().toLowerCase();
-                              final String age = pet['age'].toString().toLowerCase();
+                              final String title = pet['vpet_name'].toString().toLowerCase();
+                              final String category = pet['vpet_category'].toString().toLowerCase();
+                              final String gender = pet['vpet_gender'].toString().toLowerCase();
+                              final String age = pet['vpet_age'].toString().toLowerCase();
 
                               return title.contains(value.toLowerCase()) || category.contains(value.toLowerCase()) || gender.contains(value.toLowerCase()) || age.contains(value.toLowerCase());
                             }).toList();
@@ -195,7 +168,7 @@ class _ADOPTPETSHOPState extends State<ADOPTPETSHOP> {
                         // Update filteredPets based on your filter criteria
                         // For example, filtering by category "Cats":
                         filteredPets = pets.where((pet) {
-                          final String category = pet['category'].toString().toLowerCase();
+                          final String category = pet['vpet_category'].toString().toLowerCase();
                           return category == 'cat';
                         }).toList();
                       });
@@ -239,12 +212,12 @@ class _ADOPTPETSHOPState extends State<ADOPTPETSHOP> {
                       return GestureDetector(
                         onTap: () async {
                           try {
-                            var response = await _petNotifier.fetchAdoptPet(pet['id']);
+                            var response = await _petNotifier.fetchVarifiedPet(pet['id']);
                             var navigatorContext = context; // Store the BuildContext in a local variable
                             Navigator.push(
                               navigatorContext,
                               MaterialPageRoute(
-                                builder: (BuildContext context) => AdoptPetDetails(petData: response),
+                                builder: (BuildContext context) => VarifiedPetDetails(petData: response),
                               ),
                             );
                           } catch (error) {
@@ -252,11 +225,12 @@ class _ADOPTPETSHOPState extends State<ADOPTPETSHOP> {
                           }
                         },
                         child: PetCard(
-                          imageUrl: pet['image'],
-                          name: pet['title'],
-                          category: pet['category'],
-                          gender: pet['gender'],
-                          age: pet['age'].toString(),
+                          imageUrl: pet['vpet_image'],
+                          name: pet['vpet_name'],
+                          price: pet['vpet_price'].toString(),
+                          category: pet['vpet_category'],
+                          gender: pet['vpet_gender'],
+                          age: pet['vpet_age'].toString(),
                         ),
                       );
                     },
@@ -307,6 +281,7 @@ class CategoryIcon extends StatelessWidget {
 class PetCard extends StatelessWidget {
   final String imageUrl;
   final String name;
+  final String price;
   final String category;
   final String gender;
   final String age;
@@ -315,6 +290,7 @@ class PetCard extends StatelessWidget {
     Key? key,
     required this.imageUrl,
     required this.name,
+    required this.price,
     required this.category,
     required this.gender,
     required this.age,
@@ -352,14 +328,14 @@ class PetCard extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                // Text(
-                //   price,
-                //   style: TextStyle(
-                //     fontWeight: FontWeight.bold,
-                //     fontFamily: 'Itim-Regular',
-                //     fontSize: 16,
-                //   ),
-                // ),
+                Text(
+                  price,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Itim-Regular',
+                    fontSize: 16,
+                  ),
+                ),
               ],
             ),
           ),

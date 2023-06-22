@@ -9,6 +9,7 @@ import 'package:pet_paradise/Backend/doctor.dart';
 import 'package:pet_paradise/Commons/chat.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/vet_module/vatConfirmation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class VatConsultScreen extends StatefulWidget {
   final int userId;
@@ -25,6 +26,20 @@ class _VatConsultScreenState extends State<VatConsultScreen> {
   late final String imgUrl;
   late File? imgFile = null;
   late DateTime selectedDate = DateTime.now(); // Added for date picker
+  String userName = "";
+
+  myPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('userName')!;
+    });
+  }
+
+  @override
+  void initState() {
+    myPrefs();
+    super.initState();
+  }
 
   Future<void> getImgFromGallery() async {
     try {
@@ -61,17 +76,17 @@ class _VatConsultScreenState extends State<VatConsultScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.chat,
-            ),
-            onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Chat()),
-              // );
-            },
-          )
+          // IconButton(
+          //   icon: Icon(
+          //     Icons.chat,
+          //   ),
+          //   onPressed: () {
+          //     // Navigator.push(
+          //     //   context,
+          //     //   MaterialPageRoute(builder: (context) => Chat()),
+          //     // );
+          //   },
+          // )
         ],
         title: Text(
           'Vet Consultation',
@@ -209,7 +224,8 @@ class _VatConsultScreenState extends State<VatConsultScreen> {
             String description = helpController.text;
             String formattedDate = selectedDate.toLocal().toString().split(' ')[0];
 
-            _notifier.addAppointment(description, imgFile, formattedDate, widget.userId, widget.doctorId);
+            _notifier.addAppointment(description, userName, imgFile, formattedDate, widget.userId, widget.doctorId);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => VatConfirmation()));
           },
           child: Container(
             decoration: BoxDecoration(

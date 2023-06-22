@@ -18,7 +18,6 @@ class _MyHomePageState extends State<MyHomePage> {
   final AuthNotifier _auth = AuthNotifier();
   late int userId;
   List<String> chatRooms = [];
-  late String opname = "";
 
   myPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -38,6 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
     myPrefs();
     super.initState();
   }
+
+  late String opname = "";
 
   Future<List<String>> fetchChatRooms() async {
     final querySnapshot = await FirebaseFirestore.instance.collection('chatRooms').get();
@@ -85,37 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Container(
-                //   margin: const EdgeInsets.all(0),
-                //   child: Container(
-                //     color: Colors.indigo.shade400,
-                //     padding: const EdgeInsets.all(8),
-                //     height: 160,
-                //     child: Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         const Spacer(),
-                //         Padding(
-                //           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
-                //           child: Text(
-                //             'Recent Users',
-                //             style: Styles.h1(),
-                //           ),
-                //         ),
-                //         Container(
-                //           margin: const EdgeInsets.symmetric(vertical: 10),
-                //           height: 80,
-                //           child: ListView.builder(
-                //             scrollDirection: Axis.horizontal,
-                //             itemBuilder: (context, i) {
-                //               return ChatWidgets.circleProfile();
-                //             },
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.only(top: 10),
@@ -145,30 +115,42 @@ class _MyHomePageState extends State<MyHomePage> {
                                       final chatRoomId = chatRoomDocs[index].id;
                                       final participantIds = chatRoom['participantIds'] as List;
                                       final otherParticipantId = participantIds.firstWhere((id) => id != userId.toString(), orElse: () => '') as String;
-                                      final name = fetchnames(otherParticipantId);
-                                      return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                                        stream: FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId).collection('messages').orderBy('timestamp', descending: true).limit(1).snapshots(),
+                                      return FutureBuilder<String>(
+                                        future: fetchnames(otherParticipantId),
                                         builder: (context, snapshot) {
                                           if (snapshot.hasData) {
-                                            final messageDocs = snapshot.data!.docs;
-                                            if (messageDocs.isNotEmpty) {
-                                              final lastMessage = messageDocs[0].data();
-                                              final timestamp = lastMessage['timestamp'] as Timestamp;
-                                              final messageTime = timestamp.toDate();
-                                              return ChatWidgets.card(
-                                                title: opname,
-                                                subtitle: lastMessage['message'] ?? 'No messages',
-                                                time: messageTime,
-                                                onTap: () {
-                                                  Navigator.of(context).push(MaterialPageRoute(
-                                                      builder: (context) => ChatPage(
+                                            final name = snapshot.data!;
+                                            print(name);
+                                            return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                                              stream:
+                                                  FirebaseFirestore.instance.collection('chatRooms').doc(chatRoomId).collection('messages').orderBy('timestamp', descending: true).limit(1).snapshots(),
+                                              builder: (context, snapshot) {
+                                                if (snapshot.hasData) {
+                                                  final messageDocs = snapshot.data!.docs;
+                                                  if (messageDocs.isNotEmpty) {
+                                                    final lastMessage = messageDocs[0].data();
+                                                    final timestamp = lastMessage['timestamp'] as Timestamp;
+                                                    final messageTime = timestamp.toDate();
+                                                    return ChatWidgets.card(
+                                                      title: name,
+                                                      subtitle: lastMessage['message'] ?? 'No messages',
+                                                      time: messageTime,
+                                                      onTap: () {
+                                                        Navigator.of(context).push(MaterialPageRoute(
+                                                          builder: (context) => ChatPage(
                                                             participantIds: participantIds,
-                                                          )));
-                                                },
-                                              );
-                                            }
+                                                          ),
+                                                        ));
+                                                      },
+                                                    );
+                                                  }
+                                                }
+                                                return const SizedBox();
+                                              },
+                                            );
+                                          } else {
+                                            return const SizedBox();
                                           }
-                                          return const SizedBox();
                                         },
                                       );
                                     },

@@ -4,8 +4,9 @@ import 'package:pet_paradise/Backend/Pet/pet.dart';
 import 'package:pet_paradise/Backend/doctor.dart';
 import 'package:pet_paradise/Backend/product.dart';
 import 'package:pet_paradise/Commons/inbox.dart';
+import 'package:pet_paradise/components/styles.dart';
 import 'package:pet_paradise/pages/add_pet_detail.dart';
-import 'package:pet_paradise/pages/adopt_pet_detail.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:pet_paradise/petPanda_Module/petPandaLandingPage.dart';
 import 'package:pet_paradise/pet_owner_module/module/get_started_page_data.dart';
 import 'package:pet_paradise/Commons/get_started_page.dart';
@@ -24,11 +25,11 @@ class CommonDashBoard extends StatefulWidget {
   }) : super(key: key);
 
   //Get Started with Blog Page Data
-  static final GetStartedPageData getStartedWithBlogs = GetStartedPageData(
-      pageTitle: "Blogs & Articles",
-      subTitle: "Publish Your Own  Passion In Your Own Way ",
-      imgUrl: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-      pageName: BLOGSANDARTICLES);
+  // static final GetStartedPageData getStartedWithBlogs = GetStartedPageData(
+  //     pageTitle: "Blogs & Articles",
+  //     subTitle: "Publish Your Own  Passion In Your Own Way ",
+  //     imgUrl: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+  //     pageName: BLOGSANDARTICLES);
   static final GetStartedPageData getStartedWithPetPanda = GetStartedPageData(
       pageTitle: "Pet Panda",
       subTitle: "Publish Your Own  Passion In Your Own Way ",
@@ -74,6 +75,12 @@ class CommonDashBoard extends StatefulWidget {
 class _CommonDashBoardState extends State<CommonDashBoard> {
   String userName = "";
   late int userID;
+  final List<String> _bannerImages = [
+    'assets/images/vetbanner1.jpg',
+    'assets/images/petban1.jpg',
+    'assets/images/patban2.jpg',
+    'assets/images/petban3.jpg',
+  ];
 
   myPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -115,7 +122,7 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
           )
         ],
         elevation: 0,
-        backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
+        // backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
       ),
       drawer: drawer(
         context,
@@ -135,7 +142,7 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
     return SliverAppBar(
       title: Text(
         title,
-        style: const TextStyle(fontSize: 16, color: Colors.white, fontFamily: 'Itim-Regular'),
+        style: const TextStyle(fontSize: 22, color: Colors.white, fontFamily: 'Itim-Regular'),
       ),
       pinned: false,
       elevation: 5,
@@ -148,69 +155,92 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
           ),
         )
       ],
-      expandedHeight: 200,
-      backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
+      expandedHeight: 225,
+      // backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
       flexibleSpace: FlexibleSpaceBar(
         background: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 14, right: 16),
-                child: Text(
-                  "Dear $userName You Have Registered 5 Pets",
-                  style: const TextStyle(fontFamily: ' Itim-Regular', fontSize: 18),
-                ),
+            // SizedBox(height: 20),
+            CarouselSlider(
+              options: CarouselOptions(
+                autoPlay: true,
+                enlargeCenterPage: true,
+                aspectRatio: 2.0,
+                height: 170,
               ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: MyButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AddPetDetail(),
-                          ),
-                        );
-                      },
-                      title: 'Sale Pet',
-                      color: Colors.yellow,
-                      textColor: Colors.black,
-                      height: 45,
-                      width: 130,
+              items: _bannerImages.map((image) {
+                return Container(
+                  margin: EdgeInsets.all(5.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      image: AssetImage(image),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: MyButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AddAdoptPetDetail(),
-                          ),
-                        );
-                      },
-                      title: 'Adopt Pet',
-                      color: Colors.blue,
-                      textColor: Colors.white,
-                      height: 45,
-                      width: 130,
-                    ),
-                  ),
-                ],
-              ),
+                );
+              }).toList(),
             ),
+            SizedBox(height: 10),
+
+            // Center(
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(left: 14, right: 16),
+            //     child: Text(
+            //       "Dear $userName You Have Registered 5 Pets",
+            //       style: const TextStyle(fontFamily: ' Itim-Regular', fontSize: 18),
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 25,
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Padding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            //         child: MyButton(
+            //           onPressed: () {
+            //             Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                 builder: (context) => const AddPetDetail(),
+            //               ),
+            //             );
+            //           },
+            //           title: 'Sale Pet',
+            //           color: Colors.yellow,
+            //           textColor: Colors.black,
+            //           height: 45,
+            //           width: 130,
+            //         ),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            //         child: MyButton(
+            //           onPressed: () {
+            //             Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                 builder: (context) => const AddAdoptPetDetail(),
+            //               ),
+            //             );
+            //           },
+            //           title: 'Adopt Pet',
+            //           color: Colors.blue,
+            //           textColor: Colors.white,
+            //           height: 45,
+            //           width: 130,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
         collapseMode: CollapseMode.parallax,
@@ -222,23 +252,22 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
   List<MyDashboardCardData> generateCardData() {
     return <MyDashboardCardData>[
       MyDashboardCardData(title: PETS, imgPath: "assets/images/trainerLogo.png"),
-      MyDashboardCardData(title: VERIFIED, imgPath: "assets/images/trainerLogo.png"),
-      MyDashboardCardData(title: VATERINARIAN, imgPath: "assets/images/veterinariansLogo.png"),
+      MyDashboardCardData(title: VERIFIED, imgPath: "assets/images/48.png"),
+      MyDashboardCardData(title: VATERINARIAN, imgPath: "assets/images/43.png"),
       MyDashboardCardData(title: PETPANDA, imgPath: "assets/images/petPandaLogo.png"),
       MyDashboardCardData(title: ADOPTAPET, imgPath: "assets/images/adoptPetLogo.png"),
-      MyDashboardCardData(title: BLOGSANDARTICLES, imgPath: "assets/images/blogs&ArticlesLogo.png"),
+      // MyDashboardCardData(title: BLOGSANDARTICLES, imgPath: "assets/images/blogs&ArticlesLogo.png"),
     ];
   }
 
   /// Dashboard Grid
   SliverGrid myDashboardGrid(appUser) {
     List<MyDashboardCardData> gridCardData = generateCardData();
-
     return SliverGrid(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisExtent: 170, mainAxisSpacing: 2, crossAxisSpacing: 2),
       delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
         return Card(
-          elevation: 1,
+          elevation: 2,
           shadowColor: Colors.green,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: InkWell(
@@ -253,17 +282,13 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
                               appUser: appUser,
                             )));
               } else if (gridCardData[index].title == VERIFIED) {
-                _doctorNotifier.fetchDoctors().then((doctors) {
-                  // Handle the list of doctors here
-                  // You can pass the doctors to the next screen or perform any other logic
-                  Navigator.push(
+                Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VatLanding(doctors: doctors)),
-                  );
-                }).catchError((error) {
-                  // Handle the error if the request fails
-                  print(error);
-                });
+                    MaterialPageRoute(
+                        builder: (context) => GetStartedPage(
+                              pageData: CommonDashBoard.getStartedWithVpets,
+                              appUser: appUser,
+                            )));
               } else if (gridCardData[index].title == VATERINARIAN) {
                 _doctorNotifier.fetchDoctors().then((doctors) {
                   // Handle the list of doctors here
@@ -296,14 +321,15 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
                   // Handle the error if the request fails
                   print(error);
                 });
-              } else if (gridCardData[index].title == BLOGSANDARTICLES) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => GetStartedPage(
-                              pageData: CommonDashBoard.getStartedWithBlogs,
-                              appUser: appUser,
-                            )));
+                // } else if (gridCardData[index].title == BLOGSANDARTICLES) {
+                //   Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => GetStartedPage(
+                //                 pageData: CommonDashBoard.getStartedWithBlogs,
+                //                 appUser: appUser,
+                //               )));
+                // }
               } else if (gridCardData[index].title == PETPANDA) {
                 _productNotifier.fetchProducts().then((products) {
                   // Handle the list of doctors here
@@ -348,7 +374,7 @@ class _CommonDashBoardState extends State<CommonDashBoard> {
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: [
-        myDashboardAppBar(title: "Hello Ahmad!", generalAppUser: 'appUser'),
+        myDashboardAppBar(title: "Hello $userName!", generalAppUser: 'appUser'),
         SliverPadding(
           padding: EdgeInsets.only(left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05, bottom: MyAppSize.height! * 0.05),
           sliver: myDashboardGrid('appUser'),
