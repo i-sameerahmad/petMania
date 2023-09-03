@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/pages/doctor_profille.dart';
-import 'package:pet_paradise/widget/elevated_button.dart';
+import 'package:pet_mania/pages/doctor_profille.dart';
+import 'package:pet_mania/widget/elevated_button.dart';
 import '../components/styles.dart';
 
 class Appointments extends StatefulWidget {
@@ -42,9 +42,7 @@ class _AppointmentsState extends State<Appointments> {
           preferredSize: const Size(0.0, 60.0),
           child: Container(
             margin: const EdgeInsets.only(bottom: 16),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.black26),
-                borderRadius: const BorderRadius.all(Radius.circular(10))),
+            decoration: BoxDecoration(border: Border.all(color: Colors.black26), borderRadius: const BorderRadius.all(Radius.circular(10))),
             child: CupertinoSlidingSegmentedControl(
               groupValue: selectedValue,
               backgroundColor: Colors.white,
@@ -62,12 +60,7 @@ class _AppointmentsState extends State<Appointments> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(children: [
-          if (selectedValue == 0)
-            _builSpecialist()
-          else if (selectedValue == 1)
-            _builClinic()
-        ]),
+        child: Column(children: [if (selectedValue == 0) _builSpecialist() else if (selectedValue == 1) _builClinic()]),
       ),
     );
   }
@@ -106,20 +99,12 @@ class _AppointmentsState extends State<Appointments> {
 
   Widget buildSegment1() => Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-        child: Text('Upcoming',
-            style: TextStyle(
-                fontSize: 16,
-                fontFamily: 'semibold',
-                color: selectedValue == 0 ? Colors.white : Colors.black)),
+        child: Text('Upcoming', style: TextStyle(fontSize: 16, fontFamily: 'semibold', color: selectedValue == 0 ? Colors.white : Colors.black)),
       );
 
   Widget buildSegment2() => Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-        child: Text('Past',
-            style: TextStyle(
-                fontSize: 16,
-                fontFamily: 'semibold',
-                color: selectedValue == 1 ? Colors.white : Colors.black)),
+        child: Text('Past', style: TextStyle(fontSize: 16, fontFamily: 'semibold', color: selectedValue == 1 ? Colors.white : Colors.black)),
       );
 
   Widget _buildUpcoming(img, name) {
@@ -145,10 +130,7 @@ class _AppointmentsState extends State<Appointments> {
                 Expanded(
                   child: MyElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DoctorProfile()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const DoctorProfile()));
                       },
                       text: 'Edit',
                       colors: appColor),
@@ -159,7 +141,8 @@ class _AppointmentsState extends State<Appointments> {
                     width: double.infinity,
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.black54, padding: const EdgeInsets.all(14),
+                        foregroundColor: Colors.black54,
+                        padding: const EdgeInsets.all(14),
                         side: const BorderSide(
                           color: appColor,
                         ),
@@ -240,8 +223,7 @@ class _AppointmentsState extends State<Appointments> {
                         const CircleAvatar(
                           radius: 14,
                           backgroundColor: backgroundColor,
-                          child: Icon(Icons.location_on_outlined,
-                              color: appColor, size: 20),
+                          child: Icon(Icons.location_on_outlined, color: appColor, size: 20),
                         ),
                         const SizedBox(width: 4),
                         greyTextSmall('1.5 km')
@@ -253,8 +235,7 @@ class _AppointmentsState extends State<Appointments> {
                         const CircleAvatar(
                           radius: 14,
                           backgroundColor: backgroundColor,
-                          child: Icon(Icons.credit_card,
-                              color: appColor, size: 20),
+                          child: Icon(Icons.credit_card, color: appColor, size: 20),
                         ),
                         const SizedBox(width: 4),
                         greyTextSmall('\$20')
@@ -280,8 +261,7 @@ class _AppointmentsState extends State<Appointments> {
                   const CircleAvatar(
                     radius: 18,
                     backgroundColor: Colors.white,
-                    child: Icon(Icons.location_on_outlined,
-                        color: appColor, size: 20),
+                    child: Icon(Icons.location_on_outlined, color: appColor, size: 20),
                   ),
                   const SizedBox(width: 10),
                   Column(
@@ -299,8 +279,7 @@ class _AppointmentsState extends State<Appointments> {
                   const CircleAvatar(
                     radius: 18,
                     backgroundColor: Colors.white,
-                    child: Icon(Icons.location_on_outlined,
-                        color: appColor, size: 20),
+                    child: Icon(Icons.location_on_outlined, color: appColor, size: 20),
                   ),
                   const SizedBox(width: 10),
                   greyText('Wed 9 Sep - 10.30 am'),

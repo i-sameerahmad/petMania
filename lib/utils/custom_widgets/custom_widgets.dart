@@ -3,16 +3,16 @@
 //TODO : My Custom Button Widget
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Commons/edituser.dart';
-import 'package:pet_paradise/Commons/login_page.dart';
-import 'package:pet_paradise/Commons/mybookings.dart';
-import 'package:pet_paradise/Commons/myorders.dart';
-import 'package:pet_paradise/Commons/mypets.dart';
-import 'package:pet_paradise/petPanda_Module/cart.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/utils/responsive_controller.dart';
+import 'package:pet_mania/Commons/edituser.dart';
+import 'package:pet_mania/Commons/login_page.dart';
+import 'package:pet_mania/Commons/mybookings.dart';
+import 'package:pet_mania/Commons/myorders.dart';
+import 'package:pet_mania/Commons/mypets.dart';
+import 'package:pet_mania/petPanda_Module/cart.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/utils/responsive_controller.dart';
 
-import 'package:pet_paradise/utils/size_config.dart';
+import 'package:pet_mania/utils/size_config.dart';
 
 Widget MyButton(
     {required void Function()? onPressed,

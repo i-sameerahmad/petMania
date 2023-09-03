@@ -15,7 +15,7 @@ class ProductReviewNotifier {
     // Detect labels using Google Vision API
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://10.0.2.2:8000/api/productReview'),
+      Uri.parse('http://192.168.1.102:8000/api/productReview'),
     );
 
     // Add text fields to the request
@@ -42,7 +42,7 @@ class ProductReviewNotifier {
   }
 
   Future<List<dynamic>> fetchProductReviews(int productId) async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/productReviews/$productId');
+    var url = Uri.parse('http://192.168.1.102:8000/api/productReviews/$productId');
     var response = await http.get(url);
 
     if (response.statusCode == 200) {

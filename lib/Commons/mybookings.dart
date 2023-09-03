@@ -34,7 +34,7 @@ class _MyBookingsState extends State<MyBookings> {
   Future<void> fetchAppointments() async {
     try {
       print(userID);
-      final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getbookings/$userID'));
+      final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getbookings/$userID'));
       if (response.statusCode == 200) {
         setState(() {
           _appointments = jsonDecode(response.body);
@@ -80,7 +80,7 @@ class _MyBookingsState extends State<MyBookings> {
     final appointmentId = appointment['id']; // Assuming there's an 'id' field in the appointment data
 
     try {
-      final response = await http.delete(Uri.parse('http://10.0.2.2:8000/api/deletepet/$appointmentId'));
+      final response = await http.delete(Uri.parse('http://192.168.1.102:8000/api/deletepet/$appointmentId'));
       if (response.statusCode == 200) {
         setState(() {
           _appointments.removeAt(index);

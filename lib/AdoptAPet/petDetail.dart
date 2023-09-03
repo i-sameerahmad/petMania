@@ -2,10 +2,10 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Commons/chat.dart';
-import 'package:pet_paradise/Commons/map.dart';
-import 'package:pet_paradise/components/styles.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
+import 'package:pet_mania/Commons/chat.dart';
+import 'package:pet_mania/Commons/map.dart';
+import 'package:pet_mania/components/styles.dart';
+import 'package:pet_mania/utils/appConstants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PetDetails extends StatefulWidget {

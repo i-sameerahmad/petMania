@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pet_paradise">
+    package="com.example.pet_mania">
     <uses-permission android:name="android.permission.INTERNET" /> 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
    <application
-        android:label="pet_paradise"
+        android:label="pet_mania"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,4 +1,4 @@
-import 'package:pet_paradise/models/message.dart';
+import 'package:pet_mania/models/message.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -11,7 +11,7 @@ class MessageNotifier {
       'recipientId': recipientId,
       'content': content,
     };
-    final response = await http.post(Uri.parse("http://10.0.2.2:8000/api/message"), body: body, headers: {
+    final response = await http.post(Uri.parse("http://192.168.1.102:8000/api/message"), body: body, headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     });
     String responseBody = utf8.decoder.convert(response.bodyBytes);
@@ -22,7 +22,7 @@ class MessageNotifier {
   // Future<List<dynamic>> getMessages(
   //     {required int uid, required int rid}) async {
   //   final response = await http
-  //       .get(Uri.parse('http://10.0.2.2:8000/api/getmessages/$uid/$rid'));
+  //       .get(Uri.parse('http://192.168.1.102:8000/api/getmessages/$uid/$rid'));
 
   //   if (response.statusCode == 200) {
   //     // If the request is successful, parse the response body
@@ -51,7 +51,7 @@ class MessageNotifier {
   //   }
   // }
   Future<List<dynamic>> getMessages({required int uid, required int rid}) async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getmessages/$uid/$rid'));
+    final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getmessages/$uid/$rid'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body

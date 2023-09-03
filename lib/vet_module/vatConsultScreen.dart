@@ -1,14 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pet_paradise/Backend/Review/doctorReview.dart';
-import 'package:pet_paradise/Backend/doctor.dart';
-import 'package:pet_paradise/Commons/chat.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/vet_module/vatConfirmation.dart';
+import 'package:pet_mania/Backend/Review/doctorReview.dart';
+import 'package:pet_mania/Backend/doctor.dart';
+import 'package:pet_mania/Commons/chat.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/vet_module/vatConfirmation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class VatConsultScreen extends StatefulWidget {
@@ -25,7 +23,7 @@ class _VatConsultScreenState extends State<VatConsultScreen> {
   ImagePicker imagePicker = ImagePicker();
   late final String imgUrl;
   late File? imgFile = null;
-  late DateTime selectedDate = DateTime.now(); // Added for date picker
+  late DateTime selectedDate = DateTime.now();
   String userName = "";
 
   myPrefs() async {
@@ -75,19 +73,7 @@ class _VatConsultScreenState extends State<VatConsultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          // IconButton(
-          //   icon: Icon(
-          //     Icons.chat,
-          //   ),
-          //   onPressed: () {
-          //     // Navigator.push(
-          //     //   context,
-          //     //   MaterialPageRoute(builder: (context) => Chat()),
-          //     // );
-          //   },
-          // )
-        ],
+        actions: [],
         title: Text(
           'Vet Consultation',
           style: TextStyle(
@@ -222,10 +208,30 @@ class _VatConsultScreenState extends State<VatConsultScreen> {
         child: InkWell(
           onTap: () {
             String description = helpController.text;
-            String formattedDate = selectedDate.toLocal().toString().split(' ')[0];
+            if (description.trim().isEmpty) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Error'),
+                    content: Text('Please provide a description.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else {
+              String formattedDate = selectedDate.toLocal().toString().split(' ')[0];
 
-            _notifier.addAppointment(description, userName, imgFile, formattedDate, widget.userId, widget.doctorId);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => VatConfirmation()));
+              _notifier.addAppointment(description, userName, imgFile, formattedDate, widget.userId, widget.doctorId);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => VatConfirmation()));
+            }
           },
           child: Container(
             decoration: BoxDecoration(

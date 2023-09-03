@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Commons/commonHomeScreen.dart';
+import 'package:pet_mania/Commons/commonHomeScreen.dart';
 
 class PetConfirmation extends StatefulWidget {
   const PetConfirmation({super.key});

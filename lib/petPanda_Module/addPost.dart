@@ -4,9 +4,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pet_paradise/Commons/chat.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/vet_module/vatConfirmation.dart';
+import 'package:pet_mania/Commons/chat.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/vet_module/vatConfirmation.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({super.key});
@@ -54,10 +54,7 @@ class _AddPostState extends State<AddPost> {
         ],
         title: Text(
           'Add Product',
-          style: TextStyle(
-              fontFamily: ' Itim-Regular',
-              fontSize: 30,
-              fontWeight: FontWeight.bold),
+          style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 30, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -68,8 +65,7 @@ class _AddPostState extends State<AddPost> {
           child: Column(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0),
+                padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0),
                 child: Row(
                   children: [
                     Text(
@@ -85,9 +81,7 @@ class _AddPostState extends State<AddPost> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Container(
-                  decoration: BoxDecoration(
-                      color: MyColors.MATERIAL_LIGHT_GREEN,
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  decoration: BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN, borderRadius: BorderRadius.all(Radius.circular(20))),
                   height: 170,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 8.0),
@@ -97,12 +91,8 @@ class _AddPostState extends State<AddPost> {
                       maxLines: 7,
                       maxLength: 1500,
                       decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyColors.GREEN40, width: 0)),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyColors.GREEN40, width: 0)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: MyColors.GREEN40, width: 0)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: MyColors.GREEN40, width: 0)),
                         hintText: "Description..",
                       ),
                     ),
@@ -110,8 +100,7 @@ class _AddPostState extends State<AddPost> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0),
+                padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0),
                 child: Row(
                   children: [
                     Text(
@@ -136,31 +125,23 @@ class _AddPostState extends State<AddPost> {
                       color: MyColors.GREEN40,
                       height: 100,
                       child: Center(
-                        child: imgFile?.path == null
-                            ? Icon(Icons.add_a_photo)
-                            : Image(
-                                image: FileImage(imgFile!), fit: BoxFit.cover),
+                        child: imgFile?.path == null ? Icon(Icons.add_a_photo) : Image(image: FileImage(imgFile!), fit: BoxFit.cover),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 15),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                       color: MyColors.MATERIAL_LIGHT_GREEN,
-                      border: Border.all(
-                          color: Colors.black38,
-                          width: 3), //border of dropdown button
-                      borderRadius: BorderRadius.circular(
-                          50), //border raiuds of dropdown button
+                      border: Border.all(color: Colors.black38, width: 3), //border of dropdown button
+                      borderRadius: BorderRadius.circular(50), //border raiuds of dropdown button
                       boxShadow: <BoxShadow>[
                         //apply shadow on Dropdown button
                         BoxShadow(
-                            color: Color.fromRGBO(
-                                0, 0, 0, 0.57), //shadow for button
+                            color: Color.fromRGBO(0, 0, 0, 0.57), //shadow for button
                             blurRadius: 5) //blur radius of shadow
                       ]),
                   child: Padding(
@@ -213,8 +194,7 @@ class _AddPostState extends State<AddPost> {
                           fontSize: 20 //font size on dropdown button
                           ),
 
-                      dropdownColor: MyColors
-                          .MATERIAL_LIGHT_GREEN, //dropdown background color
+                      dropdownColor: MyColors.MATERIAL_LIGHT_GREEN, //dropdown background color
                       underline: Container(), //remove underline
                       isExpanded: true, //make true to make width 100%
                     ),
@@ -229,27 +209,22 @@ class _AddPostState extends State<AddPost> {
                   );
                 },
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
                   child: Container(
-                    decoration: BoxDecoration(
-                        color: MyColors.MATERIAL_LIGHT_GREEN,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    decoration: BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN, borderRadius: BorderRadius.all(Radius.circular(20))),
                     height: 50,
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Next",
-                              style: TextStyle(
-                                fontFamily: ' Itim-Regular',
-                                fontSize: 17,
-                              ),
-                            ),
-                            Icon(Icons.arrow_forward_ios)
-                          ]),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                        Text(
+                          "Next",
+                          style: TextStyle(
+                            fontFamily: ' Itim-Regular',
+                            fontSize: 17,
+                          ),
+                        ),
+                        Icon(Icons.arrow_forward_ios)
+                      ]),
                     ),
                   ),
                 ),

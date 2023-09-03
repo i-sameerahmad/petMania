@@ -3,13 +3,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:pet_paradise/Backend/Review/doctorReview.dart';
-import 'package:pet_paradise/Backend/doctor.dart';
-import 'package:pet_paradise/Commons/chat.dart';
-import 'package:pet_paradise/Commons/map.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/vet_module/vatConsultScreen.dart';
+import 'package:pet_mania/Backend/Review/doctorReview.dart';
+import 'package:pet_mania/Backend/doctor.dart';
+import 'package:pet_mania/Commons/chat.dart';
+import 'package:pet_mania/Commons/map.dart';
+import 'package:pet_mania/utils/appConstants.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/vet_module/vatConsultScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class VatDetailScreen extends StatefulWidget {
@@ -30,6 +30,7 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
   List<dynamic> reviewList = [];
   double rating = 0.0;
   String userName = "";
+  double averageRating = 0.0;
   late int userID;
   myPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -74,6 +75,15 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
         reviewList = reviews;
         print(reviewList);
       });
+
+      // Calculate average rating
+      double totalRating = 0.0;
+      for (var review in reviewList) {
+        double rating = double.parse(review['rating'].toString());
+        totalRating += rating;
+      }
+      averageRating = reviewList.isEmpty ? 0.0 : totalRating / reviewList.length;
+      print('Average Rating: $averageRating');
     } catch (error) {
       print('Failed to fetch product reviews: $error');
     }
@@ -251,25 +261,41 @@ class _VatDetailScreenState extends State<VatDetailScreen> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 25),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            doctor.isNotEmpty ? doctor[0]['doc_description'] : '',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 15,
-                            softWrap: false,
-                            style: TextStyle(
-                              fontFamily: ' Itim-Regular',
-                              fontSize: 17,
-                            ),
-                          ),
+
+                  Row(
+                    // SizedBox(width: 25),
+
+                    children: [
+                      SizedBox(width: 25),
+                      Text(
+                        'Rating: $averageRating',
+                        style: TextStyle(
+                          fontFamily: 'Itim-Regular',
+                          fontSize: 18,
                         ),
-                      ],
-                    ),
+                      ),
+                      Icon(Icons.star, color: Colors.yellow),
+                    ],
                   ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 25),
+                  //   child: Row(
+                  //     children: [
+                  //       Expanded(
+                  //         child: Text(
+                  //           doctor.isNotEmpty ? doctor[0]['doc_description'] : '',
+                  //           overflow: TextOverflow.ellipsis,
+                  //           maxLines: 15,
+                  //           softWrap: false,
+                  //           style: TextStyle(
+                  //             fontFamily: ' Itim-Regular',
+                  //             fontSize: 17,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
                     child: InkWell(

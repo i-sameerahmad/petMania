@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "64767201113",
-    "project_id": "petmania-fyp",
-    "storage_bucket": "petmania-fyp.appspot.com"
+    "project_number": "653613845638",
+    "project_id": "fypp-5cebc",
+    "storage_bucket": "fypp-5cebc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:64767201113:android:2a240281bd3fcd7f230648",
+        "mobilesdk_app_id": "1:653613845638:android:c25e32ecc6de52d7955507",
         "android_client_info": {
-          "package_name": "com.example.pet_paradise"
+          "package_name": "com.example.pet_mania"
         }
       },
       "oauth_client": [
         {
-          "client_id": "64767201113-pcmc5aj4ej5modkla16lrthnvnftge4r.apps.googleusercontent.com",
+          "client_id": "653613845638-qiar90a9ftmhjh7n3qrttvoeqr9ubfrg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCK5q-s2CEKCBwoBfTgID0C05ca2ytLci8"
+          "current_key": "AIzaSyBUBLP9Rw0VIK-ElwldgHprfoSiSZeqWvg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "64767201113-78gn2of4kvsff96emss10n447nhm89vo.apps.googleusercontent.com",
+              "client_id": "653613845638-qiar90a9ftmhjh7n3qrttvoeqr9ubfrg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

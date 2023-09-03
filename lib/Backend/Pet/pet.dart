@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
-import 'package:pet_paradise/vet_module/petconf.dart';
-import 'package:pet_paradise/vet_module/vatConfirmation.dart';
+import 'package:pet_mania/vet_module/petconf.dart';
+import 'package:pet_mania/vet_module/vatConfirmation.dart';
 
 List<String> pets = [
   "Cat",
@@ -58,7 +58,7 @@ class PetNotifier {
     }
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://10.0.2.2:8000/api/pets'),
+      Uri.parse('http://192.168.1.102:8000/api/pets'),
     );
 
     // Add text fields to the request
@@ -133,7 +133,7 @@ class PetNotifier {
     }
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://10.0.2.2:8000/api/adoptpet'),
+      Uri.parse('http://192.168.1.102:8000/api/adoptpet'),
     );
 
     // Add text fields to the request
@@ -175,7 +175,7 @@ class PetNotifier {
   }
 
   Future<List<dynamic>> fetchPets() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getpets'));
+    final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getpets'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -194,7 +194,7 @@ class PetNotifier {
   }
 
   Future<List<dynamic>> fetchVerifiedPets() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getverifiedpets'));
+    final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getverifiedpets'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -213,7 +213,7 @@ class PetNotifier {
   }
 
   Future<List<dynamic>> fetchAdoptPets() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getadoptpets'));
+    final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getadoptpets'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -232,7 +232,7 @@ class PetNotifier {
   }
 
   Future<dynamic> fetchPet(int id) async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getpet/$id'));
+    final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getpet/$id'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -251,7 +251,7 @@ class PetNotifier {
   }
 
   Future<dynamic> fetchVarifiedPet(int id) async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getvarifiedpet/$id'));
+    final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getvarifiedpet/$id'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body
@@ -270,7 +270,7 @@ class PetNotifier {
   }
 
   Future<dynamic> fetchAdoptPet(int id) async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getadoptpet/$id'));
+    final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getadoptpet/$id'));
 
     if (response.statusCode == 200) {
       // If the request is successful, parse the response body

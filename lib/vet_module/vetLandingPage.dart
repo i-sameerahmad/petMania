@@ -2,11 +2,11 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/AdoptAPet/landingAdoptpet.dart';
-import 'package:pet_paradise/Backend/doctor.dart';
-import 'package:pet_paradise/trainer_landing/trainerLangingPage.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
-import 'package:pet_paradise/vet_module/VatDetailScreen.dart';
+import 'package:pet_mania/AdoptAPet/landingAdoptpet.dart';
+import 'package:pet_mania/Backend/doctor.dart';
+import 'package:pet_mania/trainer_landing/trainerLangingPage.dart';
+import 'package:pet_mania/utils/appConstants.dart';
+import 'package:pet_mania/vet_module/VatDetailScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class VatLanding extends StatefulWidget {
@@ -181,19 +181,19 @@ class _VatLandingState extends State<VatLanding> {
                                             fontSize: 18,
                                           ),
                                         ),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.star, color: Colors.yellow),
-                                            SizedBox(width: 5),
-                                            Text(
-                                              '4',
-                                              style: TextStyle(
-                                                fontFamily: 'Itim-Regular',
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                        // Row(
+                                        //   children: [
+                                        //     Icon(Icons.star, color: Colors.yellow),
+                                        //     SizedBox(width: 5),
+                                        //     Text(
+                                        //       '4',
+                                        //       style: TextStyle(
+                                        //         fontFamily: 'Itim-Regular',
+                                        //         fontSize: 18,
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // ),
                                       ],
                                     ),
                                     SizedBox(height: 5),

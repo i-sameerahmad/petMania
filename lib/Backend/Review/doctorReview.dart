@@ -15,7 +15,7 @@ class DoctorReviewNotifier {
     // Detect labels using Google Vision API
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://10.0.2.2:8000/api/doctorReview'),
+      Uri.parse('http://192.168.1.102:8000/api/doctorReview'),
     );
 
     // Add text fields to the request
@@ -42,7 +42,7 @@ class DoctorReviewNotifier {
   }
 
   Future<List<dynamic>> fetchDoctorReviews(int doctorId) async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/doctorReviews/$doctorId');
+    var url = Uri.parse('http://192.168.1.102:8000/api/doctorReviews/$doctorId');
     var response = await http.get(url);
 
     if (response.statusCode == 200) {

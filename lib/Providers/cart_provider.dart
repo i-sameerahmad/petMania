@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/models/cart.dart';
+import 'package:pet_mania/models/cart.dart';
 
 class CartProvider extends ChangeNotifier {
   List<CartProduct> cartList = [];

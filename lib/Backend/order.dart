@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 class OrderNotifier {
   Future<void> handleCheckout(List<int> productIds, List<int> quantities, int userId, int total,
       {required String name, required String address, required String phone, required String email, required String paymentMethod}) async {
-    final url = Uri.parse('http://10.0.2.2:8000/api/checkout');
+    final url = Uri.parse('http://192.168.1.102:8000/api/checkout');
 
     // Prepare the request body
     final body = {

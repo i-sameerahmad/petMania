@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/blogs_module/module/blog_module.dart';
-import 'package:pet_paradise/blogs_module/pages/blogger_dashboard.dart';
-import 'package:pet_paradise/blogs_module/pages/blog_reading_page.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/utils/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/utils/size_config.dart';
+import 'package:pet_mania/blogs_module/module/blog_module.dart';
+import 'package:pet_mania/blogs_module/pages/blogger_dashboard.dart';
+import 'package:pet_mania/blogs_module/pages/blog_reading_page.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/utils/custom_widgets/custom_widgets.dart';
+import 'package:pet_mania/utils/size_config.dart';
 import '../../utils/responsive_controller.dart';
 
 class BlogSelectionPage extends StatefulWidget {
@@ -67,18 +66,14 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
                     children: [
                       const Text(
                         "Blogs",
-                        style: TextStyle(
-                            fontFamily: ' Itim-Regular',
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold),
+                        style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 25, fontWeight: FontWeight.bold),
                       ),
                       clickAbleText(
                           text: "Your Blogs",
                           fontWeight: FontWeight.bold,
                           textSize: 18,
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const BloggerDashboard()));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const BloggerDashboard()));
                           },
                           enable: true),
                     ],
@@ -98,8 +93,7 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
                         ),
                       ),
                       onChanged: (value) {
-                        setState(() {
-                        });
+                        setState(() {});
                       },
                     ),
                   ),
@@ -108,8 +102,7 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
             ),
           ],
         ),
-        Padding(
-            padding: const EdgeInsets.only(top: 150), child: getAllBlogsList())
+        Padding(padding: const EdgeInsets.only(top: 150), child: getAllBlogsList())
       ],
     );
   }
@@ -133,19 +126,13 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
   ///blog card
   Widget blogCard() {
     return Padding(
-      padding: EdgeInsets.only(
-          left: MyAppSize.width! * 0.05,
-          right: MyAppSize.width! * 0.05,
-          bottom: 10),
+      padding: EdgeInsets.only(left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05, bottom: 10),
       child: Card(
         color: MyColors.LIGHT_GREEN,
         child: Container(
           height: 170,
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                colors: [MyColors.GREEN40, MyColors.GRADIENT_YELLOW],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter),
+            gradient: LinearGradient(colors: [MyColors.GREEN40, MyColors.GRADIENT_YELLOW], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           ),
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -160,8 +147,7 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
                   CircleAvatar(
                     maxRadius: 60,
                     backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                        'https://www.shutterstock.com/image-photo/fried-cod-fish-filet-green-260nw-1075892291.jpg'),
+                    backgroundImage: NetworkImage('https://www.shutterstock.com/image-photo/fried-cod-fish-filet-green-260nw-1075892291.jpg'),
                   ),
                   SizedBox(
                     width: 20,
@@ -178,10 +164,7 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
                 child: Text(
                   "3 Reads",
                   textAlign: TextAlign.end,
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 13),
+                  style: TextStyle(color: Colors.grey, fontFamily: ' Itim-Regular', fontSize: 13),
                 ),
               )
             ],
@@ -195,8 +178,7 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
   Widget readBlog({required Widget child}) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const BlogReadingPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const BlogReadingPage()));
       },
       child: child,
     );

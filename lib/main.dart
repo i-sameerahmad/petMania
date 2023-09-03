@@ -2,10 +2,10 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Commons/splash_page.dart';
-import 'package:pet_paradise/Providers/cart_provider.dart';
-import 'package:pet_paradise/petPanda_Module/cart.dart';
-import 'package:pet_paradise/utils/strings.dart';
+import 'package:pet_mania/Commons/splash_page.dart';
+import 'package:pet_mania/Providers/cart_provider.dart';
+import 'package:pet_mania/petPanda_Module/cart.dart';
+import 'package:pet_mania/utils/strings.dart';
 import 'package:provider/provider.dart';
 // import 'package:firebase_core/firebase_core.dart';
 

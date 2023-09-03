@@ -2,9 +2,9 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Commons/chat.dart';
-import 'package:pet_paradise/Commons/map.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
+import 'package:pet_mania/Commons/chat.dart';
+import 'package:pet_mania/Commons/map.dart';
+import 'package:pet_mania/utils/appConstants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AdoptPetDetails extends StatefulWidget {
@@ -58,12 +58,13 @@ class _AdoptPetDetailsState extends State<AdoptPetDetails> {
               Icons.chat,
             ),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
+              if (userID != pet[0]['user_id']) {
+                Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ChatPage(
-                        participantIds: [userID.toString(), pet[0]['user_id'].toString()],
-                      )));
-
-              // do something
+                    participantIds: [userID.toString(), pet[0]['user_id'].toString()],
+                  ),
+                ));
+              }
             },
           )
         ],

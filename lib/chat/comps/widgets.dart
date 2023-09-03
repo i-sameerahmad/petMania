@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/chat/comps/animated-dialog.dart';
-import 'package:pet_paradise/chat/comps/styles.dart';
+import 'package:pet_mania/chat/comps/animated-dialog.dart';
+import 'package:pet_mania/chat/comps/styles.dart';
 
 class ChatWidgets {
   static Widget card({title, time, subtitle, onTap}) {
@@ -54,8 +54,7 @@ class ChatWidgets {
                 child: Center(
                     child: Text(
                   'John',
-                  style:
-                      TextStyle(height: 1.5, fontSize: 12, color: Colors.white),
+                  style: TextStyle(height: 1.5, fontSize: 12, color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                 )))
           ],

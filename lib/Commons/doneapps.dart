@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MyPets extends StatefulWidget {
+class DoneAppointments extends StatefulWidget {
   @override
-  _MyPetsState createState() => _MyPetsState();
+  _DoneAppointmentsState createState() => _DoneAppointmentsState();
 }
 
-class _MyPetsState extends State<MyPets> {
+class _DoneAppointmentsState extends State<DoneAppointments> {
   List<dynamic> _appointments = [];
   late int userID;
 
@@ -34,7 +34,7 @@ class _MyPetsState extends State<MyPets> {
   Future<void> fetchAppointments() async {
     try {
       print(userID);
-      final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getmypets/$userID'));
+      final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/fetchdoneapp/$userID'));
       if (response.statusCode == 200) {
         setState(() {
           _appointments = jsonDecode(response.body);
@@ -51,7 +51,7 @@ class _MyPetsState extends State<MyPets> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Pets'),
+        title: Text('My Appointments'),
       ),
       body: ListView.builder(
         itemCount: _appointments.length,
@@ -59,19 +59,19 @@ class _MyPetsState extends State<MyPets> {
           final appointment = _appointments[index];
           return Card(
             child: ListTile(
-              title: Text(appointment['title']),
-              subtitle: Text(appointment['category']),
-              leading: Text(appointment['gender']),
+              title: Text(appointment['description']),
+              subtitle: Text(appointment['date']),
+              leading: Text(appointment['user_name']),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(appointment['price']),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      _deleteAppointment(index);
-                    },
-                  ),
+                  Text(appointment['status']),
+                  // IconButton(
+                  //   icon: Icon(Icons.delete),
+                  //   onPressed: () {
+                  //     _deleteAppointment(index);
+                  //   },
+                  // ),
                 ],
               ),
             ),
@@ -79,30 +79,5 @@ class _MyPetsState extends State<MyPets> {
         },
       ),
     );
-  }
-
-  Future<void> _deleteAppointment(int index) async {
-    final appointment = _appointments[index];
-    final appointmentId = appointment['id']; // Assuming there's an 'id' field in the appointment data
-
-    try {
-      final response = await http.delete(Uri.parse('http://192.168.1.102:8000/api/deletepet/$appointmentId'));
-      if (response.statusCode == 200) {
-        setState(() {
-          _appointments.removeAt(index);
-        });
-        final snackBar = SnackBar(
-          content: Text("Pet deleted successfully"),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      } else {
-        final snackBar = SnackBar(
-          content: Text("Failed to delete pet"),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-    } catch (error) {
-      print('Error: $error');
-    }
   }
 }

@@ -1,4 +1,4 @@
-# pet_paradise
+# pet_mania
 
 A new Flutter project.
 

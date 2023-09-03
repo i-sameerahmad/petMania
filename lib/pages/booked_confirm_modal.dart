@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/pages/appointments.dart';
+import 'package:pet_mania/pages/appointments.dart';
 
 import '../components/styles.dart';
 
@@ -30,45 +30,29 @@ class _BookingConfirmModalState extends State<BookingConfirmModal> {
                 const Icon(Icons.check_circle, size: 140, color: Colors.white),
                 Column(
                   children: [
-                    const Text('Your appointment \n has been booked',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontFamily: 'bold')),
+                    const Text('Your appointment \n has been booked', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 24, fontFamily: 'bold')),
                     const SizedBox(height: 16),
-                    const Text(
-                        'Reamae Velasko will be waiting \n for you and your pet',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 14)),
+                    const Text('Reamae Velasko will be waiting \n for you and your pet', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 14)),
                     const SizedBox(height: 40),
                     Container(
                       height: 40,
-                      decoration: const BoxDecoration(
-                          color: Colors.black12,
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                      child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.access_time,
-                                color: Colors.white, size: 20),
-                            SizedBox(width: 8),
-                            Text('Wed 9 Sep at 10:00',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14)),
-                          ]),
+                      decoration: const BoxDecoration(color: Colors.black12, borderRadius: BorderRadius.all(Radius.circular(30))),
+                      child: const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                        Icon(Icons.access_time, color: Colors.white, size: 20),
+                        SizedBox(width: 8),
+                        Text('Wed 9 Sep at 10:00', style: TextStyle(color: Colors.white, fontSize: 14)),
+                      ]),
                     ),
                     const SizedBox(height: 8),
-                    const Text('+ Add appointment to calender',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 12)),
+                    const Text('+ Add appointment to calender', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 12)),
                   ],
                 ),
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.black54, padding: const EdgeInsets.all(14),
+                      foregroundColor: Colors.black54,
+                      padding: const EdgeInsets.all(14),
                       side: const BorderSide(
                         color: Colors.white,
                       ),
@@ -80,13 +64,9 @@ class _BookingConfirmModalState extends State<BookingConfirmModal> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Appointments()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Appointments()));
                     },
-                    child: const Text("Go to my appointments",
-                        style: TextStyle(color: Colors.white)),
+                    child: const Text("Go to my appointments", style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],

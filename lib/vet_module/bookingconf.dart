@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Commons/commonHomeScreen.dart';
+import 'package:pet_mania/Commons/commonHomeScreen.dart';
 
 class BookingConfirmation extends StatefulWidget {
   // const BookingConfirmation({required Key key}) : super(key: key);

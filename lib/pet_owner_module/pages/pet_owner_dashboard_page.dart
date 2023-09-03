@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/pet_owner_module/module/get_started_page_data.dart';
-import 'package:pet_paradise/Commons/get_started_page.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
-import 'package:pet_paradise/utils/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/utils/responsive_controller.dart';
+import 'package:pet_mania/pet_owner_module/module/get_started_page_data.dart';
+import 'package:pet_mania/Commons/get_started_page.dart';
+import 'package:pet_mania/utils/appConstants.dart';
+import 'package:pet_mania/utils/custom_widgets/custom_widgets.dart';
+import 'package:pet_mania/utils/responsive_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/size_config.dart';
 

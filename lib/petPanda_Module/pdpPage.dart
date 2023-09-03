@@ -3,13 +3,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:pet_paradise/Backend/Review/productReview.dart';
-import 'package:pet_paradise/Providers/cart_provider.dart';
-import 'package:pet_paradise/models/cart.dart';
-import 'package:pet_paradise/petPanda_Module/cart.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/utils/responsive_controller.dart';
+import 'package:pet_mania/Backend/Review/productReview.dart';
+import 'package:pet_mania/Providers/cart_provider.dart';
+import 'package:pet_mania/models/cart.dart';
+import 'package:pet_mania/petPanda_Module/cart.dart';
+import 'package:pet_mania/utils/appConstants.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/utils/responsive_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

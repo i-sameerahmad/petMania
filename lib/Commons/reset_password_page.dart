@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/utils/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/utils/responsive_controller.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/utils/size_config.dart';
-
+import 'package:pet_mania/utils/custom_widgets/custom_widgets.dart';
+import 'package:pet_mania/utils/responsive_controller.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/utils/size_config.dart';
 
 TextEditingController resetPasswordEmailController = TextEditingController();
 
@@ -53,25 +52,18 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(
-              left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
+          padding: EdgeInsets.only(left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Image(
-                  width: 90,
-                  height: 80,
-                  image: AssetImage("assets/images/lock.png")),
+              const Image(width: 90, height: 80, image: AssetImage("assets/images/lock.png")),
               const SizedBox(
                 height: 20,
               ),
               const Text(
                 "Forgot Your Password?",
-                style: TextStyle(
-                    fontFamily: ' Itim-Regular',
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 17, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -91,8 +83,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               TextField(
                 controller: resetPasswordEmailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: textFieldDecorationWithIcon(
-                    hint: "Enter Your Email", icon: Icons.voicemail),
+                decoration: textFieldDecorationWithIcon(hint: "Enter Your Email", icon: Icons.voicemail),
               ),
               const SizedBox(
                 height: 50,
@@ -103,17 +94,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   MaterialButton(
                     minWidth: 193,
                     height: 39,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                     onPressed: () {},
                     textColor: Colors.black,
                     color: MyColors.MATERIAL_LIGHT_GREEN,
                     child: const Text(
                       "Submit",
-                      style: TextStyle(
-                          fontFamily: ' Itim-Regular',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

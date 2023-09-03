@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/blogs_module/pages/add_blog.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
-import 'package:pet_paradise/utils/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/utils/responsive_controller.dart';
+import 'package:pet_mania/blogs_module/pages/add_blog.dart';
+import 'package:pet_mania/utils/appConstants.dart';
+import 'package:pet_mania/utils/custom_widgets/custom_widgets.dart';
+import 'package:pet_mania/utils/responsive_controller.dart';
 
 import '../../utils/colors.dart';
 import '../../utils/size_config.dart';
@@ -39,8 +39,7 @@ class _BloggerDashboardState extends State<BloggerDashboard> {
         padding: const EdgeInsets.only(bottom: 16.0),
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AddBlog()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddBlog()));
           },
           backgroundColor: MyColors.YELLOW,
           tooltip: "Add new Blog.",
@@ -68,12 +67,7 @@ class _BloggerDashboardState extends State<BloggerDashboard> {
             children: [
               CircleAvatar(
                 radius: 48, // Image radius
-                backgroundImage: Image.asset(NOIMAGE,
-                        height: 180,
-                        width: 180,
-                        fit: BoxFit.cover,
-                        alignment: Alignment.center)
-                    .image,
+                backgroundImage: Image.asset(NOIMAGE, height: 180, width: 180, fit: BoxFit.cover, alignment: Alignment.center).image,
               ),
               SizedBox(
                 height: 10,
@@ -85,10 +79,7 @@ class _BloggerDashboardState extends State<BloggerDashboard> {
                     padding: EdgeInsets.only(left: 8.0),
                     child: Text(
                       "Usama",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          fontFamily: 'Itim-Regular'),
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, fontFamily: 'Itim-Regular'),
                     ),
                   ),
                 ],
@@ -106,19 +97,13 @@ class _BloggerDashboardState extends State<BloggerDashboard> {
   ///blog card
   Widget blogCard() {
     return Padding(
-      padding: EdgeInsets.only(
-          left: MyAppSize.width! * 0.05,
-          right: MyAppSize.width! * 0.05,
-          bottom: 10),
+      padding: EdgeInsets.only(left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05, bottom: 10),
       child: Card(
         color: MyColors.LIGHT_GREEN,
         child: Container(
           height: 170,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [MyColors.GREEN40, MyColors.GRADIENT_YELLOW],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter),
+            gradient: LinearGradient(colors: [MyColors.GREEN40, MyColors.GRADIENT_YELLOW], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -148,10 +133,7 @@ class _BloggerDashboardState extends State<BloggerDashboard> {
                 child: Text(
                   "12 Reads",
                   textAlign: TextAlign.end,
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 13),
+                  style: TextStyle(color: Colors.grey, fontFamily: ' Itim-Regular', fontSize: 13),
                 ),
               )
             ],

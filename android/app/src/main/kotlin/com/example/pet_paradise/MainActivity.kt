@@ -1,4 +1,4 @@
-package com.example.pet_paradise
+package com.example.pet_mania
 
 import io.flutter.embedding.android.FlutterActivity
 

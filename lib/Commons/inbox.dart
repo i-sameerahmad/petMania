@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-import 'package:pet_paradise/Backend/Auth/auth.dart';
-import 'package:pet_paradise/Commons/chat.dart';
+import 'package:pet_mania/Backend/Auth/auth.dart';
+import 'package:pet_mania/Commons/chat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyHomePage extends StatefulWidget {

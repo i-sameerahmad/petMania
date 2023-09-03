@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/AdoptAPet/landingAdoptpet.dart';
-import 'package:pet_paradise/trainer_landing/trainerDetail.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
+import 'package:pet_mania/AdoptAPet/landingAdoptpet.dart';
+import 'package:pet_mania/trainer_landing/trainerDetail.dart';
+import 'package:pet_mania/utils/appConstants.dart';
 
 class TrainerLanding extends StatefulWidget {
   const TrainerLanding({
@@ -47,20 +47,15 @@ class _TrainerLandingState extends State<TrainerLanding> {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   children: [
-                    Text("Hey, Ahmad... :)",
-                        style: TextStyle(
-                            fontFamily: ' Itim-Regular', fontSize: 25)),
+                    Text("Hey, Ahmad... :)", style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 25)),
                   ],
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
                 child: Row(
                   children: [
-                    Text("How May I  Help You Today?",
-                        style: TextStyle(
-                            fontFamily: ' Itim-Regular', fontSize: 27)),
+                    Text("How May I  Help You Today?", style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 27)),
                   ],
                 ),
               ),
@@ -71,8 +66,7 @@ class _TrainerLandingState extends State<TrainerLanding> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => TrainerLanding()),
+                        MaterialPageRoute(builder: (context) => TrainerLanding()),
                       );
                     },
                     child: Column(
@@ -82,9 +76,7 @@ class _TrainerLandingState extends State<TrainerLanding> {
                           height: 100,
                           width: 100,
                         ),
-                        Text("Training",
-                            style: TextStyle(
-                                fontFamily: ' Itim-Regular', fontSize: 20)),
+                        Text("Training", style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 20)),
                       ],
                     ),
                   ),
@@ -102,9 +94,7 @@ class _TrainerLandingState extends State<TrainerLanding> {
                           height: 100,
                           width: 100,
                         ),
-                        Text("Veterinary",
-                            style: TextStyle(
-                                fontFamily: ' Itim-Regular', fontSize: 20)),
+                        Text("Veterinary", style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 20)),
                       ],
                     ),
                   ),
@@ -122,9 +112,7 @@ class _TrainerLandingState extends State<TrainerLanding> {
                           height: 100,
                           width: 100,
                         ),
-                        Text("Adopt",
-                            style: TextStyle(
-                                fontFamily: ' Itim-Regular', fontSize: 20)),
+                        Text("Adopt", style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 20)),
                       ],
                     ),
                   ),
@@ -141,44 +129,29 @@ class _TrainerLandingState extends State<TrainerLanding> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => TrainerDetail()),
+                              MaterialPageRoute(builder: (context) => TrainerDetail()),
                             );
                           },
                           child: Container(
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 171, 207, 172),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
+                              decoration: BoxDecoration(color: Color.fromARGB(255, 171, 207, 172), borderRadius: BorderRadius.all(Radius.circular(20))),
                               child: Padding(
                                 padding: const EdgeInsets.all(13.0),
                                 child: Column(
                                   children: [
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Column(
                                           children: [
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 3.0),
+                                              padding: const EdgeInsets.symmetric(vertical: 3.0),
                                               child: Text(
                                                 'Umer',
-                                                style: TextStyle(
-                                                    decoration: TextDecoration
-                                                        .underline,
-                                                    fontFamily: ' Itim-Regular',
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                style: TextStyle(decoration: TextDecoration.underline, fontFamily: ' Itim-Regular', fontSize: 20, fontWeight: FontWeight.bold),
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 3.0),
+                                              padding: const EdgeInsets.symmetric(vertical: 3.0),
                                               child: Text(
                                                 'MS in Computer',
                                                 style: TextStyle(
@@ -188,19 +161,14 @@ class _TrainerLandingState extends State<TrainerLanding> {
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 3.0),
+                                              padding: const EdgeInsets.symmetric(vertical: 3.0),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Text(
                                                     'Price: 99\$}',
                                                     style: TextStyle(
-                                                      fontFamily:
-                                                          ' Itim-Regular',
+                                                      fontFamily: ' Itim-Regular',
                                                       fontSize: 20,
                                                     ),
                                                   ),
@@ -213,8 +181,7 @@ class _TrainerLandingState extends State<TrainerLanding> {
                                                       Text(
                                                         '1',
                                                         style: TextStyle(
-                                                          fontFamily:
-                                                              ' Itim-Regular',
+                                                          fontFamily: ' Itim-Regular',
                                                           fontSize: 20,
                                                         ),
                                                       ),
@@ -237,8 +204,7 @@ class _TrainerLandingState extends State<TrainerLanding> {
                                       ],
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 3.0),
+                                      padding: const EdgeInsets.symmetric(vertical: 3.0),
                                       child: Row(
                                         children: [
                                           Icon(Icons.timer),

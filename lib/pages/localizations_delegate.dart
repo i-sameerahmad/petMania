@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/pages/localizations.dart';
+import 'package:pet_mania/pages/localizations.dart';
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   // This delegate instance will never change (it doesn't even have fields!)

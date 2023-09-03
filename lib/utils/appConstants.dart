@@ -13,4 +13,4 @@ const PETPANDA = 'Pet Panda';
 
 const ADOPTAPET = "Adopt A Pet";
 const BLOGSANDARTICLES = "Blogs & Articles";
-const DB_URL_IMAGES = "http://10.0.2.2:8000/images/";
+const DB_URL_IMAGES = "http://192.168.1.102:8000/images/";

@@ -33,7 +33,7 @@ class _MyOrdersState extends State<MyOrders> {
   Future<void> fetchorders() async {
     try {
       print(userID);
-      final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getmyorders/$userID'));
+      final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getmyorders/$userID'));
       if (response.statusCode == 200) {
         setState(() {
           _orders = jsonDecode(response.body);

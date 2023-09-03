@@ -2,10 +2,10 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Backend/product.dart';
-import 'package:pet_paradise/petPanda_Module/addPost.dart';
-import 'package:pet_paradise/petPanda_Module/pdpPage.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
+import 'package:pet_mania/Backend/product.dart';
+import 'package:pet_mania/petPanda_Module/addPost.dart';
+import 'package:pet_mania/petPanda_Module/pdpPage.dart';
+import 'package:pet_mania/utils/appConstants.dart';
 
 class PetPandaLanding extends StatefulWidget {
   final List<dynamic> products;

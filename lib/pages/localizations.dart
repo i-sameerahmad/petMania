@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pet_paradise/pages/localizations_delegate.dart';
+import 'package:pet_mania/pages/localizations_delegate.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -16,15 +16,13 @@ class AppLocalizations {
   }
 
   // Static member to have a simple access to the delegate from the MaterialApp
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = AppLocalizationsDelegate();
 
   late Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
-    String jsonString =
-        await rootBundle.loadString('assets/i18n/${locale.languageCode}.json');
+    String jsonString = await rootBundle.loadString('assets/i18n/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
 
     _localizedStrings = jsonMap.map((key, value) {

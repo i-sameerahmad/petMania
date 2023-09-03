@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Backend/Pet/pet.dart';
-import 'package:pet_paradise/widget/elevated_button.dart';
+import 'package:pet_mania/Backend/Pet/pet.dart';
+import 'package:pet_mania/widget/elevated_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import '../components/styles.dart';

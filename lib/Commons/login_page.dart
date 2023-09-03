@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:pet_paradise/Backend/Auth/auth.dart';
-import 'package:pet_paradise/Commons/reset_password_page.dart';
-import 'package:pet_paradise/Commons/signup_page.dart';
+import 'package:pet_mania/Backend/Auth/auth.dart';
+import 'package:pet_mania/Commons/reset_password_page.dart';
+import 'package:pet_mania/Commons/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pet_paradise/utils/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/utils/responsive_controller.dart';
-import 'package:pet_paradise/utils/colors.dart';
+import 'package:pet_mania/utils/custom_widgets/custom_widgets.dart';
+import 'package:pet_mania/utils/responsive_controller.dart';
+import 'package:pet_mania/utils/colors.dart';
 import '../../utils/size_config.dart';
 
 //Text Editing Controller

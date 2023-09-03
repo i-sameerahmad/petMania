@@ -3,10 +3,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:pet_paradise/AdoptAPet/petDetail.dart';
-import 'package:pet_paradise/Backend/Pet/pet.dart';
-import 'package:pet_paradise/Commons/varifietPetDetail.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
+import 'package:pet_mania/AdoptAPet/petDetail.dart';
+import 'package:pet_mania/Backend/Pet/pet.dart';
+import 'package:pet_mania/Commons/varifietPetDetail.dart';
+import 'package:pet_mania/utils/appConstants.dart';
 
 class VARIFIEDPETSHOP extends StatefulWidget {
   final List<dynamic> pets;

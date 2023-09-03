@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Backend/order.dart';
-import 'package:pet_paradise/Providers/cart_provider.dart';
-import 'package:pet_paradise/petPanda_Module/cartConfirmation.dart';
-import 'package:pet_paradise/utils/colors.dart';
+import 'package:pet_mania/Backend/order.dart';
+import 'package:pet_mania/Providers/cart_provider.dart';
+import 'package:pet_mania/petPanda_Module/cartConfirmation.dart';
+import 'package:pet_mania/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

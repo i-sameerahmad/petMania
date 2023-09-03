@@ -28,7 +28,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future<String> fetchNames(String participantId) async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getNames/$participantId'));
+    final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getNames/$participantId'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

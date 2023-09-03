@@ -3,11 +3,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:pet_paradise/AdoptAPet/adoptPetDetail.dart';
-import 'package:pet_paradise/Backend/Pet/pet.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/pages/adopt_pet_detail.dart';
+import 'package:pet_mania/AdoptAPet/adoptPetDetail.dart';
+import 'package:pet_mania/Backend/Pet/pet.dart';
+import 'package:pet_mania/utils/appConstants.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/pages/adopt_pet_detail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ADOPTPETSHOP extends StatefulWidget {

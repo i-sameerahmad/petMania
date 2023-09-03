@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/widget/elevated_button.dart';
-import 'package:pet_paradise/widget/text_btn.dart';
+import 'package:pet_mania/widget/elevated_button.dart';
+import 'package:pet_mania/widget/text_btn.dart';
 import '../components/styles.dart';
 
 class SliderScreen extends StatefulWidget {
@@ -19,12 +19,9 @@ class _SliderScreenState extends State<SliderScreen> {
   final CarouselController _controller = CarouselController();
 
   List<Item> imgList = <Item>[
-    const Item('assets/images/s1.png', 'Welcome to Pet Care',
-        'All types of services for your pet in one place, instantly searchable'),
-    const Item('assets/images/s2.png', 'Proven Experts',
-        'We interview every specialist before they get to work'),
-    const Item('assets/images/s3.png', 'Share your happy moment',
-        'A review can be left only by a user who used the service.'),
+    const Item('assets/images/s1.png', 'Welcome to Pet Care', 'All types of services for your pet in one place, instantly searchable'),
+    const Item('assets/images/s2.png', 'Proven Experts', 'We interview every specialist before they get to work'),
+    const Item('assets/images/s3.png', 'Share your happy moment', 'A review can be left only by a user who used the service.'),
   ];
 
   @override
@@ -52,8 +49,7 @@ class _SliderScreenState extends State<SliderScreen> {
                   items: imgList
                       .map((e) => Container(
                             // color: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 32, vertical: 32),
+                            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
                             child: Column(
                               children: [
                                 Row(
@@ -70,8 +66,7 @@ class _SliderScreenState extends State<SliderScreen> {
                                   e.img,
                                   fit: BoxFit.fitWidth,
                                   width: MediaQuery.of(context).size.width * .7,
-                                  height:
-                                      MediaQuery.of(context).size.height * .45,
+                                  height: MediaQuery.of(context).size.height * .45,
                                 ),
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 36),
@@ -114,14 +109,8 @@ class _SliderScreenState extends State<SliderScreen> {
                             width: 8.0,
                             height: 8.0,
                             margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: (Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? Colors.white
-                                        : appColor3)
-                                    .withOpacity(
-                                        _current == entry.key ? 1 : 0.4)),
+                            decoration:
+                                BoxDecoration(shape: BoxShape.circle, color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : appColor3).withOpacity(_current == entry.key ? 1 : 0.4)),
                           ),
                         );
                       }).toList(),

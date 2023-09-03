@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pet_paradise/Commons/login_page.dart';
+import 'package:pet_mania/Commons/login_page.dart';
 
-import 'package:pet_paradise/utils/size_config.dart';
-
+import 'package:pet_mania/utils/size_config.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -21,8 +20,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     Timer(const Duration(seconds: 3), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
         return const LoginScreen();
       }));
     });

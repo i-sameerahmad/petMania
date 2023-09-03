@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:date_picker_timeline/date_picker_timeline.dart';
-import 'package:pet_paradise/pages/booked_confirm_modal.dart';
-import 'package:pet_paradise/widget/elevated_button.dart';
+import 'package:pet_mania/pages/booked_confirm_modal.dart';
+import 'package:pet_mania/widget/elevated_button.dart';
 import '../components/styles.dart';
 
 class DoctorProfile extends StatefulWidget {
@@ -60,16 +60,9 @@ class _DoctorProfileState extends State<DoctorProfile> {
               child: Stack(
                 children: [
                   Column(
-                    children: [
-                      _buildProfile(),
-                      const SizedBox(height: 60),
-                      _buildProfileDtl()
-                    ],
+                    children: [_buildProfile(), const SizedBox(height: 60), _buildProfileDtl()],
                   ),
-                  Positioned(
-                      top: 340,
-                      width: MediaQuery.of(context).size.width * 1,
-                      child: _buildDoctorDetail()),
+                  Positioned(top: 340, width: MediaQuery.of(context).size.width * 1, child: _buildDoctorDetail()),
                 ],
               )),
         ],
@@ -82,8 +75,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
         width: double.infinity,
         height: MediaQuery.of(context).size.height * 0.5,
         decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/dr.jpg"), fit: BoxFit.cover),
+          image: DecorationImage(image: AssetImage("assets/images/dr.jpg"), fit: BoxFit.cover),
         ));
   }
 
@@ -91,15 +83,12 @@ class _DoctorProfileState extends State<DoctorProfile> {
     return Container(
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 20.0,
-            )
-          ]),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: const [
+        BoxShadow(
+          color: Colors.black12,
+          blurRadius: 20.0,
+        )
+      ]),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -118,8 +107,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         const CircleAvatar(
                           radius: 16,
                           backgroundColor: backgroundColor,
-                          child: Icon(Icons.location_on_outlined,
-                              color: appColor, size: 20),
+                          child: Icon(Icons.location_on_outlined, color: appColor, size: 20),
                         ),
                         const SizedBox(width: 4),
                         greyTextSmall('1.5 km')
@@ -131,8 +119,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         const CircleAvatar(
                           radius: 16,
                           backgroundColor: backgroundColor,
-                          child: Icon(Icons.credit_card,
-                              color: appColor, size: 20),
+                          child: Icon(Icons.credit_card, color: appColor, size: 20),
                         ),
                         const SizedBox(width: 4),
                         greyTextSmall('\$20')
@@ -148,21 +135,14 @@ class _DoctorProfileState extends State<DoctorProfile> {
               Container(
                   height: 60,
                   width: 60,
-                  decoration: BoxDecoration(
-                      color: appColor,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 20.0,
-                        )
-                      ]),
+                  decoration: BoxDecoration(color: appColor, borderRadius: BorderRadius.circular(20), boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 20.0,
+                    )
+                  ]),
                   child: const Center(
-                    child: Text('4.9',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontFamily: 'semibold')),
+                    child: Text('4.9', style: TextStyle(color: Colors.white, fontSize: 24, fontFamily: 'semibold')),
                   )),
               greyTextSmall('120 reviews')
             ],
@@ -180,15 +160,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
         children: [
           Column(
             children: [
-              MediumText(
-                  '"He was friendly and diligent in getting to the right diagnosis and prescription."'),
+              MediumText('"He was friendly and diligent in getting to the right diagnosis and prescription."'),
               const SizedBox(height: 8),
               Row(
-                children: [
-                  smallText('a verified review'),
-                  const SizedBox(width: 4),
-                  const Icon(Icons.check_circle, color: Colors.green, size: 14)
-                ],
+                children: [smallText('a verified review'), const SizedBox(width: 4), const Icon(Icons.check_circle, color: Colors.green, size: 14)],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -203,10 +178,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                   const SizedBox(height: 8),
                   Container(
                       child: Row(
-                    children: [
-                      appcolorText('View all 120 Reviews'),
-                      const Icon(Icons.chevron_right)
-                    ],
+                    children: [appcolorText('View all 120 Reviews'), const Icon(Icons.chevron_right)],
                   ))
                 ],
               ),
@@ -222,15 +194,12 @@ class _DoctorProfileState extends State<DoctorProfile> {
     return Container(
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(vertical: 16),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 3.0,
-            )
-          ]),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), boxShadow: const [
+        BoxShadow(
+          color: Colors.black12,
+          blurRadius: 3.0,
+        )
+      ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -280,9 +249,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
           ),
           child: Text(
             e.name,
-            style: TextStyle(
-                color: tabID == e.hashCode ? Colors.white : appColor,
-                fontSize: 12),
+            style: TextStyle(color: tabID == e.hashCode ? Colors.white : appColor, fontSize: 12),
           )),
     );
   }
@@ -299,8 +266,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
               children: [
                 const Text(
                   '\$20 ',
-                  style: TextStyle(
-                      color: appColor, fontSize: 20, fontFamily: 'semibold'),
+                  style: TextStyle(color: appColor, fontSize: 20, fontFamily: 'semibold'),
                 ),
                 MediumText('/ first visit')
               ],
@@ -442,10 +408,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                   children: [
                     const Text(
                       '\$20 ',
-                      style: TextStyle(
-                          color: appColor,
-                          fontSize: 20,
-                          fontFamily: 'semibold'),
+                      style: TextStyle(color: appColor, fontSize: 20, fontFamily: 'semibold'),
                     ),
                     MediumText('/ first visit')
                   ],
@@ -454,11 +417,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 Expanded(
                   child: MyElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const BookingConfirmModal()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const BookingConfirmModal()));
                       },
                       text: 'Book',
                       colors: appColor),

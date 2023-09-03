@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Backend/Auth/auth.dart';
-import 'package:pet_paradise/Commons/login_page.dart';
-import 'package:pet_paradise/utils/custom_widgets/custom_widgets.dart';
+import 'package:pet_mania/Backend/Auth/auth.dart';
+import 'package:pet_mania/Commons/login_page.dart';
+import 'package:pet_mania/utils/custom_widgets/custom_widgets.dart';
 
 import '../../utils/form_validation_controller.dart';
 import '../../utils/responsive_controller.dart';

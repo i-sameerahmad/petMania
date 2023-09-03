@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/utils/responsive_controller.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/utils/responsive_controller.dart';
 
 class BlogReadingPage extends StatefulWidget {
   const BlogReadingPage({
@@ -39,13 +39,8 @@ class _BlogReadingPageState extends State<BlogReadingPage> {
             background: Container(
               decoration: BoxDecoration(
                   color: Colors.white,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://www.shutterstock.com/image-photo/fried-cod-fish-filet-green-260nw-1075892291.jpg'),
-                      fit: BoxFit.fill),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20))),
+                  image: DecorationImage(image: NetworkImage('https://www.shutterstock.com/image-photo/fried-cod-fish-filet-green-260nw-1075892291.jpg'), fit: BoxFit.fill),
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
             ),
           ),
         ),
@@ -61,8 +56,7 @@ class _BlogReadingPageState extends State<BlogReadingPage> {
                   children: [
                     Text(
                       "First Blog",
-                      style:
-                          TextStyle(fontSize: 25, fontFamily: 'Itim-Regular'),
+                      style: TextStyle(fontSize: 25, fontFamily: 'Itim-Regular'),
                     ),
                   ],
                 ),

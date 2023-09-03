@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/utils/size_config.dart';
+import 'package:pet_mania/utils/size_config.dart';
 
 class Responsive extends StatelessWidget {
   /// Max width for mobile is 479 px
@@ -7,14 +7,11 @@ class Responsive extends StatelessWidget {
   /// more than 767 px (width)  will be treated as eb or desktop
   ///
 
-
   final Widget mobile;
   final Widget tablet;
   final Widget web;
 
-  const Responsive(
-      {Key? key, required this.mobile, required this.tablet, required this.web})
-      : super(key: key);
+  const Responsive({Key? key, required this.mobile, required this.tablet, required this.web}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +23,18 @@ class Responsive extends StatelessWidget {
       return web;
     }
   }
-
-
-
 }
 
 ///Tablet Screen For All Pages
-Widget tabletUI(){
-  return const Center(child: Text("Tablet Screens Coming Soon....!"),);
+Widget tabletUI() {
+  return const Center(
+    child: Text("Tablet Screens Coming Soon....!"),
+  );
 }
 
 ///Web/Desktop Screen For All Pages
-Widget webUI(){
-  return const Center(child: Text("Web/Desktop Screens Coming Soon....!"),);
+Widget webUI() {
+  return const Center(
+    child: Text("Web/Desktop Screens Coming Soon....!"),
+  );
 }

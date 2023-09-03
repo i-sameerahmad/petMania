@@ -3,9 +3,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pet_paradise/utils/colors.dart';
-import 'package:pet_paradise/utils/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/utils/responsive_controller.dart';
+import 'package:pet_mania/utils/colors.dart';
+import 'package:pet_mania/utils/custom_widgets/custom_widgets.dart';
+import 'package:pet_mania/utils/responsive_controller.dart';
 
 class AddBlog extends StatefulWidget {
   var appUser;
@@ -79,10 +79,7 @@ class _AddBlogState extends State<AddBlog> {
                 Text(
                   "Create a blog and everyone will be able to read it. Inform people of your knowledge about your pet.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 14),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 14),
                 ),
                 SizedBox(
                   height: 40,
@@ -91,10 +88,7 @@ class _AddBlogState extends State<AddBlog> {
                 ///Add Title TextField
                 Text(
                   "Title",
-                  style: TextStyle(
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 5,
@@ -102,12 +96,8 @@ class _AddBlogState extends State<AddBlog> {
                 TextFormField(
                   controller: widget._titleController,
                   decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: MyColors.GREEN40, width: 0)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: MyColors.GREEN40, width: 0)),
+                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: MyColors.GREEN40, width: 0)),
+                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: MyColors.GREEN40, width: 0)),
                       hintText: "Blog Title",
                       filled: true,
                       fillColor: MyColors.GREEN40),
@@ -119,10 +109,7 @@ class _AddBlogState extends State<AddBlog> {
                 ///Add Image
                 Text(
                   "Upload a picture",
-                  style: TextStyle(
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 5,
@@ -135,11 +122,7 @@ class _AddBlogState extends State<AddBlog> {
                     color: MyColors.GREEN40,
                     height: 100,
                     child: Center(
-                      child: widget.imgFile?.path == null
-                          ? Icon(Icons.add_a_photo)
-                          : Image(
-                              image: FileImage(widget.imgFile!),
-                              fit: BoxFit.cover),
+                      child: widget.imgFile?.path == null ? Icon(Icons.add_a_photo) : Image(image: FileImage(widget.imgFile!), fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -150,10 +133,7 @@ class _AddBlogState extends State<AddBlog> {
                 ///Add blog Content
                 Text(
                   "Write Something",
-                  style: TextStyle(
-                      fontFamily: ' Itim-Regular',
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontFamily: ' Itim-Regular', fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 5,
@@ -169,12 +149,8 @@ class _AddBlogState extends State<AddBlog> {
                       maxLines: 7,
                       maxLength: 1500,
                       decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyColors.GREEN40, width: 0)),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyColors.GREEN40, width: 0)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: MyColors.GREEN40, width: 0)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: MyColors.GREEN40, width: 0)),
                         hintText: "Blog Content",
                       ),
                     ),
@@ -183,14 +159,7 @@ class _AddBlogState extends State<AddBlog> {
                 SizedBox(
                   height: 20,
                 ),
-                MyButton(
-                    onPressed: () async {
-                     
-                    },
-                    title: "Upload Your Blog",
-                    color: MyColors.GREEN_LIGHT_SHADE,
-                    textColor: Colors.black,
-                    borderRadius: 0)
+                MyButton(onPressed: () async {}, title: "Upload Your Blog", color: MyColors.GREEN_LIGHT_SHADE, textColor: Colors.black, borderRadius: 0)
               ],
             ),
           ),
@@ -198,6 +167,4 @@ class _AddBlogState extends State<AddBlog> {
       ],
     );
   }
-
-
 }

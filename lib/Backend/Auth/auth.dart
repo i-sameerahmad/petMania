@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:pet_paradise/Commons/DoctorHome.dart';
+import 'package:pet_mania/Commons/DoctorHome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/Commons/commonHomeScreen.dart';
-import 'package:pet_paradise/models/user.dart';
+import 'package:pet_mania/Commons/commonHomeScreen.dart';
+import 'package:pet_mania/models/user.dart';
 
 class AuthNotifier {
   Future register(String email, password, name, context) async {
@@ -19,7 +19,7 @@ class AuthNotifier {
     final client = http.Client();
     try {
       final response = await client.post(
-        Uri.parse("http://10.0.2.2:8000/api/auth/register"),
+        Uri.parse("http://192.168.1.102:8000/api/auth/register"),
         body: body,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -80,7 +80,7 @@ class AuthNotifier {
     final client = http.Client();
     try {
       final response = await client.post(
-        Uri.parse("http://10.0.2.2:8000/api/auth/login"),
+        Uri.parse("http://192.168.1.102:8000/api/auth/login"),
         body: body,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -143,7 +143,7 @@ class AuthNotifier {
   }
 
   Future<String> fetchNames(String otherParticipantId) async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/getNames/$otherParticipantId'));
+    final response = await http.get(Uri.parse('http://192.168.1.102:8000/api/getNames/$otherParticipantId'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

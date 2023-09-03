@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/AdoptAPet/petDetail.dart';
-import 'package:pet_paradise/Commons/chat.dart';
+import 'package:pet_mania/AdoptAPet/petDetail.dart';
+import 'package:pet_mania/Commons/chat.dart';
 
 class ADOPTPET extends StatefulWidget {
   const ADOPTPET({
@@ -21,10 +21,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
         centerTitle: true,
         title: Text(
           "Adopt a Pet",
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontFamily: ' Itim-Regular',
-              fontSize: 22),
+          style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 22),
         ),
         actions: [
           IconButton(
@@ -46,26 +43,15 @@ class _ADOPTPETState extends State<ADOPTPET> {
         children: [
           ListTile(
             leading: CircleAvatar(
-              backgroundImage: Image.asset('assets/images/meena.png',
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
-                      alignment: Alignment.center)
-                  .image,
+              backgroundImage: Image.asset('assets/images/meena.png', height: 100, width: 100, fit: BoxFit.cover, alignment: Alignment.center).image,
             ),
             title: Text(
               'Ahmad',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: ' Itim-Regular',
-                  fontSize: 22),
+              style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 22),
             ),
             subtitle: Text(
               'Lahore ,Pakistan',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: ' Itim-Regular',
-                  fontSize: 16),
+              style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 16),
             ),
           ),
           Row(
@@ -77,17 +63,11 @@ class _ADOPTPETState extends State<ADOPTPET> {
                   children: [
                     Text(
                       '40% off on all',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: ' Itim-Regular',
-                          fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 18),
                     ),
                     Text(
                       'Pets Adoption',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: ' Itim-Regular',
-                          fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 18),
                     ),
                   ],
                 ),
@@ -110,10 +90,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                       ),
                       Text(
                         'Cats',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: ' Itim-Regular',
-                            fontSize: 18),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 18),
                       ),
                     ],
                   ),
@@ -128,10 +105,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                       ),
                       Text(
                         'Birds',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: ' Itim-Regular',
-                            fontSize: 18),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 18),
                       ),
                     ],
                   ),
@@ -146,10 +120,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                       ),
                       Text(
                         'Dogs',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: ' Itim-Regular',
-                            fontSize: 18),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 18),
                       ),
                     ],
                   ),
@@ -164,10 +135,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                       ),
                       Text(
                         'Rabbits',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: ' Itim-Regular',
-                            fontSize: 18),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 18),
                       ),
                     ],
                   ),
@@ -179,29 +147,22 @@ class _ADOPTPETState extends State<ADOPTPET> {
             height: 10,
           ),
           Container(
-            decoration: BoxDecoration(
-                color: Color(0xfffa3ba61),
-                borderRadius: BorderRadius.all(Radius.circular(20))),
+            decoration: BoxDecoration(color: Color(0xfffa3ba61), borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Column(
               children: [
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15),
                       child: Text(
                         '230 Cats Found',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: ' Itim-Regular',
-                            fontSize: 18),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontFamily: ' Itim-Regular', fontSize: 18),
                       ),
                     ),
                   ],
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 25),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -212,22 +173,17 @@ class _ADOPTPETState extends State<ADOPTPET> {
                           // },
                           child: Container(
                             width: 160,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 117, 133, 69),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
+                            decoration: BoxDecoration(color: Color.fromARGB(255, 117, 133, 69), borderRadius: BorderRadius.all(Radius.circular(20))),
                             child: Column(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(14.0),
-                                  child:
-                                      Image.asset('assets/images/cat 3 1.png'),
+                                  child: Image.asset('assets/images/cat 3 1.png'),
                                 ),
                                 Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                       child: Text(
                                         'Mona',
                                         style: TextStyle(
@@ -239,8 +195,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                       child: Text(
                                         'PKR 120',
                                         style: TextStyle(
@@ -254,8 +209,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4.0, horizontal: 5),
+                                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                   child: Row(
                                     children: [
                                       Text(
@@ -272,13 +226,11 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                 Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Center(
                                               child: Text(
@@ -295,16 +247,11 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                         ),
                                         width: 50,
                                         height: 30,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 69, 83, 28),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
+                                        decoration: BoxDecoration(color: Color.fromARGB(255, 69, 83, 28), borderRadius: BorderRadius.all(Radius.circular(20))),
                                       ),
                                       Container(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Center(
                                               child: Text(
@@ -321,11 +268,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                         ),
                                         width: 60,
                                         height: 30,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 69, 83, 28),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
+                                        decoration: BoxDecoration(color: Color.fromARGB(255, 69, 83, 28), borderRadius: BorderRadius.all(Radius.circular(20))),
                                       )
                                     ],
                                   ),
@@ -341,22 +284,17 @@ class _ADOPTPETState extends State<ADOPTPET> {
                           // },
                           child: Container(
                             width: 160,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 117, 133, 69),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
+                            decoration: BoxDecoration(color: Color.fromARGB(255, 117, 133, 69), borderRadius: BorderRadius.all(Radius.circular(20))),
                             child: Column(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(14.0),
-                                  child:
-                                      Image.asset('assets/images/cat 3 2.png'),
+                                  child: Image.asset('assets/images/cat 3 2.png'),
                                 ),
                                 Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                       child: Text(
                                         'Samanta',
                                         style: TextStyle(
@@ -368,8 +306,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                       child: Text(
                                         'PKR 120',
                                         style: TextStyle(
@@ -383,8 +320,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4.0, horizontal: 5),
+                                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                   child: Row(
                                     children: [
                                       Text(
@@ -401,13 +337,11 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                 Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Center(
                                               child: Text(
@@ -424,16 +358,11 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                         ),
                                         width: 70,
                                         height: 30,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 69, 83, 28),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
+                                        decoration: BoxDecoration(color: Color.fromARGB(255, 69, 83, 28), borderRadius: BorderRadius.all(Radius.circular(20))),
                                       ),
                                       Container(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Center(
                                               child: Text(
@@ -450,11 +379,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                         ),
                                         width: 60,
                                         height: 30,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 69, 83, 28),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
+                                        decoration: BoxDecoration(color: Color.fromARGB(255, 69, 83, 28), borderRadius: BorderRadius.all(Radius.circular(20))),
                                       )
                                     ],
                                   ),
@@ -466,8 +391,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                       ],
                     )),
                 Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 25),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -478,22 +402,17 @@ class _ADOPTPETState extends State<ADOPTPET> {
                           // },
                           child: Container(
                             width: 160,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 117, 133, 69),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
+                            decoration: BoxDecoration(color: Color.fromARGB(255, 117, 133, 69), borderRadius: BorderRadius.all(Radius.circular(20))),
                             child: Column(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(14.0),
-                                  child:
-                                      Image.asset('assets/images/cat 3 3.png'),
+                                  child: Image.asset('assets/images/cat 3 3.png'),
                                 ),
                                 Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                       child: Text(
                                         'Coco',
                                         style: TextStyle(
@@ -505,8 +424,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                       child: Text(
                                         'PKR 120',
                                         style: TextStyle(
@@ -520,8 +438,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4.0, horizontal: 5),
+                                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                   child: Row(
                                     children: [
                                       Text(
@@ -538,13 +455,11 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                 Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Center(
                                               child: Text(
@@ -561,16 +476,11 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                         ),
                                         width: 50,
                                         height: 30,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 69, 83, 28),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
+                                        decoration: BoxDecoration(color: Color.fromARGB(255, 69, 83, 28), borderRadius: BorderRadius.all(Radius.circular(20))),
                                       ),
                                       Container(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Center(
                                               child: Text(
@@ -587,11 +497,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                         ),
                                         width: 60,
                                         height: 30,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 69, 83, 28),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
+                                        decoration: BoxDecoration(color: Color.fromARGB(255, 69, 83, 28), borderRadius: BorderRadius.all(Radius.circular(20))),
                                       )
                                     ],
                                   ),
@@ -607,22 +513,17 @@ class _ADOPTPETState extends State<ADOPTPET> {
                           // },
                           child: Container(
                             width: 160,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 117, 133, 69),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
+                            decoration: BoxDecoration(color: Color.fromARGB(255, 117, 133, 69), borderRadius: BorderRadius.all(Radius.circular(20))),
                             child: Column(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(14.0),
-                                  child:
-                                      Image.asset('assets/images/cat 3 4.png'),
+                                  child: Image.asset('assets/images/cat 3 4.png'),
                                 ),
                                 Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                       child: Text(
                                         'Whito',
                                         style: TextStyle(
@@ -634,8 +535,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4.0, horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                       child: Text(
                                         'PKR 120',
                                         style: TextStyle(
@@ -649,8 +549,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4.0, horizontal: 5),
+                                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 5),
                                   child: Row(
                                     children: [
                                       Text(
@@ -667,13 +566,11 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                 Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Center(
                                               child: Text(
@@ -690,16 +587,11 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                         ),
                                         width: 70,
                                         height: 30,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 69, 83, 28),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
+                                        decoration: BoxDecoration(color: Color.fromARGB(255, 69, 83, 28), borderRadius: BorderRadius.all(Radius.circular(20))),
                                       ),
                                       Container(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Center(
                                               child: Text(
@@ -716,11 +608,7 @@ class _ADOPTPETState extends State<ADOPTPET> {
                                         ),
                                         width: 60,
                                         height: 30,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 69, 83, 28),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
+                                        decoration: BoxDecoration(color: Color.fromARGB(255, 69, 83, 28), borderRadius: BorderRadius.all(Radius.circular(20))),
                                       )
                                     ],
                                   ),

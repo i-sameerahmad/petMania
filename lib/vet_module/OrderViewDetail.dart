@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/utils/appConstants.dart';
-import 'package:pet_paradise/utils/colors.dart';
+import 'package:pet_mania/utils/appConstants.dart';
+import 'package:pet_mania/utils/colors.dart';
 
 class OrderViewDetail extends StatefulWidget {
   const OrderViewDetail({super.key});

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/pages/localizations.dart';
+import 'package:pet_mania/pages/localizations.dart';
 
 // import 'drawer.dart';
 // import 'slider.dart';
@@ -61,16 +61,9 @@ class _HomeState extends State<Home> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding:
-                            const EdgeInsets.only(top: 14.0, left: 8.0, right: 8.0),
-                        child: Text(
-                            AppLocalizations.of(context)
-                                    ?.translate('NEW_ARRIVALS') ??
-                                '',
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.secondary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700)),
+                        padding: const EdgeInsets.only(top: 14.0, left: 8.0, right: 8.0),
+                        child: Text(AppLocalizations.of(context)?.translate('NEW_ARRIVALS') ?? '',
+                            style: TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 18, fontWeight: FontWeight.w700)),
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -86,13 +79,10 @@ class _HomeState extends State<Home> {
                                     clipBehavior: Clip.antiAlias,
                                     child: InkWell(
                                       onTap: () {
-                                        Navigator.pushNamed(
-                                            context, '/products',
-                                            arguments: i);
+                                        Navigator.pushNamed(context, '/products', arguments: i);
                                       },
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
                                           SizedBox(
                                             height: 160,
@@ -101,13 +91,8 @@ class _HomeState extends State<Home> {
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl: i,
-                                                placeholder: (context, url) =>
-                                                    const Center(
-                                                        child:
-                                                            CircularProgressIndicator()),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        const Icon(Icons.error),
+                                                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => const Icon(Icons.error),
                                               ),
                                             ),
                                           ),
@@ -116,13 +101,7 @@ class _HomeState extends State<Home> {
                                               'Two Gold Rings',
                                               style: TextStyle(fontSize: 14),
                                             ),
-                                            subtitle: Text('\$200',
-                                                style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary,
-                                                    fontWeight:
-                                                        FontWeight.w700)),
+                                            subtitle: Text('\$200', style: TextStyle(color: Theme.of(context).colorScheme.secondary, fontWeight: FontWeight.w700)),
                                           )
                                         ],
                                       ),
@@ -136,8 +115,7 @@ class _HomeState extends State<Home> {
                       ),
                       Container(
                         child: const Padding(
-                          padding:
-                              EdgeInsets.only(top: 6.0, left: 8.0, right: 8.0),
+                          padding: EdgeInsets.only(top: 6.0, left: 8.0, right: 8.0),
                           child: Image(
                             fit: BoxFit.cover,
                             image: AssetImage('assets/images/banner-1.png'),
@@ -148,23 +126,14 @@ class _HomeState extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8.0, left: 8.0, right: 8.0),
-                            child: Text('Shop By Category',
-                                style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700)),
+                            padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                            child: Text('Shop By Category', style: TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 18, fontWeight: FontWeight.w700)),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                right: 8.0, top: 8.0, left: 8.0),
+                            padding: const EdgeInsets.only(right: 8.0, top: 8.0, left: 8.0),
                             child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Theme.of(context).primaryColor),
-                                child: const Text('View All',
-                                    style: TextStyle(color: Colors.white)),
+                                style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
+                                child: const Text('View All', style: TextStyle(color: Colors.white)),
                                 onPressed: () {
                                   Navigator.pushNamed(context, '/categorise');
                                 }),
@@ -176,8 +145,7 @@ class _HomeState extends State<Home> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 2,
-                          padding: const EdgeInsets.only(
-                              top: 8, left: 6, right: 6, bottom: 12),
+                          padding: const EdgeInsets.only(top: 8, left: 6, right: 6, bottom: 12),
                           children: List.generate(4, (index) {
                             return Container(
                               child: Card(
@@ -187,31 +155,22 @@ class _HomeState extends State<Home> {
                                     print('Card tapped.');
                                   },
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
                                       SizedBox(
-                                        height:
-                                            (MediaQuery.of(context).size.width /
-                                                    2) -
-                                                70,
+                                        height: (MediaQuery.of(context).size.width / 2) - 70,
                                         width: double.infinity,
                                         child: CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: imgList[index],
-                                          placeholder: (context, url) => const Center(
-                                              child:
-                                                  CircularProgressIndicator()),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
+                                          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) => const Icon(Icons.error),
                                         ),
                                       ),
                                       const ListTile(
                                           title: Text(
                                         'Two Gold Rings',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16),
+                                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                                       ))
                                     ],
                                   ),
@@ -223,8 +182,7 @@ class _HomeState extends State<Home> {
                       ),
                       Container(
                         child: const Padding(
-                          padding: EdgeInsets.only(
-                              top: 6.0, left: 8.0, right: 8.0, bottom: 10),
+                          padding: EdgeInsets.only(top: 6.0, left: 8.0, right: 8.0, bottom: 10),
                           child: Image(
                             fit: BoxFit.cover,
                             image: AssetImage('assets/images/banner-2.png'),

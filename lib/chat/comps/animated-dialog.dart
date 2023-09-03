@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/chat/comps/widgets.dart';
+import 'package:pet_mania/chat/comps/widgets.dart';
 
 class AnimatedDialog extends StatefulWidget {
   final double height;
   final double width;
 
-  const AnimatedDialog({Key? key, required this.height, required this.width})
-      : super(key: key);
+  const AnimatedDialog({Key? key, required this.height, required this.width}) : super(key: key);
 
   @override
   State<AnimatedDialog> createState() => _AnimatedDialogState();
@@ -38,9 +37,7 @@ class _AnimatedDialogState extends State<AnimatedDialog> {
           height: widget.height,
           width: widget.width,
           decoration: BoxDecoration(
-              color: widget.width == 0
-                  ? Colors.indigo.withOpacity(0)
-                  : Colors.indigo.shade400,
+              color: widget.width == 0 ? Colors.indigo.withOpacity(0) : Colors.indigo.shade400,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(widget.width == 0 ? 100 : 0),
                 bottomRight: Radius.circular(widget.width == 0 ? 100 : 0),
@@ -55,8 +52,7 @@ class _AnimatedDialogState extends State<AnimatedDialog> {
                         ChatWidgets.searchField(),
                         Expanded(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: ListView.builder(
                               itemCount: 2,
                               itemBuilder: (context, i) {
